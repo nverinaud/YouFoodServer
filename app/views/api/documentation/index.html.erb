@@ -2,46 +2,25 @@
 
 <div id="api-documentation">
 
-	<section id="api-global" class="span3">
-		<h3>Global</h3>
-		<ul>
-			<li><a href="">GET /api/current_menu</a></li>
-		</ul>
-	</section>
-
-	<section id="api-for-waiters" class="span3">
-		<h3>For Waiters</h3>
-		<ul>
-			<li><a href="">GET /api/invoices</a></li>
-			<li><a href="">PUT /api/invoices</a></li>
-		</ul>
-	</section>
-
-	<section id="api-for-customers" class="span3">
-		<h3>For Customers</h3>
-		<ul>
-			<li><a href="">POST /api/invoices</a></li>
-			<li><a href="">POST /api/call_waiter</a></li>
-		</ul>
-	</section>
+	<%= render 'shared/api/subnav' %>
 
 	<section id="resources">
 
-	  <section id="lists-and-items">
+	  <section>
 	    <article>
 	      <div class="page-header">
-	        <h1>Lists & Items</h1>
+	        <h1>Global</h1>
 	      </div>
-	      <h2 class="light-title">GET protocol/getLists.aspx</h2>
-	      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	      <h2 class="light-title" id="api-current_menu">GET api/current_menu</h2>
+	      <p>Get the current menu which include:</p>
+	      <ul>
+	      	<li>The current menu information</li>
+	      	<li>All products from the current menu</li>
+	      	<li>Products always available</li>
+	      </ul>
 	      <h3>Resource URL</h3>
-	      <p>http://<em>[eCommunity-Server-URL]</em>/protocol/getLists.aspx</p>
-	      <h3>Paramètres</h3>
+	      <p>http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</p>
+	      <h3>Parameter</h3>
 	      <table class="table table-bordered">
 	        <tbody>
 	          <tr>
@@ -57,12 +36,12 @@
 	          </tr>
 	        </tbody>
 	      </table>
-	      <h3>Exemple de Requête</h3>
+	      <h3>Sample Request</h3>
 	      <table class="table">
 	        <tbody>
 	          <tr>
 	            <td><strong>GET</strong></td>
-	            <td class="code">http://<em>[eCommunity-Server-URL]</em>/protocol/getLists.aspx?device=iphone</td>
+	            <td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</td>
 	          </tr>
 	        </tbody>
 	      </table>
@@ -83,6 +62,17 @@
 ]
 </pre>
     	</article>
+
+    	<p>&nbsp;</p>
+    	<p>&nbsp;</p>
+    	<p>&nbsp;</p>
+    	<p>&nbsp;</p>
+    	<p>&nbsp;</p>
+    	<p>&nbsp;</p>
+    	<p>&nbsp;</p>
+    	<p>&nbsp;</p>
+    	<p>&nbsp;</p>
+    	<p>&nbsp;</p>
 	
 </div>
 

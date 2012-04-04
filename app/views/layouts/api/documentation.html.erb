@@ -3,7 +3,7 @@
 <head>
   <title><%= fullTitle(yield(:page_title)) %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <%= stylesheet_link_tag "api/documentation", :media => "all" %>
   <%= csrf_meta_tags %>
 
@@ -12,7 +12,7 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-<body>
+<body data-spy="scroll">
 
 	<%= render 'shared/api/header' %>
     
