@@ -1,0 +1,28 @@
+
+section article
+{
+	padding-top: 75px;
+}
+
+.light-title
+{
+	font-weight: lighter;
+}
+
+section#resources em
+{
+	font-style: normal;
+	color: #bbb;
+}
+
+section#resources h3
+{
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+
+.code
+{
+	color: #666;
+	font-family: "Monaco", "Menlo", "Courier New", sans-serif;
+}
