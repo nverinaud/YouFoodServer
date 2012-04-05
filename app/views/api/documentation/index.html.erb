@@ -4,47 +4,33 @@
 
 	<%= render 'shared/api/subnav' %>
 
-	<section id="resources">
+	<header class="page-header">
+		<h1>Global</h1>
+	</header>
 
-	  <section>
-	    <article>
-	      <div class="page-header">
-	        <h1>Global</h1>
-	      </div>
-	      <h2 class="light-title" id="api-current_menu">GET api/current_menu</h2>
-	      <p>Get the current menu which include:</p>
-	      <ul>
-	      	<li>The current menu information</li>
-	      	<li>All products from the current menu</li>
-	      	<li>Products always available</li>
-	      </ul>
-	      <h3>Resource URL</h3>
-	      <p>http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</p>
-	      <h3>Parameter</h3>
-	      <table class="table table-bordered">
-	        <tbody>
-	          <tr>
-	            <td>
-	              device<br/>
-	              <em>optionnel</em>
-	            </td>
-	            <td>
-	              Specifies the number of records to retrieve. Must be less than or equal to 200. <br/>
-	              Defaults to 20.<br/><br/>
-	              <strong>Exemples de valeurs: </strong>iphone, ipad, android, windowsphone
-	            </td>
-	          </tr>
-	        </tbody>
-	      </table>
-	      <h3>Sample Request</h3>
-	      <table class="table">
-	        <tbody>
-	          <tr>
-	            <td><strong>GET</strong></td>
-	            <td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</td>
-	          </tr>
-	        </tbody>
-	      </table>
+	<article id="api-current_menu">
+		<header>
+			<h1 class="light-title">GET api/current_menu</h1>
+		</header>
+		<p>Get the current menu which include:</p>
+		<ul>
+			<li>The current menu information</li>
+			<li>All products from the current menu</li>
+			<li>Products always available</li>
+		</ul>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</p>
+		<h3>Parameter</h3>
+		<p>None</p>
+		<h3>Sample Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>GET</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</td>
+				</tr>
+			</tbody>
+		</table>
 <pre class="prettyprint linenums">
 [
 	{
@@ -61,19 +47,136 @@
 	}
 ]
 </pre>
-    	</article>
-
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
+	</article>
 	
+
+	<article id="api-invoices">
+		<header>
+			<h1 class="light-title">GET api/invoices</h1>
+		</header>
+		<p>Get the current menu which include:</p>
+		<ul>
+			<li>The current menu information</li>
+			<li>All products from the current menu</li>
+			<li>Products always available</li>
+		</ul>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</p>
+		<h3>Parameter</h3>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+					device<br/>
+					<em>optionnel</em>
+					</td>
+					<td>
+					Specifies the number of records to retrieve. Must be less than or equal to 200. <br/>
+					Defaults to 20.<br/><br/>
+					<strong>Exemples de valeurs: </strong>iphone, ipad, android, windowsphone
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Sample Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>GET</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+[
+	{
+		"id": 1,
+		"name": "Tradition",
+		"description": "Menu tradition française",
+		"productCount": "10"
+	}, 
+	{
+		"id": 2,
+		"name": "Tradition",
+		"description": "Menu tradition française",
+		"productCount": 10
+	}
+]
+</pre>
+	</article>
+
+
+
+
+
+
+
+
+
+
+
+<!-- 	<article id="api-current_menu">
+			<header>
+				<h1 class="light-title">GET api/current_menu</h1>
+			</header>
+		<p>Get the current menu which include:</p>
+		<ul>
+			<li>The current menu information</li>
+			<li>All products from the current menu</li>
+			<li>Products always available</li>
+		</ul>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</p>
+		<h3>Parameter</h3>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+					device<br/>
+					<em>optionnel</em>
+					</td>
+					<td>
+					Specifies the number of records to retrieve. Must be less than or equal to 200. <br/>
+					Defaults to 20.<br/><br/>
+					<strong>Exemples de valeurs: </strong>iphone, ipad, android, windowsphone
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Sample Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>GET</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+[
+	{
+		"id": 1,
+		"name": "Tradition",
+		"description": "Menu tradition française",
+		"productCount": "10"
+	}, 
+	{
+		"id": 2,
+		"name": "Tradition",
+		"description": "Menu tradition française",
+		"productCount": 10
+	}
+]
+</pre>
+	</article> -->
+
+
+
+
+
+
+
+
 </div>
 
 

@@ -1,7 +1,6 @@
-
-section article
+#api-documentation article header
 {
-	padding-top: 75px;
+	padding-top: 115px;
 }
 
 .light-title
@@ -9,13 +8,13 @@ section article
 	font-weight: lighter;
 }
 
-section#resources em
+div#api-documentation em
 {
 	font-style: normal;
 	color: #bbb;
 }
 
-section#resources h3
+div#api-documentation h3
 {
 	margin-top: 20px;
 	margin-bottom: 5px;
