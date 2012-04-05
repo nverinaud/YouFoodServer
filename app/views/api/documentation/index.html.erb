@@ -4,11 +4,13 @@
 
 	<%= render 'shared/api/subnav' %>
 
+<section>
+
 	<header class="page-header">
 		<h1>Global</h1>
 	</header>
 
-	<article id="api-current_menu">
+	<article id="get-api-current_menu">
 		<header>
 			<h1 class="light-title">GET api/current_menu</h1>
 		</header>
@@ -48,42 +50,30 @@
 ]
 </pre>
 	</article>
+
+</section>
 	
 
-	<article id="api-invoices">
+<section>
+
+	<header class="page-header">
+		<h1>For Waiters</h1>
+	</header>
+
+	<article id="get-api-invoices">
 		<header>
 			<h1 class="light-title">GET api/invoices</h1>
 		</header>
-		<p>Get the current menu which include:</p>
-		<ul>
-			<li>The current menu information</li>
-			<li>All products from the current menu</li>
-			<li>Products always available</li>
-		</ul>
+		<p>Short description</p>
 		<h3>Resource URL</h3>
-		<p>http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</p>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
 		<h3>Parameter</h3>
-		<table class="table table-bordered">
-			<tbody>
-				<tr>
-					<td>
-					device<br/>
-					<em>optionnel</em>
-					</td>
-					<td>
-					Specifies the number of records to retrieve. Must be less than or equal to 200. <br/>
-					Defaults to 20.<br/><br/>
-					<strong>Exemples de valeurs: </strong>iphone, ipad, android, windowsphone
-					</td>
-				</tr>
-			</tbody>
-		</table>
 		<h3>Sample Request</h3>
 		<table class="table">
 			<tbody>
 				<tr>
 					<td><strong>GET</strong></td>
-					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices</td>
 				</tr>
 			</tbody>
 		</table>
@@ -92,20 +82,116 @@
 	{
 		"id": 1,
 		"name": "Tradition",
-		"description": "Menu tradition française",
-		"productCount": "10"
-	}, 
-	{
-		"id": 2,
-		"name": "Tradition",
-		"description": "Menu tradition française",
-		"productCount": 10
 	}
 ]
 </pre>
 	</article>
 
+	<article id="put-api-invoices">
+		<header>
+			<h1 class="light-title">PUT api/invoices</h1>
+		</header>
+		<p>Short description</p>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
+		<h3>Parameter</h3>
+		<h3>Sample Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>PUT</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices</td>
+				</tr>
+				<tr>
+					<td><strong>PUT Data</strong></td>
+					<td class="code">
+<pre class="prettyprint linenums">
+[
+	{
+		"id": 1,
+		"name": "Tradition",
+	}
+]
+</pre>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+[
+	{
+		"id": 1,
+		"name": "Tradition",
+	}
+]
+</pre>
+	</article>
 
+</section>
+
+<section>
+
+	<header class="page-header">
+		<h1>For Customers</h1>
+	</header>
+
+	<article id="post-api-invoices">
+		<header>
+			<h1 class="light-title">POST api/invoices</h1>
+		</header>
+		<p>Short description</p>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
+		<h3>Parameter</h3>
+		<p>None</p>
+		<h3>Sample Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>POST</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+[
+	{
+		"id": 1,
+		"name": "Tradition"
+	}
+]
+</pre>
+	</article>
+
+	<article id="post-api-call_waiter">
+		<header>
+			<h1 class="light-title">POST api/call_waiter</h1>
+		</header>
+		<p>Short description</p>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/call_waiter</p>
+		<h3>Parameter</h3>
+		<p>None</p>
+		<h3>Sample Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>POST</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/call_waiter</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+[
+	{
+		"id": 1,
+		"name": "Tradition"
+	}
+]
+</pre>
+	</article>
+
+</section>
 
 
 
@@ -132,13 +218,13 @@
 			<tbody>
 				<tr>
 					<td>
-					device<br/>
-					<em>optionnel</em>
+						device<br/>
+						<em>optionnel</em>
 					</td>
 					<td>
-					Specifies the number of records to retrieve. Must be less than or equal to 200. <br/>
-					Defaults to 20.<br/><br/>
-					<strong>Exemples de valeurs: </strong>iphone, ipad, android, windowsphone
+						Specifies the number of records to retrieve. Must be less than or equal to 200. <br/>
+						Defaults to 20.<br/><br/>
+						<strong>Exemples de valeurs: </strong>iphone, ipad, android, windowsphone
 					</td>
 				</tr>
 			</tbody>
