@@ -1,22 +1,23 @@
-
-body
-{
+body {
   padding-top: 60px;
 }
 
-@media (min-width: 768px) and (max-width: 980px)
-{
-  body
-  {
+@media (min-width: 768px) and (max-width: 980px) {
+  body {
     padding-top: 0px;
   }
 }
 
-@media (max-width: 768px)
-{
-  body
-  {
+@media (max-width: 768px) {
+  body {
     padding-top: 0px;
   }
+}
+
+.authentication-form {
+  width: 300px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 20px;
 }
 
