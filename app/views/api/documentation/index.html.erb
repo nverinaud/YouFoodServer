@@ -34,20 +34,41 @@
 			</tbody>
 		</table>
 <pre class="prettyprint linenums">
-[
-	{
-		"id": 1,
-		"name": "Tradition",
-		"description": "Menu tradition française",
-		"productCount": "10"
-	}, 
-	{
-		"id": 2,
-		"name": "Tradition",
-		"description": "Menu tradition française",
-		"productCount": 10
-	}
-]
+{
+	"current_menu" : {
+		"id" : 3,
+		"name" : "Menu Alsacien",
+		"description" : "Revivez les joies de la flammekeuche chez YouFood !"
+	},
+	"products" : [
+		{
+			"id": 1,
+			"name": "Choucroute",
+			"abbreviation" : "chouc",
+			"description": "Hummm... La bonne choucroute traditionnelle !",
+			"photo_url" : "http://images.youfoud.com/products/choucroute.png",
+			"price" : 13,
+			"category" : {
+				"id" : 2,
+				"name" : "Tradition"
+			},
+			"is_permanent" : false
+		}, 
+		{
+			"id": 2,
+			"name": "Pizza Reine",
+			"abbreviation" : "p.reine",
+			"description": "Hummm... La bonne pizza reine traditionnelle !",
+			"photo_url" : "http://images.youfoud.com/products/pizzas/reine.png",
+			"price" : 8.50,
+			"category" : {
+				"id" : 18,
+				"name" : "Pizza"
+			},
+			"is_permanent" : true
+		}
+	]
+}
 </pre>
 	</article>
 
