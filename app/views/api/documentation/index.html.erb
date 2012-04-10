@@ -81,6 +81,75 @@
 		<h1>For Waiters</h1>
 	</header>
 
+	<article id="get-api-zones">
+		<header>
+			<h1 class="light-title">GET api/zones</h1>
+		</header>
+		<p>Retrieve all zones for the specified waiter.</p>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/zones</p>
+		<h3>Parameters</h3>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						waiter_id<br/>
+						<em>required</em>
+					</td>
+					<td>
+						ID of the waiter for which you want the zones<br/>
+						<strong>Example Values: </strong>1 2 3 4 5
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Exemple Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>GET</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/zones?waiter_id=3</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+[
+	{
+		"id": 1,
+		"name": "Zone GeeK",
+		"tables" : [
+			{
+				"id" : 2,
+				"name" : "Table Starcraft",
+				"forks_nb" : 6
+			},
+			{
+				"id" : 3,
+				"name" : "Table Warcraft",
+				"forks_nb" : 4
+			}
+		]
+	},
+	{
+		"id": 7,
+		"name": "Zone SUPINFO",
+		"tables" : [
+			{
+				"id" : 2,
+				"name" : "Table STA",
+				"forks_nb" : 12
+			},
+			{
+				"id" : 3,
+				"name" : "Table Etudiants 1",
+				"forks_nb" : 18
+			}
+		]
+	}
+]
+</pre>
+	</article>
+
 	<article id="get-api-invoices">
 		<header>
 			<h1 class="light-title">GET api/invoices</h1>
