@@ -197,7 +197,7 @@
 		"id": 1,
 		"table_id" : 2,
 		"price": 55.4,
-		"invoice_product_ids" : [14, 15, 16, 17],
+		"invoice_products_count" : [14, 15, 16, 17],
 		"state" : "ready",
 		"updated_at" : "08/08/2012 12:33:21"
 	},
@@ -217,30 +217,20 @@
 		<header>
 			<h1 class="light-title">GET api/invoices/:id</h1>
 		</header>
-		<p>Short description</p>
+		<p>Get details about an invoice.</p>
 		<h3>Resource URL</h3>
-		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices/:id</p>
 		<h3>Parameters</h3>
 		<table class="table table-bordered">
 			<tbody>
 				<tr>
 					<td>
-						zone_id<br/>
+						id<br/>
 						<em>required</em>
 					</td>
 					<td>
-						The zone for which you want the invoices<br/>
+						ID of the invoice.<br/>
 						<strong>Example Values: </strong>1 2 3 4 5
-					</td>
-				</tr>
-				<tr>
-					<td>
-						include_entities<br/>
-						<em>optional</em>
-					</td>
-					<td>
-						If true the invoices are returned with all invoice's products information instead of just ids.<br/>
-						<strong>Example Values: </strong>true, false
 					</td>
 				</tr>
 			</tbody>
@@ -250,25 +240,34 @@
 			<tbody>
 				<tr>
 					<td><strong>GET</strong></td>
-					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices?zone_id=3&include_entities=false</td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices/1</td>
 				</tr>
 			</tbody>
 		</table>
 <pre class="prettyprint linenums">
-[
-	{
-		"id": 1,
-		"price": 55.4,
-		"invoice_product_ids" : [14, 15, 16, 17],
-		"state" : "ready"
-	},
-	{
-		"id": 9,
-		"price": 25.4,
-		"invoice_product_ids" : [66, 67],
-		"state" : "waiting"
-	}
-]
+{
+	"id": 1,
+	"price": 55.4,
+	"invoice_products" : [
+		{
+			"id" : 14,
+			"product" : {
+				"id" : 34,
+				"name" : "Filet de boeuf 130gr"
+			},
+			"comment" : "saignant, sauce poivre"
+		},
+		{
+			"id" : 15,
+			"product" : {
+				"id" : 89,
+				"name" : "Choucroute"
+			},
+			"comment" : null
+		}
+	],
+	"state" : "waiting"
+}
 </pre>
 	</article>
 
