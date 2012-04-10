@@ -166,18 +166,28 @@
 						<em>required</em>
 					</td>
 					<td>
-						The zone for which you want the invoices<br/>
+						Returns results within the specified zone.<br/>
 						<strong>Example Values: </strong>1 2 3 4 5
 					</td>
 				</tr>
 				<tr>
 					<td>
-						include_entities<br/>
+						state<br/>
 						<em>optional</em>
 					</td>
 					<td>
-						If true the invoices are returned with all invoice's products information instead of just ids.<br/>
-						<strong>Example Values: </strong>true, false
+						Returns results with the specified state.<br/>
+						<strong>Example Values: </strong>ready, waiting
+					</td>
+				</tr>
+				<tr>
+					<td>
+						since_id<br/>
+						<em>optional</em>
+					</td>
+					<td>
+						Returns results with an ID greater than (that is, more recent than) the specified ID.<br/>
+						<strong>Example Values: </strong>4 3 2 1
 					</td>
 				</tr>
 			</tbody>
@@ -187,25 +197,25 @@
 			<tbody>
 				<tr>
 					<td><strong>GET</strong></td>
-					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices?zone_id=3&include_entities=false</td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices?zone_id=3&state=waiting&since_id=19</td>
 				</tr>
 			</tbody>
 		</table>
 <pre class="prettyprint linenums">
 [
 	{
-		"id": 1,
+		"id": 23,
 		"table_id" : 2,
 		"price": 55.4,
-		"invoice_products_count" : [14, 15, 16, 17],
-		"state" : "ready",
+		"invoice_products_count" : 4,
+		"state" : "waiting",
 		"updated_at" : "08/08/2012 12:33:21"
 	},
 	{
-		"id": 9,
+		"id": 27,
 		"table_id" : 87,
 		"price": 25.4,
-		"invoice_product_ids" : [66, 67],
+		"invoice_products_count" : 2,
 		"state" : "waiting",
 		"updated_at" : "08/08/2012 12:33:21"
 	}
