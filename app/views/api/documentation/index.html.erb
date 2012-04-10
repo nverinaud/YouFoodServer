@@ -85,6 +85,67 @@
 		<header>
 			<h1 class="light-title">GET api/invoices</h1>
 		</header>
+		<p>Retrieve all invoices for the specified zone.</p>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
+		<h3>Parameters</h3>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						zone_id<br/>
+						<em>required</em>
+					</td>
+					<td>
+						The zone for which you want the invoices<br/>
+						<strong>Example Values: </strong>1 2 3 4 5
+					</td>
+				</tr>
+				<tr>
+					<td>
+						include_entities<br/>
+						<em>optional</em>
+					</td>
+					<td>
+						If true the invoices are returned with all invoice's products information instead of just ids.<br/>
+						<strong>Example Values: </strong>true, false
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Exemple Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>GET</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices?zone_id=3&include_entities=false</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+[
+	{
+		"id": 1,
+		"price": 55.4,
+		"invoice_product_ids" : [14, 15, 16, 17],
+		"state" : "ready",
+		"updated_at" : "08/08/2012 12:33:21"
+	},
+	{
+		"id": 9,
+		"price": 25.4,
+		"invoice_product_ids" : [66, 67],
+		"state" : "waiting",
+		"updated_at" : "08/08/2012 12:33:21"
+	}
+]
+</pre>
+	</article>
+
+	<article id="get-api-invoices-id">
+		<header>
+			<h1 class="light-title">GET api/invoices/:id</h1>
+		</header>
 		<p>Short description</p>
 		<h3>Resource URL</h3>
 		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
