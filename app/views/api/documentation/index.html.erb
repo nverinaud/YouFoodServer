@@ -5,10 +5,104 @@
 	<%= render 'shared/api/subnav' %>
 
 <section>
+	<header>
+		<h1>Auth</h1>
+	</header>
 
-	<header class="page-header">
+	<article id="auth">
+		<header>
+			<h1 class="light-title">Principle & Usage</h1>
+		</header>
+
+		<p>
+			All APIs use authentication so you must request an access token 
+			in order to start communicate with the server.
+		</p>
+
+		<h3>Principle</h3>
+		<p>A standard HTTP request to the API could be :</p>
+		<pre class="prettyprint">
+GET /api/current_menu HTTP/1.1
+Accept: */*
+Connection: close
+User-Agent: OAuth gem v0.4.4
+Host: youfoodserver.herokuapp.com
+		</pre>
+		<p>But this request is <strong>invalid</strong> !</p>
+		<p>You must provide an access token in order to communicate with the server.</p>
+
+		<h3>Usage</h3>
+		<p>To know how to request a token see <a href="#post-api-auth-request-token">POST api/auth/request_token</a>.</p>
+		<p>When you have your access token you must add an HTTP header to all your requests like the following example :</p>
+		<pre class="prettyprint">
+GET /api/current_menu HTTP/1.1
+Accept: */*
+Connection: close
+User-Agent: OAuth gem v0.4.4
+YouFoodServer-AccessToken: AKouzae98723kjzaea87elkjh1982
+Host: youfoodserver.herokuapp.com
+		</pre>
+		<p>The HTTP header is : <strong>YouFoodServer-AccessToken</strong>.</p>
+	</article>
+</section>
+
+<section>
+
+	<header>
 		<h1>Global</h1>
 	</header>
+
+	<article id="post-api-auth-request-token">
+		<header>
+			<h1 class="light-title">POST /api/auth/request_token</h1>
+		</header>
+		<p>Authenticate against the server.</p>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/auth/request_token</p>
+		<h3>Parameters</h3>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						email<br/>
+						<em>required</em>
+					</td>
+					<td>
+						Email of the account to authenticate<br/>
+						<strong>Example Values: </strong>restaurant@youfood.com
+					</td>
+				</tr>
+				<tr>
+					<td>
+						pass<br/>
+						<em>required</em>
+					</td>
+					<td>
+						Password of the corresponding account (form-url-encoded)<br/>
+						<strong>Example Values: </strong>secret+food, i+love+cocoa
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Example Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>POST</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/auth/request_token</td>
+				</tr>
+				<tr>
+					<td><strong>POST data</strong></td>
+					<td class="code">email=restaurant@youfood.com&pass=secret+food</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+{
+	"youfoodserver_access_token" : "AKouzae98723kjzaea87elkjh1982ouFood"
+}
+</pre>
+	</article>
 
 	<article id="get-api-current_menu">
 		<header>
@@ -328,6 +422,34 @@
 	<header class="page-header">
 		<h1>For Customers</h1>
 	</header>
+
+	<article id="get-api-tables">
+		<header>
+			<h1 class="light-title">GET api/tables</h1>
+		</header>
+		<p>Short description</p>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/tables</p>
+		<h3>Parameters</h3>
+		<p>None</p>
+		<h3>Example Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>GET</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/tables</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+[
+	{
+		"id": 1,
+		"name": "Tradition"
+	}
+]
+</pre>
+	</article>
 
 	<article id="post-api-invoices">
 		<header>
