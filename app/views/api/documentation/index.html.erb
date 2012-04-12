@@ -373,7 +373,12 @@ Host: youfoodserver.herokuapp.com
 			<h1 class="light-title">PUT api/invoices/:id</h1>
 		</header>
 		<h3>Description</h3>
-		<p>Short description</p>
+		<p>Use this API if you want to update an invoice.</p>
+		<p><strong>Warning</strong> You can only update the following values :</p>
+		<ul>
+			<li>state</li>
+			<li>InvoiceProduct's comment</li>
+		</ul>
 		<h3>Resource URL</h3>
 		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
 		<h3>Parameters</h3>
@@ -406,7 +411,7 @@ Host: youfoodserver.herokuapp.com
 					</td>
 					<td>
 						A JSON array of InvoiceProduct entities (with id and comment) you want to update.<br/>
-						<strong>Example Values: </strong>[{"id" : 1, "comment" : "saignant, maître d'hôtel"}]
+						<strong>Example Values: </strong><span class="code">[{"id" : 1, "comment" : "saignant, maître d'hôtel"}]</span>
 					</td>
 				</tr>
 			</tbody>
@@ -528,7 +533,7 @@ Host: youfoodserver.herokuapp.com
 					</td>
 					<td>
 						A JSON array of InvoiceProduct entities (with product_id and comment) you want to add to the invoice.<br/>
-						<strong>Example Values: </strong> [{"product_id" : 1, "comment" : "saignant, maître d'hôtel"}]
+						<strong>Example Values: </strong><span class="code">[{"product_id" : 1, "comment" : "saignant, maître d'hôtel"}]</span>
 					</td>
 				</tr>
 			</tbody>
