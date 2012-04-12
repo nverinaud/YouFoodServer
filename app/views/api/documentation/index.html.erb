@@ -1,2 +1,685 @@
+<% provide(:page_title, "Server API Documentation") %>
 
-<h1>Documentation !</h1>
+<div id="api-documentation">
+
+	<%= render 'shared/api/subnav' %>
+
+<section>
+	<header>
+		<h1>Auth</h1>
+	</header>
+
+	<article id="auth">
+		<header>
+			<h1 class="light-title">Principle & Usage</h1>
+		</header>
+
+		<p>
+			All APIs use authentication so you must request an access token 
+			in order to start communicate with the server.
+		</p>
+
+		<h3>Principle</h3>
+		<p>A standard HTTP request to the API could be :</p>
+		<pre class="prettyprint">
+GET /api/current_menu HTTP/1.1
+Accept: */*
+Connection: close
+User-Agent: OAuth gem v0.4.4
+Host: youfoodserver.herokuapp.com
+		</pre>
+		<p>But this request is <strong>invalid</strong> !</p>
+		<p>You must provide an access token in order to communicate with the server.</p>
+
+		<h3>Usage</h3>
+		<p>To know how to request a token see <a href="#post-api-auth-request-token">POST api/auth/request_token</a>.</p>
+		<p>When you have your access token you must add an HTTP header to all your requests like the following example :</p>
+		<pre class="prettyprint">
+GET /api/current_menu HTTP/1.1
+Accept: */*
+Connection: close
+User-Agent: OAuth gem v0.4.4
+YouFoodServer-AccessToken: AKouzae98723kjzaea87elkjh1982
+Host: youfoodserver.herokuapp.com
+		</pre>
+		<p>The HTTP header is : <strong>YouFoodServer-AccessToken</strong>.</p>
+	</article>
+</section>
+
+<section>
+
+	<header>
+		<h1>Global</h1>
+	</header>
+
+	<article id="post-api-auth-request-token">
+		<header>
+			<h1 class="light-title">POST /api/auth/request_token</h1>
+		</header>
+		<h3>Description</h3>
+		<p>Authenticate against the server.</p>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/auth/request_token</p>
+		<h3>Parameters</h3>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						email<br/>
+						<em>required</em>
+					</td>
+					<td>
+						Email of the account to authenticate<br/>
+						<strong>Example Values: </strong>restaurant@youfood.com
+					</td>
+				</tr>
+				<tr>
+					<td>
+						pass<br/>
+						<em>required</em>
+					</td>
+					<td>
+						Password of the corresponding account (form-url-encoded)<br/>
+						<strong>Example Values: </strong>secret+food, i+love+cocoa
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Example Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>POST</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/auth/request_token</td>
+				</tr>
+				<tr>
+					<td><strong>POST data</strong></td>
+					<td class="code">email=restaurant@youfood.com&pass=secret+food</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+{
+	"youfoodserver_access_token" : "AKouzae98723kjzaea87elkjh1982ouFood"
+}
+</pre>
+	</article>
+
+	<article id="get-api-current_menu">
+		<header>
+			<h1 class="light-title">GET api/current_menu</h1>
+		</header>
+		<h3>Description</h3>
+		<p>Get the current menu which include:</p>
+		<ul>
+			<li>The current menu information</li>
+			<li>All products from the current menu</li>
+			<li>Products always available</li>
+		</ul>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</p>
+		<h3>Parameters</h3>
+		<p>None</p>
+		<h3>Example Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>GET</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+{
+	"current_menu" : {
+		"id" : 3,
+		"name" : "Menu Alsacien",
+		"description" : "Revivez les joies de la flammekeuche chez YouFood !"
+	},
+	"products" : [
+		{
+			"id": 1,
+			"name": "Choucroute",
+			"abbreviation" : "chouc",
+			"description": "Hummm... La bonne choucroute traditionnelle !",
+			"photo_url" : "http://images.youfoud.com/products/choucroute.png",
+			"price" : 13,
+			"category" : {
+				"id" : 2,
+				"name" : "Tradition"
+			},
+			"is_permanent" : false
+		}, 
+		{
+			"id": 2,
+			"name": "Pizza Reine",
+			"abbreviation" : "p.reine",
+			"description": "Hummm... La bonne pizza reine traditionnelle !",
+			"photo_url" : "http://images.youfoud.com/products/pizzas/reine.png",
+			"price" : 8.50,
+			"category" : {
+				"id" : 18,
+				"name" : "Pizza"
+			},
+			"is_permanent" : true
+		}
+	]
+}
+</pre>
+	</article>
+
+</section>
+	
+
+<section>
+
+	<header class="page-header">
+		<h1>For Waiters</h1>
+	</header>
+
+	<article id="get-api-zones">
+		<header>
+			<h1 class="light-title">GET api/zones</h1>
+		</header>
+		<h3>Description</h3>
+		<p>Retrieve all zones for the logged in waiter or restaurant manager.</p>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/zones</p>
+		<h3>Parameters</h3>
+		<p>None</p>
+		<h3>Exemple Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>GET</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/zones</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+[
+	{
+		"id": 1,
+		"name": "Zone GeeK",
+		"tables" : [
+			{
+				"id" : 2,
+				"name" : "Table Starcraft",
+				"forks_nb" : 6
+			},
+			{
+				"id" : 3,
+				"name" : "Table Warcraft",
+				"forks_nb" : 4
+			}
+		]
+	},
+	{
+		"id": 7,
+		"name": "Zone SUPINFO",
+		"tables" : [
+			{
+				"id" : 2,
+				"name" : "Table STA",
+				"forks_nb" : 12
+			},
+			{
+				"id" : 3,
+				"name" : "Table Etudiants 1",
+				"forks_nb" : 18
+			}
+		]
+	}
+]
+</pre>
+	</article>
+
+	<article id="get-api-invoices">
+		<header>
+			<h1 class="light-title">GET api/invoices</h1>
+		</header>
+		<h3>Description</h3>
+		<p>Retrieve all invoices managed by the logged in waiter or restaurant manager.<br/>
+		Results can be filtered by parameters.</p>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
+		<h3>Parameters</h3>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						zone_id<br/>
+						<em>optional</em>
+					</td>
+					<td>
+						Returns results within the specified zone.<br/>
+						<strong>Example Values: </strong>1 2 3 4 5
+					</td>
+				</tr>
+				<tr>
+					<td>
+						state<br/>
+						<em>optional</em>
+					</td>
+					<td>
+						Returns results with the specified state.<br/>
+						<strong>Example Values: </strong>ready, waiting
+					</td>
+				</tr>
+				<tr>
+					<td>
+						since_id<br/>
+						<em>optional</em>
+					</td>
+					<td>
+						Returns results with an ID greater than (that is, more recent than) the specified ID.<br/>
+						<strong>Example Values: </strong>4 3 2 1
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Exemple Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>GET</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices?zone_id=3&state=waiting&since_id=19</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+[
+	{
+		"id": 23,
+		"table_id" : 2,
+		"price": 55.4,
+		"invoice_products_count" : 4,
+		"state" : "waiting",
+		"updated_at" : "08/08/2012 12:33:21"
+	},
+	{
+		"id": 27,
+		"table_id" : 87,
+		"price": 25.4,
+		"invoice_products_count" : 2,
+		"state" : "waiting",
+		"updated_at" : "08/08/2012 12:33:21"
+	}
+]
+</pre>
+	</article>
+
+	<article id="get-api-invoices-id">
+		<header>
+			<h1 class="light-title">GET api/invoices/:id</h1>
+		</header>
+		<h3>Description</h3>
+		<p>Get details about an invoice.</p>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices/:id</p>
+		<h3>Parameters</h3>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						id<br/>
+						<em>required</em>
+					</td>
+					<td>
+						ID of the invoice.<br/>
+						<strong>Example Values: </strong>1 2 3 4 5
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Exemple Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>GET</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices/1</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+{
+	"id": 1,
+	"price": 55.4,
+	"invoice_products" : [
+		{
+			"id" : 14,
+			"product" : {
+				"id" : 34,
+				"name" : "Filet de boeuf 130gr"
+			},
+			"comment" : "saignant, sauce poivre"
+		},
+		{
+			"id" : 15,
+			"product" : {
+				"id" : 89,
+				"name" : "Choucroute"
+			},
+			"comment" : null
+		}
+	],
+	"state" : "waiting"
+}
+</pre>
+	</article>
+
+	<article id="put-api-invoices">
+		<header>
+			<h1 class="light-title">PUT api/invoices/:id</h1>
+		</header>
+		<h3>Description</h3>
+		<p>Use this API if you want to update an invoice.</p>
+		<p><strong>Warning</strong> You can only update the following values :</p>
+		<ul>
+			<li>state</li>
+			<li>InvoiceProduct's comment</li>
+		</ul>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
+		<h3>Parameters</h3>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						id<br/>
+						<em>required</em>
+					</td>
+					<td>
+						ID of the invoice. Given in the URL (see example request below).<br/>
+						<strong>Example Values: </strong>1 2 3 4 5
+					</td>
+				</tr>
+				<tr>
+					<td>
+						state<br/>
+						<em>optional</em>
+					</td>
+					<td>
+						The new state of the invoice.<br/>
+						<strong>Example Values: </strong>waiting, ready
+					</td>
+				</tr>
+				<tr>
+					<td>
+						invoice_products<br/>
+						<em>optional</em>
+					</td>
+					<td>
+						A JSON array of InvoiceProduct entities (with id and comment) you want to update.<br/>
+						<strong>Example Values: </strong><span class="code">[{"id" : 1, "comment" : "saignant, maître d'hôtel"}]</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Example Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>PUT</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices/1</td>
+				</tr>
+				<tr>
+					<td><strong>PUT Data</strong></td>
+					<td class="code">
+<pre class="prettyprint linenums">
+{
+	"invoice_products" : [
+		{
+			"id" : 14,
+			"comment" : "à point, sauce poivre"
+		}
+	],
+	"state" : "ready"
+}
+</pre>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
+</section>
+
+<section>
+
+	<header class="page-header">
+		<h1>For Customers</h1>
+	</header>
+
+	<article id="get-api-tables">
+		<header>
+			<h1 class="light-title">GET api/tables</h1>
+		</header>
+		<h3>Description</h3>
+		<p>Returns restaurant's tables for the logged in restaurant manager.</p>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/tables</p>
+		<h3>Parameters</h3>
+		<p>None</p>
+		<h3>Example Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>GET</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/tables</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+[
+	{
+		"id" : 1,
+		"name" : "Table STA",
+		"forks_nb" : 12
+		"zone" : {
+			"id" : 2,
+			"name" : "Zone SUPINFO"
+		}
+	},
+	{
+		"id" : 2,
+		"name" : "Table Etudiants 1",
+		"forks_nb" : 18,
+		"zone" : {
+			"id" : 2,
+			"name" : "Zone SUPINFO"
+		}
+	}
+]
+</pre>
+	</article>
+
+	<article id="post-api-invoices">
+		<header>
+			<h1 class="light-title">POST api/invoices</h1>
+		</header>
+		<h3>Description</h3>
+		<p>Create a new invoices.</p>
+		<p>In case of error the server returns an 403 error.</p>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
+		<h3>Parameters</h3>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						table_id<br/>
+						<em>required</em>
+					</td>
+					<td>
+						ID of the table.<br/>
+						<strong>Example Values: </strong>1 2 3 4 5
+					</td>
+				</tr>
+				<tr>
+					<td>
+						price<br/>
+						<em>required</em>
+					</td>
+					<td>
+						The price of the invoice.<br/>
+						<strong>Example Values: </strong>23, 155.18
+					</td>
+				</tr>
+				<tr>
+					<td>
+						invoice_products<br/>
+						<em>optional</em>
+					</td>
+					<td>
+						A JSON array of InvoiceProduct entities (with product_id and comment) you want to add to the invoice.<br/>
+						<strong>Example Values: </strong><span class="code">[{"product_id" : 1, "comment" : "saignant, maître d'hôtel"}]</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Example Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>POST</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices</td>
+				</tr>
+				<tr>
+					<td><strong>POST data</strong></td>
+					<td class="code">
+<pre class="prettyprint linenums">
+{
+	"table_id" : 2,
+	"price": 55.4,
+	"invoice_products" : [
+		{
+			"product_id" : 34,
+			"comment" : "saignant, sauce poivre"
+		},
+		{
+			"product_id" : 89,
+			"comment" : null
+		}
+	]
+}
+</pre>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
+	<article id="post-api-call_waiter">
+		<header>
+			<h1 class="light-title">POST api/call_waiter</h1>
+		</header>
+		<h3>Description</h3>
+		<p>Notify the waiter responsible of the table.</p>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/call_waiter</p>
+		<h3>Parameters</h3>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						table_id<br/>
+						<em>required</em>
+					</td>
+					<td>
+						ID of the table for which you want to call the waiter.<br/>
+						<strong>Example Values: </strong>1 2 3 4
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Example Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>POST</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/call_waiter</td>
+				</tr>
+				<tr>
+					<td><strong>POST data</strong></td>
+					<td class="code">table_id=2</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- 	<article id="api-current_menu">
+			<header>
+				<h1 class="light-title">GET api/current_menu</h1>
+			</header>
+		<p>Get the current menu which include:</p>
+		<ul>
+			<li>The current menu information</li>
+			<li>All products from the current menu</li>
+			<li>Products always available</li>
+		</ul>
+		<h3>Resource URL</h3>
+		<p>http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</p>
+		<h3>Parameters</h3>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						device<br/>
+						<em>optionnel</em>
+					</td>
+					<td>
+						Specifies the number of records to retrieve. Must be less than or equal to 200. <br/>
+						Defaults to 20.<br/><br/>
+						<strong>Exemples de valeurs: </strong>iphone, ipad, android, windowsphone
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Example Request</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><strong>GET</strong></td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/current_menu</td>
+				</tr>
+			</tbody>
+		</table>
+<pre class="prettyprint linenums">
+[
+	{
+		"id": 1,
+		"name": "Tradition",
+		"description": "Menu tradition française",
+		"productCount": "10"
+	}, 
+	{
+		"id": 2,
+		"name": "Tradition",
+		"description": "Menu tradition française",
+		"productCount": 10
+	}
+]
+</pre>
+	</article> -->
+
+
+
+
+
+
+
+
+</div>
+
+

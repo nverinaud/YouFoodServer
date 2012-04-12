@@ -1,0 +1,27 @@
+#api-documentation article header
+{
+	padding-top: 115px;
+}
+
+.light-title
+{
+	font-weight: lighter;
+}
+
+div#api-documentation em
+{
+	font-style: normal;
+	color: #bbb;
+}
+
+div#api-documentation h3
+{
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+
+.code
+{
+	color: #666;
+	font-family: "Monaco", "Menlo", "Courier New", sans-serif;
+}
