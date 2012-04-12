@@ -523,11 +523,24 @@ Host: youfoodserver.herokuapp.com
 			<h1 class="light-title">POST api/call_waiter</h1>
 		</header>
 		<h3>Description</h3>
-		<p>Short description</p>
+		<p>Notify the waiter responsible of the table.</p>
 		<h3>Resource URL</h3>
 		<p>http://<em>youfoodserver.herokuapp.com</em>/api/call_waiter</p>
 		<h3>Parameters</h3>
-		<p>None</p>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						table_id<br/>
+						<em>required</em>
+					</td>
+					<td>
+						ID of the table for which you want to call the waiter.<br/>
+						<strong>Example Values: </strong>1 2 3 4
+					</td>
+				</tr>
+			</tbody>
+		</table>
 		<h3>Example Request</h3>
 		<table class="table">
 			<tbody>
@@ -535,16 +548,12 @@ Host: youfoodserver.herokuapp.com
 					<td><strong>POST</strong></td>
 					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/call_waiter</td>
 				</tr>
+				<tr>
+					<td><strong>POST data</strong></td>
+					<td class="code">table_id=2</td>
+				</tr>
 			</tbody>
 		</table>
-<pre class="prettyprint linenums">
-[
-	{
-		"id": 1,
-		"name": "Tradition"
-	}
-]
-</pre>
 	</article>
 
 </section>
