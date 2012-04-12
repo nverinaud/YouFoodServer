@@ -56,6 +56,7 @@ Host: youfoodserver.herokuapp.com
 		<header>
 			<h1 class="light-title">POST /api/auth/request_token</h1>
 		</header>
+		<h3>Description</h3>
 		<p>Authenticate against the server.</p>
 		<h3>Resource URL</h3>
 		<p>http://<em>youfoodserver.herokuapp.com</em>/api/auth/request_token</p>
@@ -108,6 +109,7 @@ Host: youfoodserver.herokuapp.com
 		<header>
 			<h1 class="light-title">GET api/current_menu</h1>
 		</header>
+		<h3>Description</h3>
 		<p>Get the current menu which include:</p>
 		<ul>
 			<li>The current menu information</li>
@@ -179,30 +181,18 @@ Host: youfoodserver.herokuapp.com
 		<header>
 			<h1 class="light-title">GET api/zones</h1>
 		</header>
-		<p>Retrieve all zones for the specified waiter.</p>
+		<h3>Description</h3>
+		<p>Retrieve all zones for the logged in waiter or restaurant manager.</p>
 		<h3>Resource URL</h3>
 		<p>http://<em>youfoodserver.herokuapp.com</em>/api/zones</p>
 		<h3>Parameters</h3>
-		<table class="table table-bordered">
-			<tbody>
-				<tr>
-					<td>
-						waiter_id<br/>
-						<em>required</em>
-					</td>
-					<td>
-						ID of the waiter for which you want the zones<br/>
-						<strong>Example Values: </strong>1 2 3 4 5
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<p>None</p>
 		<h3>Exemple Request</h3>
 		<table class="table">
 			<tbody>
 				<tr>
 					<td><strong>GET</strong></td>
-					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/zones?waiter_id=3</td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/zones</td>
 				</tr>
 			</tbody>
 		</table>
@@ -248,7 +238,9 @@ Host: youfoodserver.herokuapp.com
 		<header>
 			<h1 class="light-title">GET api/invoices</h1>
 		</header>
-		<p>Retrieve all invoices for the specified zone.</p>
+		<h3>Description</h3>
+		<p>Retrieve all invoices managed by the logged in waiter or restaurant manager.<br/>
+		Results can be filtered by parameters.</p>
 		<h3>Resource URL</h3>
 		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
 		<h3>Parameters</h3>
@@ -257,7 +249,7 @@ Host: youfoodserver.herokuapp.com
 				<tr>
 					<td>
 						zone_id<br/>
-						<em>required</em>
+						<em>optional</em>
 					</td>
 					<td>
 						Returns results within the specified zone.<br/>
@@ -321,6 +313,7 @@ Host: youfoodserver.herokuapp.com
 		<header>
 			<h1 class="light-title">GET api/invoices/:id</h1>
 		</header>
+		<h3>Description</h3>
 		<p>Get details about an invoice.</p>
 		<h3>Resource URL</h3>
 		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices/:id</p>
@@ -377,42 +370,52 @@ Host: youfoodserver.herokuapp.com
 
 	<article id="put-api-invoices">
 		<header>
-			<h1 class="light-title">PUT api/invoices</h1>
+			<h1 class="light-title">PUT api/invoices/:id</h1>
 		</header>
+		<h3>Description</h3>
 		<p>Short description</p>
 		<h3>Resource URL</h3>
 		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
 		<h3>Parameters</h3>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						id<br/>
+						<em>required</em>
+					</td>
+					<td>
+						ID of the invoice. Given in the URL (see example request below).<br/>
+						<strong>Example Values: </strong>1 2 3 4 5
+					</td>
+				</tr>
+			</tbody>
+		</table>
 		<h3>Example Request</h3>
 		<table class="table">
 			<tbody>
 				<tr>
 					<td><strong>PUT</strong></td>
-					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices</td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices/1</td>
 				</tr>
 				<tr>
 					<td><strong>PUT Data</strong></td>
 					<td class="code">
 <pre class="prettyprint linenums">
-[
-	{
-		"id": 1,
-		"name": "Tradition",
-	}
-]
+{
+	"invoice_products" : [
+		{
+			"id" : 14,
+			"comment" : "à point, sauce poivre"
+		}
+	],
+	"state" : "ready"
+}
 </pre>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-<pre class="prettyprint linenums">
-[
-	{
-		"id": 1,
-		"name": "Tradition",
-	}
-]
-</pre>
 	</article>
 
 </section>
@@ -427,6 +430,7 @@ Host: youfoodserver.herokuapp.com
 		<header>
 			<h1 class="light-title">GET api/tables</h1>
 		</header>
+		<h3>Description</h3>
 		<p>Short description</p>
 		<h3>Resource URL</h3>
 		<p>http://<em>youfoodserver.herokuapp.com</em>/api/tables</p>
@@ -455,6 +459,7 @@ Host: youfoodserver.herokuapp.com
 		<header>
 			<h1 class="light-title">POST api/invoices</h1>
 		</header>
+		<h3>Description</h3>
 		<p>Short description</p>
 		<h3>Resource URL</h3>
 		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
@@ -483,6 +488,7 @@ Host: youfoodserver.herokuapp.com
 		<header>
 			<h1 class="light-title">POST api/call_waiter</h1>
 		</header>
+		<h3>Description</h3>
 		<p>Short description</p>
 		<h3>Resource URL</h3>
 		<p>http://<em>youfoodserver.herokuapp.com</em>/api/call_waiter</p>
