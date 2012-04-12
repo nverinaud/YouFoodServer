@@ -406,7 +406,7 @@ Host: youfoodserver.herokuapp.com
 					</td>
 					<td>
 						A JSON array of InvoiceProduct entities (with id and comment) you want to update.<br/>
-						<strong>Example Values: </strong>1 2 3 4 5
+						<strong>Example Values: </strong>[{"id" : 1, "comment" : "saignant, maître d'hôtel"}]
 					</td>
 				</tr>
 			</tbody>
@@ -499,7 +499,40 @@ Host: youfoodserver.herokuapp.com
 		<h3>Resource URL</h3>
 		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
 		<h3>Parameters</h3>
-		<p>None</p>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						table_id<br/>
+						<em>required</em>
+					</td>
+					<td>
+						ID of the table.<br/>
+						<strong>Example Values: </strong>1 2 3 4 5
+					</td>
+				</tr>
+				<tr>
+					<td>
+						price<br/>
+						<em>required</em>
+					</td>
+					<td>
+						The price of the invoice.<br/>
+						<strong>Example Values: </strong>23, 155.18
+					</td>
+				</tr>
+				<tr>
+					<td>
+						invoice_products<br/>
+						<em>optional</em>
+					</td>
+					<td>
+						A JSON array of InvoiceProduct entities (with product_id and comment) you want to add to the invoice.<br/>
+						<strong>Example Values: </strong> [{"product_id" : 1, "comment" : "saignant, maître d'hôtel"}]
+					</td>
+				</tr>
+			</tbody>
+		</table>
 		<h3>Example Request</h3>
 		<table class="table">
 			<tbody>
@@ -516,17 +549,11 @@ Host: youfoodserver.herokuapp.com
 	"price": 55.4,
 	"invoice_products" : [
 		{
-			"product" : {
-				"id" : 34,
-				"name" : "Filet de boeuf 130gr"
-			},
+			"product_id" : 34,
 			"comment" : "saignant, sauce poivre"
 		},
 		{
-			"product" : {
-				"id" : 89,
-				"name" : "Choucroute"
-			},
+			"product_id" : 89,
 			"comment" : null
 		}
 	]
