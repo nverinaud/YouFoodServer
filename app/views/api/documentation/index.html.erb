@@ -474,7 +474,8 @@ Host: youfoodserver.herokuapp.com
 			<h1 class="light-title">POST api/invoices</h1>
 		</header>
 		<h3>Description</h3>
-		<p>Short description</p>
+		<p>Create a new invoices.</p>
+		<p>In case of error the server returns an 403 error.</p>
 		<h3>Resource URL</h3>
 		<p>http://<em>youfoodserver.herokuapp.com</em>/api/invoices</p>
 		<h3>Parameters</h3>
@@ -486,16 +487,35 @@ Host: youfoodserver.herokuapp.com
 					<td><strong>POST</strong></td>
 					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices</td>
 				</tr>
+				<tr>
+					<td><strong>POST data</strong></td>
+					<td class="code">
+<pre class="prettyprint linenums">
+{
+	"table_id" : 2,
+	"price": 55.4,
+	"invoice_products" : [
+		{
+			"product" : {
+				"id" : 34,
+				"name" : "Filet de boeuf 130gr"
+			},
+			"comment" : "saignant, sauce poivre"
+		},
+		{
+			"product" : {
+				"id" : 89,
+				"name" : "Choucroute"
+			},
+			"comment" : null
+		}
+	]
+}
+</pre>
+					</td>
+				</tr>
 			</tbody>
 		</table>
-<pre class="prettyprint linenums">
-[
-	{
-		"id": 1,
-		"name": "Tradition"
-	}
-]
-</pre>
 	</article>
 
 	<article id="post-api-call_waiter">
