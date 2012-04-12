@@ -431,7 +431,7 @@ Host: youfoodserver.herokuapp.com
 			<h1 class="light-title">GET api/tables</h1>
 		</header>
 		<h3>Description</h3>
-		<p>Short description</p>
+		<p>Returns restaurant's tables for the logged in restaurant manager.</p>
 		<h3>Resource URL</h3>
 		<p>http://<em>youfoodserver.herokuapp.com</em>/api/tables</p>
 		<h3>Parameters</h3>
@@ -448,8 +448,22 @@ Host: youfoodserver.herokuapp.com
 <pre class="prettyprint linenums">
 [
 	{
-		"id": 1,
-		"name": "Tradition"
+		"id" : 1,
+		"name" : "Table STA",
+		"forks_nb" : 12
+		"zone" : {
+			"id" : 2,
+			"name" : "Zone SUPINFO"
+		}
+	},
+	{
+		"id" : 2,
+		"name" : "Table Etudiants 1",
+		"forks_nb" : 18,
+		"zone" : {
+			"id" : 2,
+			"name" : "Zone SUPINFO"
+		}
 	}
 ]
 </pre>
