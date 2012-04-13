@@ -1,0 +1,27 @@
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="<%= root_path %>">YouFood</a>
+
+            <div class="nav-collapse">
+            </div>
+
+            <% if signed_in? %>
+                <ul class="nav pull-right">
+                    <li>
+                        <p>Bienvenue <%= current_user.name %></p>
+                    </li>
+                    <li class="divider-vertical"></li>
+                    <li>
+                        <%= link_to("Se déconnecter", signout_path, method: :delete) %>
+                    </li>
+                </ul>
+            <% end %>
+        </div>
+    </div>
+</div>
