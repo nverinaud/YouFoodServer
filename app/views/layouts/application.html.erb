@@ -21,5 +21,13 @@
     <%= render 'shared/app_footer' %>
 </div>
 
+<% if Rails.env.development? %>
+    <%= current_user %>
+    <%= signed_in? %>
+    <%= debug(params) %>
+    <pre>method : <%= request.method %></pre>
+    <pre>path : <%= request.fullpath %> </pre>
+<% end %>
+
 </body>
 </html>

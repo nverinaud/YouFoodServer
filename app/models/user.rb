@@ -17,8 +17,10 @@
 
 class User < ActiveRecord::Base
   attr_accessible :id, :email, :password, :password_confirmation,
-                  :type, :name, :phone, :address, :zipCode, :city
+                  :type, :name, :phone, :address, :zipCode, :city,
+                  :remember_token
   has_secure_password
+  before_save :create_remember_token
 
   validates :name, presence: true
   validates :email, presence: true
@@ -31,4 +33,10 @@ class User < ActiveRecord::Base
 
   validates :password,
             length: {minimum: 8}
+
+  private
+
+  def create_remember_token
+    self.remember_token = SecureRandom.urlsafe_base64
+  end
 end
