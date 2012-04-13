@@ -1,4 +1,4 @@
 class PortalController < ApplicationController
-  def home
+  def director
   end
 end
