@@ -49,6 +49,18 @@ describe "Authentication" do
           it { should have_selector("legend", text: "Connexion") }
         end
       end
+
+      describe "as a restaurant manager" do
+        let(:restaurant_manager) { FactoryGirl.create(:restaurant_manager) }
+        before { sign_in restaurant_manager }
+
+        it { should have_signout_link }
+        it { should have_selector("h1", text: "Restaurant") }
+        it { should have_link('Gérer le personnel') }
+        it { should have_link('Gérer la salle') }
+        it { should have_link('Créer un nouvel employé') }
+        it { should have_link('Gérer les commandes') }
+      end
     end
   end
 end
