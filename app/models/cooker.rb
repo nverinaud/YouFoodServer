@@ -1,0 +1,3 @@
+class Cooker < User
+
+end
