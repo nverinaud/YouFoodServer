@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe ProductsController do
 
+	subject { page }
+
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'
