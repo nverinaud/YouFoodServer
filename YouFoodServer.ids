@@ -11,4 +11,39 @@
       </library>
     </libraries>
   </data-source>
+  <data-source source="LOCAL" name="Rails YouFoodServer: test" product="SQLite" version="3.7.2" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native" uuid="4b0ac955-41bd-46b7-8216-ca4905bd20e1">
+    <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+    <jdbc-url>jdbc:sqlite:/home/oli/Development/Rails/YouFoodServer/db/test.sqlite3</jdbc-url>
+    <libraries>
+      <library>
+        <url>file://$USER_HOME$/.IntelliJIdea11/config/jdbc-drivers/xerial-sqlite-license.txt</url>
+      </library>
+      <library>
+        <url>file://$USER_HOME$/.IntelliJIdea11/config/jdbc-drivers/sqlite-jdbc-3.7.2.jar</url>
+      </library>
+    </libraries>
+    <table name="schema_migrations" schema="" catalog="" type="TABLE">
+      <column name="version" sqlType="VARCHAR(255)" length="2000000000" precision="10" nullable="false" jdbcType="12" />
+      <index name="unique_schema_migrations" unique="true" columns="version" />
+    </table>
+    <table name="sqlite_sequence" schema="" catalog="" type="TABLE">
+      <column name="name" sqlType="" length="2000000000" precision="10" nullable="true" jdbcType="12" />
+      <column name="seq" sqlType="" length="2000000000" precision="10" nullable="true" jdbcType="12" />
+    </table>
+    <table name="users" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4" />
+      <column name="number" sqlType="INTEGER" length="2000000000" precision="10" nullable="true" jdbcType="4" />
+      <column name="email" sqlType="VARCHAR(255)" length="2000000000" precision="10" nullable="true" jdbcType="12" />
+      <column name="type" sqlType="VARCHAR(255)" length="2000000000" precision="10" nullable="true" jdbcType="12" />
+      <column name="name" sqlType="VARCHAR(255)" length="2000000000" precision="10" nullable="true" jdbcType="12" />
+      <column name="phone" sqlType="VARCHAR(255)" length="2000000000" precision="10" nullable="true" jdbcType="12" />
+      <column name="address" sqlType="VARCHAR(255)" length="2000000000" precision="10" nullable="true" jdbcType="12" />
+      <column name="zipCode" sqlType="INTEGER" length="2000000000" precision="10" nullable="true" jdbcType="4" />
+      <column name="city" sqlType="VARCHAR(255)" length="2000000000" precision="10" nullable="true" jdbcType="12" />
+      <column name="created_at" sqlType="DATETIME" length="2000000000" precision="10" nullable="false" jdbcType="12" />
+      <column name="updated_at" sqlType="DATETIME" length="2000000000" precision="10" nullable="false" jdbcType="12" />
+      <column name="password_digest" sqlType="VARCHAR(255)" length="2000000000" precision="10" nullable="true" jdbcType="12" />
+      <primary-key columns="id" />
+    </table>
+  </data-source>
 </component>
