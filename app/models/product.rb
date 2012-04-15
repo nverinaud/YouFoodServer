@@ -21,7 +21,8 @@ class Product < ActiveRecord::Base
 									:abbreviation, 
 									:description, 
 									:photoURL,
-									:permanent
+									:permanent,
+									:category
 
 	# Relationships
 	belongs_to :category
