@@ -14,6 +14,16 @@ body {
   }
 }
 
+.navbar {
+  .nav {
+    li {
+      p {
+        padding: 10px 10px 0 0;
+      }
+    }
+  }
+}
+
 .authentication-form {
   width: 300px;
   display: inline-block;
@@ -21,3 +31,23 @@ body {
   margin-left: 20px;
 }
 
+a.tile:link {
+  line-height: 100px;
+  width: 200px;
+  background-color: #369bd7;
+  display: inline-block;
+  margin: 0 5px 5px 0;
+  text-align: center;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+a.tile:visited {
+  color: white;
+}
+
+a.tile:hover {
+  text-decoration: none;
+  background-color: #68c0d5;
+}
