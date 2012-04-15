@@ -16,8 +16,13 @@
 <%= render 'shared/app_header' %>
 
 <div class="container">
-    <%= yield %>
-    <%= render 'shared/app_footer' %>
+  <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+  <% end %>
+
+  <%= yield %>
+  
+  <%= render 'shared/app_footer' %>
 </div>
 
     <%= javascript_include_tag "application" %>

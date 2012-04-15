@@ -1,17 +1,7 @@
+$lightGray: #aaa;
+
 body {
   padding-top: 60px;
-}
-
-@media (min-width: 768px) and (max-width: 980px) {
-  body {
-    padding-top: 0px;
-  }
-}
-
-@media (max-width: 768px) {
-  body {
-    padding-top: 0px;
-  }
 }
 
 .navbar {
@@ -74,4 +64,42 @@ div.pagination .previous_page {
 div.pagination .disabled {
   color: #999;
   background-color: transparent;
+}
+
+/* Details  */
+section.details {
+
+  img {
+    width: 300px;
+  }
+
+  table {
+
+    td {
+      padding: 7px 10px;
+    }
+
+    tr td:first-child {
+      vertical-align: top;
+      text-align: right;
+      font-size: 1.1em;
+      color: $lightGray;
+      width: 150px;
+    }
+
+  }
+
+}
+
+
+@media (min-width: 768px) and (max-width: 980px) {
+  body {
+    padding-top: 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 0px;
+  }
 }

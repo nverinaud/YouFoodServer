@@ -1,10 +1,6 @@
 <tr>
-	<td><%= product.name %></td>
+	<td><%= link_to product.name, product %></td>
 	<td><%= product.category.name %></td>
-	<% if product.permanent? %>
-		<td>Toujours à la carte</td>
-	<% else %>
-		<td>À thème</td>
-	<% end %>
+	<td><%= product_humanize_permanent(product) %></td>
 	<td><%= product.price %> €</td>
 </tr>
