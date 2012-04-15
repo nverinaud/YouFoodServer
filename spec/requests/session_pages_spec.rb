@@ -43,7 +43,7 @@ describe "Authentication" do
         it { should have_link('Créer un menu') }
         it { should have_link('Gérer un produit') }
 
-        describe "home page should be the portal" do
+        describe "show page should be the portal" do
           before { visit root_path }
           it { should have_selector("h1", text: "Directeur") }
         end
@@ -65,6 +65,14 @@ describe "Authentication" do
         it { should have_link('Gérer la salle') }
         it { should have_link('Créer un nouvel employé') }
         it { should have_link('Gérer les commandes') }
+      end
+
+      describe "as a restaurant manager" do
+        let(:cooker) { FactoryGirl.create(:cooker) }
+        before { sign_in cooker }
+
+        it { should have_signout_link }
+        it { should have_selector("h1", text: "commande") }
       end
     end
   end

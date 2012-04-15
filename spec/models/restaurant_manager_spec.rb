@@ -2,7 +2,7 @@ require "rspec"
 
 describe RestaurantManager do
   before do
-    @restaurant_manager = RestaurantManager.new(name: "John", email: "john@doe.com", password: "password")
+    @restaurant_manager = RestaurantManager.new(name: "Restaurant manager", email: "restaurant.manager@youfood.com", password: "password")
   end
   subject { @restaurant_manager }
 
