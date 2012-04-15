@@ -20,15 +20,9 @@
     <%= render 'shared/app_footer' %>
 </div>
 
-<<<<<<< HEAD
 <%= javascript_include_tag "application" %>
-
-=======
-    <%= javascript_include_tag "application" %>
     
->>>>>>> f689f6f280f678a7a0a704bcd31a9e41cc4f754c
 <% if Rails.env.development? %>
-    <%= current_user %>
     <%= signed_in? %>
     <%= debug(params) %>
     <pre>method : <%= request.method %></pre>
