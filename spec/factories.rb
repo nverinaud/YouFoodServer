@@ -15,5 +15,9 @@ FactoryGirl.define do
   	sequence(:permanent) { |n| n%2 == 0 }
   end
 
+  factory :category do
+    sequence(:name) { |n| "Category #{n}" }
+  end
+
 end
 

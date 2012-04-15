@@ -5,6 +5,7 @@ namespace :db do
   task populate: :environment do
     Rake::Task['db:reset'].invoke
     make_products
+    make_categories
   end
 
 
@@ -20,6 +21,20 @@ namespace :db do
                       abbreviation: abbreviation,
                       description: description,
                       permanent: permanent)
+    end
+  end
+
+
+  def make_categories
+    5.times do |n|
+      name = Faker::Name.first_name
+      Category.create!(name: name)
+    end
+    products = Product.all
+    categories = Category.all
+    products.each_with_index do |product, i|
+      product.category = categories[i%5]
+      product.save
     end
   end
 
