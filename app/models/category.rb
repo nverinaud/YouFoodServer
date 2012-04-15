@@ -12,4 +12,7 @@ class Category < ActiveRecord::Base
 
 	attr_accessible :name
 
+	# Validation
+	validates :name, presence: true
+
 end
