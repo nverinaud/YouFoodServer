@@ -5,6 +5,8 @@ YouFoodServer::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/director', to: 'portal#director'
+  match '/restaurant', to: 'portal#restaurant_manager'
+
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
 
