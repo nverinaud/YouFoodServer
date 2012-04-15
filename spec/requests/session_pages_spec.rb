@@ -44,6 +44,11 @@ describe "Authentication" do
         it { should have_link('Gérer un produit') }
       end
 
+      describe "and then signout" do
+        before { click_link "Se déconnecter" }
+        it { should have_selector("img", alt: "Food picture") }
+        it { should have_selector("legend", text: "Connexion") }
+      end
     end
   end
 end
