@@ -7,13 +7,14 @@ describe "Product pages" do
   describe "index" do
 
   	before do
-  		3.times { FactoryGirl.create(:product) }
+  		@product = FactoryGirl.create(:product)
   		visit products_path
   	end
 
   	it { should have_title("Les Produits") }
   	it { should have_h1("Les Produits") }
 
+    it { should have_link(@product.name, href: product_path(@product)) }
 
   	describe "pagination" do
 
@@ -40,8 +41,21 @@ describe "Product pages" do
           page.should_not have_selector('td', text: product.name)
         end
       end
-
   	end
+  end
+
+  describe "show" do
+
+    let(:product) { FactoryGirl.create(:product) }
+    before { visit product_path(product) }
+
+    it { should have_title(full_title("Produit | #{product.name}")) }
+    it { should have_h1(product.name) }
+
+    it "should redirect if bad product id" do
+      get product_path(99999999999999)
+      response.should redirect_to(products_path)
+    end
 
   end
 
