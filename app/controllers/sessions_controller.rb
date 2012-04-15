@@ -8,6 +8,8 @@ class SessionsController < ApplicationController
       sign_in user
       if user.is_a? Director
         redirect_to '/director'
+      elsif user.is_a? RestaurantManager
+        redirect_to '/restaurant'
       end
     else
       flash.now[:error] = 'Couple identifiant/mot de passe invalide'
