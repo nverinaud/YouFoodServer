@@ -14,4 +14,17 @@
 #
 
 class Product < ActiveRecord::Base
+
+	attr_accessible :price, 
+					:name, 
+					:abbreviation, 
+					:description, 
+					:photoURL,
+					:permanent
+
+	# Validation
+	validates :price, presence: true, numericality: { greater_than: 0.0 }
+	validates :name, presence: true
+	validates :abbreviation, length: { maximum: 10 }
+
 end
