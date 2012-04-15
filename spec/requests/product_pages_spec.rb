@@ -12,8 +12,14 @@ describe "Product pages" do
   	end
 
   	it { should have_title("Les Produits") }
+  	it { should have_h1("Les Produits") }
+
+
+  	describe "pagination" do
+  		
+  	end
 
   end
-	
+
 end
 

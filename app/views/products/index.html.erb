@@ -1,2 +1,22 @@
-<h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
+<% provide(:page_title, "Les Produits") %>
+
+<header class="page-header">
+	<h1>Les Produits</h1>
+</header>
+
+<table class="table table-bordered table-striped products">
+	<% if @products.any? %>
+		<thead>
+			<td>Nom</td>
+			<td>Toujours à la carte</td>
+			<td>Prix</td>
+		</thead>
+		<tbody>
+			<%= render @products %>
+		</tbody>
+	<% else %>
+		<tr>
+			<td>Aucun produit trouvé.</td>
+		</tr>
+	<% end %>
+</table>

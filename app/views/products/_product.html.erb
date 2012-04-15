@@ -1,0 +1,9 @@
+<tr>
+	<td><%= product.name %></td>
+	<% if product.permanent? %>
+		<td>Toujours à la carte</td>
+	<% else %>
+		<td>À thème</td>
+	<% end %>
+	<td><%= product.price %> €</td>
+</tr>
