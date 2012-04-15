@@ -3,6 +3,7 @@ YouFoodServer::Application.routes.draw do
   root to: 'sessions#new'
 
   resources :sessions, only: [:new, :create, :destroy]
+  resources :products, only: [:index]
 
   match '/director', to: 'portal#director'
   match '/signin',  to: 'sessions#new'
