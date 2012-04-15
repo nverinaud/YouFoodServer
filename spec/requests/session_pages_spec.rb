@@ -43,6 +43,11 @@ describe "Authentication" do
         it { should have_link('Créer un menu') }
         it { should have_link('Gérer un produit') }
 
+        describe "home page shoudl be the portal" do
+          before { visit root_path }
+          it { should have_selector("h1", text: "Directeur") }
+        end
+
         describe "and then signout" do
           before { click_link "Se déconnecter" }
           it { should have_selector("img", alt: "Food picture") }
