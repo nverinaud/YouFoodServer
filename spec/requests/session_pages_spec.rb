@@ -43,11 +43,36 @@ describe "Authentication" do
         it { should have_link('Créer un menu') }
         it { should have_link('Gérer un produit') }
 
+        describe "show page should be the portal" do
+          before { visit root_path }
+          it { should have_selector("h1", text: "Directeur") }
+        end
+
         describe "and then signout" do
           before { click_link "Se déconnecter" }
           it { should have_selector("img", alt: "Food picture") }
           it { should have_selector("legend", text: "Connexion") }
         end
+      end
+
+      describe "as a restaurant manager" do
+        let(:restaurant_manager) { FactoryGirl.create(:restaurant_manager) }
+        before { sign_in restaurant_manager }
+
+        it { should have_signout_link }
+        it { should have_selector("h1", text: "Restaurant") }
+        it { should have_link('Gérer le personnel') }
+        it { should have_link('Gérer la salle') }
+        it { should have_link('Créer un nouvel employé') }
+        it { should have_link('Gérer les commandes') }
+      end
+
+      describe "as a restaurant manager" do
+        let(:cooker) { FactoryGirl.create(:cooker) }
+        before { sign_in cooker }
+
+        it { should have_signout_link }
+        it { should have_selector("h1", text: "commande") }
       end
     end
   end

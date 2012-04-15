@@ -1,14 +1,15 @@
 class SessionsController < ApplicationController
   def new
+    if signed_in?
+      redirect_to current_user_portal_path
+    end
   end
 
   def create
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       sign_in user
-      if user.is_a? Director
-        redirect_to '/director'
-      end
+      redirect_to current_user_portal_path
     else
       flash.now[:error] = 'Couple identifiant/mot de passe invalide'
       render 'new'

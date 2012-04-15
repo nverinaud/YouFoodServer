@@ -41,6 +41,16 @@ module SessionsHelper
     end
   end
 
+  def current_user_portal_path
+    if current_user.is_a? Director
+      '/director'
+    elsif current_user.is_a? RestaurantManager
+      '/restaurant'
+    elsif current_user.is_a? Cooker
+      '/orders'
+    end
+  end
+
   private
 
   def user_from_remember_token
