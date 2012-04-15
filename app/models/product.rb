@@ -11,6 +11,7 @@
 #  permanent    :boolean
 #  created_at   :datetime        not null
 #  updated_at   :datetime        not null
+#  category_id  :integer
 #
 
 class Product < ActiveRecord::Base
@@ -22,9 +23,14 @@ class Product < ActiveRecord::Base
 									:photoURL,
 									:permanent
 
+	# Relationships
+	belongs_to :category
+	validates_associated :category
+
 	# Validation
 	validates :price, presence: true, numericality: { greater_than: 0.0 }
 	validates :name, presence: true
 	validates :abbreviation, length: { maximum: 10 }
+	validates :category, presence: true
 
 end

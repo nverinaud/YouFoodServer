@@ -18,7 +18,10 @@ describe "Product pages" do
   	describe "pagination" do
 
   		before(:all) { 30.times { FactoryGirl.create(:product) } }
-      after(:all)  { Product.delete_all }
+      after(:all)  { 
+      	Product.delete_all 
+      	Category.delete_all
+      }
 
       let(:first_page) { Product.paginate(page: 1) }
       let(:second_page) { Product.paginate(page: 2) }

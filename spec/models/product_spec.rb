@@ -11,13 +11,18 @@
 #  permanent    :boolean
 #  created_at   :datetime        not null
 #  updated_at   :datetime        not null
+#  category_id  :integer
 #
 
 require 'spec_helper'
 
 describe Product do
 
-	before { @product = FactoryGirl.create(:product) }
+	let(:category) { FactoryGirl.create(:category) }
+	before { 
+		@product = FactoryGirl.create(:product) 
+		@product.category = category
+	}
 
 	subject { @product }
 
@@ -27,8 +32,15 @@ describe Product do
 	it { should respond_to(:description) }
 	it { should respond_to(:photoURL) }
 	it { should respond_to(:permanent) }
+	it { should respond_to(:category) }
+	its(:category) { should == category }
 
 	it { should be_valid }
+
+	describe "with no category" do
+		before { @product.category = nil }
+		it { should_not be_valid }
+	end
 
 	describe "with no price" do
 		before { @product.price = 0 }

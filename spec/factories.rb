@@ -6,6 +6,12 @@ FactoryGirl.define do
     password "foobarfoobar"
   end
 
+
+  factory :category do
+    sequence(:name) { |n| "Category #{n}" }
+  end
+
+
   factory :product do
   	sequence(:price) { |n| n+10 }
   	sequence(:name) { |n| "Product #{n}" }
@@ -13,10 +19,7 @@ FactoryGirl.define do
   	description "Hum I like it !"
   	photoURL "http://localhost:3000/assets/images/food-image.jpg"
   	sequence(:permanent) { |n| n%2 == 0 }
-  end
-
-  factory :category do
-    sequence(:name) { |n| "Category #{n}" }
+    category
   end
 
 end

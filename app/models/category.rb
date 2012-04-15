@@ -12,7 +12,10 @@ class Category < ActiveRecord::Base
 
 	attr_accessible :name
 
+	# Relationships
+	has_many :products
+
 	# Validation
-	validates :name, presence: true
+	validates :name, presence: true, uniqueness: { case_sensitive: false }
 
 end
