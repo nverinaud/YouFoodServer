@@ -43,7 +43,7 @@ describe "Authentication" do
         it { should have_link('Créer un menu') }
         it { should have_link('Gérer un produit') }
 
-        describe "home page should be the portal" do
+        describe "show page should be the portal" do
           before { visit root_path }
           it { should have_selector("h1", text: "Directeur") }
         end

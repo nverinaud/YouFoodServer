@@ -2,7 +2,7 @@ require "rspec"
 
 describe Cooker do
   before do
-    @cooker = Cooker.new(name: "Cookre", email: "cooker@youfood.com", password: "password")
+    @cooker = Cooker.new(name: "Cooker", email: "cooker@youfood.com", password: "password")
   end
   subject { @cooker }
 

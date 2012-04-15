@@ -46,6 +46,8 @@ module SessionsHelper
       '/director'
     elsif current_user.is_a? RestaurantManager
       '/restaurant'
+    elsif current_user.is_a? Cooker
+      '/orders'
     end
   end
 
