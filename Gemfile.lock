@@ -151,6 +151,9 @@ GEM
       ffi (~> 1.0)
       multi_json (~> 1.0)
       rubyzip
+    simple_form (2.0.1)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     spork (0.9.0)
     sprockets (2.1.2)
       hike (~> 1.2)
@@ -194,6 +197,7 @@ DEPENDENCIES
   rb-inotify (= 0.8.8)
   rspec-rails (= 2.8.1)
   sass-rails (= 3.2.3)
+  simple_form
   spork (~> 0.9.0.rc)
   sqlite3 (= 1.3.5)
   uglifier (= 1.0.3)

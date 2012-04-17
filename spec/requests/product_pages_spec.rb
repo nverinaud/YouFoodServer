@@ -5,7 +5,6 @@ describe "Product pages" do
 	subject { page }
 
   describe "index" do
-
   	before do
   		@product = FactoryGirl.create(:product)
   		visit products_path
@@ -45,7 +44,6 @@ describe "Product pages" do
   end
 
   describe "show" do
-
     let(:product) { FactoryGirl.create(:product) }
     before { visit product_path(product) }
 
@@ -55,6 +53,36 @@ describe "Product pages" do
     it "should redirect if bad product id" do
       get product_path(99999999999999)
       response.should redirect_to(products_path)
+    end
+  end
+
+  describe "product creation" do
+    before { visit new_product_path }
+
+    describe "with invalid information" do
+
+      it "should not create a product" do
+        expect { click_button "Submit" }.should_not change(Product, :count)
+      end
+
+      describe "error messages" do
+        let(:error) { '3 errors' }
+        before { click_button "Submit" }
+        it { should have_content(error) }
+      end
+    end
+
+    describe "with valid information" do
+
+      before do
+        fill_in 'product[price]',     with: "10"
+        fill_in 'product[name]' ,     with: "Sample Product"
+        fill_in 'product[category]',  with: "Sample Category"
+      end
+
+      it "should create a micropost" do
+        expect { click_button "Submit" }.should change(Product, :count).by(1)
+      end
     end
 
   end

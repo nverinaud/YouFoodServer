@@ -1,0 +1,41 @@
+<header class="page-header">
+	<h1><%= form.input :name, placeholder: "Nom du Produit" %></h1>
+</header>
+
+<div class="row-fluid">
+	<div class="span2">
+	</div>
+	<div class="span8">
+		<table>
+			<tbody>
+				<tr>
+					<td>Catégorie</td>
+					<td><%= form.input :category, placeholder: "Rechercher..." %></td>
+				</tr>
+				<tr>
+					<td>Toujours à la carte ?</td>
+					<td><%= form.input :permanent, as: :radio_buttons %></td>
+				</tr>
+				<tr>
+					<td>Prix</td>
+					<td><%= form.input :price, placeholder: "ex: 10.50" %> €</td>
+				</tr>
+				<tr>
+					<td>Abréviation</td>
+					<td><%= form.input :abbreviation, placeholder: "abrev" %></td>
+				</tr>
+				<tr>
+					<td>Description Alléchante</td>
+					<td><%= form.input :description, as: :text, placeholder: "ex: Mmmmmh trop bon !" %></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><%= form.submit "Valider" %></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="span2">
+		
+	</div>
+</div>
