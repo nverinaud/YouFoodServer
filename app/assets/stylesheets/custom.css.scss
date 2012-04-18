@@ -92,6 +92,53 @@ section.details {
 }
 
 
+/* Forms */
+section.new-element {
+
+  form {
+
+    header.page-header {
+
+      padding-bottom: 0px;
+
+      label {
+        display: none;
+      }
+
+      .controls {
+        margin-left: 0px;
+      }
+
+    }
+
+    img {
+      width: 128px;
+      margin-bottom: 10px;
+    }
+
+    label.control-label {
+      color: $lightGray;
+      font-size: 1.1em;
+      width: 150px;
+    }
+
+    div.form-actions  {
+
+      input:first-child {
+        margin-right: 15px;
+      }
+
+      a.btn {
+        float: none;
+        margin-left: 0;
+      }
+    }
+
+  }
+
+}
+
+
 @media (min-width: 768px) and (max-width: 980px) {
   body {
     padding-top: 0px;

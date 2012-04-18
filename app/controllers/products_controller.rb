@@ -17,11 +17,20 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
+    @product = session[:product] || Product.new
+    session[:product] = nil
   end
 
   # POST /products
   def create
+    params[:product][:category] = nil
+    @product = Product.new(params[:product])
+    if @product.save
+      redirect_to products_path
+    else
+      session[:product] = @product
+      redirect_to new_product_path      
+    end
   end
 
 end
