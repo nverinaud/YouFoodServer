@@ -122,6 +122,18 @@ section.new-element {
       width: 150px;
     }
 
+    div.controls {
+
+      p.help-block {
+        color: blue;
+      }
+
+      p.warning {
+        color: #C09853;
+      }
+
+    }
+
     div.form-actions  {
 
       input:first-child {

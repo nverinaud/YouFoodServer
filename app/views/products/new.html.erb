@@ -7,3 +7,36 @@
 <% end %>
 
 </section>
+
+<% if @categories.any? %>
+	<% content_for :js do %>
+<script type="text/javascript">
+	var product_categories = <%= raw @categories.to_json %>;
+
+	var $help = $("#product_category ~ p.help-block");
+	var originalHelp = $help.text();
+	var newCategInfo = "(!) Cette catégorie n'existe pas et sera créée."
+	var $categoryInput = $("#product_category");
+
+	$categoryInput.autocomplete({
+			delay: 0,
+			source: product_categories,
+			close : function(event, ui) {
+				var val = $categoryInput.val()
+				
+				if (!val || $.inArray(val, product_categories) != -1)
+				{
+					$help.text(originalHelp);
+					$help.removeClass('warning');
+				}
+				else
+				{
+					$help.text(newCategInfo);
+					$help.addClass('warning');
+				}
+			}
+	});
+
+</script>
+	<% end %>
+<% end %>

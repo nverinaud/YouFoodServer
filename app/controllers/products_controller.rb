@@ -17,6 +17,7 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
+    @categories = Category.select(:name).map { |c| c.name };
     @product = session[:product] || Product.new
     session[:product] = nil
   end
