@@ -21,21 +21,30 @@
 	$categoryInput.autocomplete({
 			delay: 0,
 			source: product_categories,
-			close : function(event, ui) {
-				var val = $categoryInput.val()
-				
-				if (!val || $.inArray(val, product_categories) != -1)
-				{
-					$help.text(originalHelp);
-					$help.removeClass('warning');
-				}
-				else
-				{
-					$help.text(newCategInfo);
-					$help.addClass('warning');
-				}
+			close: function(event, ui) {
+				checkCategoryInputAndFeedbackUser();
 			}
 	});
+
+	$categoryInput.blur(function(){
+		checkCategoryInputAndFeedbackUser();
+	});
+
+	function checkCategoryInputAndFeedbackUser()
+	{
+		var val = $categoryInput.val()
+				
+		if (!val || $.inArray(val, product_categories) != -1)
+		{
+			$help.text(originalHelp);
+			$help.removeClass('warning');
+		}
+		else
+		{
+			$help.text(newCategInfo);
+			$help.addClass('warning');
+		}
+	}
 
 </script>
 	<% end %>
