@@ -16,7 +16,10 @@
 	var $help = $("#product_category ~ p.help-block");
 	var originalHelp = $help.text();
 	var newCategInfo = "(!) Cette catégorie n'existe pas et sera créée."
+	var existingCategInfo = "Cette catégorie existe et sera utilisée."
 	var $categoryInput = $("#product_category");
+
+	checkCategoryInputAndFeedbackUser();
 
 	$categoryInput.autocomplete({
 			delay: 0,
@@ -34,9 +37,14 @@
 	{
 		var val = $categoryInput.val()
 				
-		if (!val || $.inArray(val, product_categories) != -1)
+		if (!val)
 		{
 			$help.text(originalHelp);
+			$help.removeClass('warning');
+		}
+		else if ($.inArray(val, product_categories) != -1)
+		{
+			$help.text(existingCategInfo);
 			$help.removeClass('warning');
 		}
 		else

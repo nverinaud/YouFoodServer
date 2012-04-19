@@ -14,11 +14,13 @@
 	</div>
 	<div class="span10">
 		<%= 
+			categoryValue = @product.category.name unless @product.category.nil?
+
 			form.input 	:category, 
-									placeholder: "Rechercher...", 
+									placeholder: "Rechercher...",
 									required: false,
 									label: "Catégorie",
-									input_html: { class: 'span4' },
+									input_html: { class: 'span4', value: categoryValue || "" },
 									hint: "Info: pour créer une nouvelle catégorie, entrez son nom !"
 		%>
 		<div class="control-group">

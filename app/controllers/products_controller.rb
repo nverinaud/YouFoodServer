@@ -24,13 +24,29 @@ class ProductsController < ApplicationController
 
   # POST /products
   def create
-    params[:product][:category] = nil
-    @product = Product.new(params[:product])
-    if @product.save
-      redirect_to products_path
+    categoryName = params[:product][:category];
+    params[:product][:category] = nil;
+    category = nil
+    if !categoryName.blank?
+      category = Category.where(name: categoryName).first_or_create
+      product = category.products.build(params[:product])
+      if product.save
+        redirect_to products_path
+      else
+        if !category.nil?
+          product.category = Category.new(name: category.name)
+          if category.products.count == 0
+            category.delete
+          end
+        end
+        session[:product] = product
+        redirect_to new_product_path
+      end
     else
-      session[:product] = @product
-      redirect_to new_product_path      
+      product = Product.new(params[:product])
+      product.valid?
+      session[:product] = product
+      redirect_to new_product_path
     end
   end
 
