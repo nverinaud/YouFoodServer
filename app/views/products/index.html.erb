@@ -6,7 +6,11 @@
 	<h1>Les Produits</h1>
 </header>
 
-	<p><%= pluralize(@products.count, "produit", "produits") %></p>
+	<div class="row-fluid">
+		<p class="span9"><%= pluralize(@products.count, "produit", "produits") %></p>
+		<a href="<%= new_product_path %>" class="btn btn-primary span2">Nouveau Produit +</a>
+	</div>
+	
 
 <%= will_paginate %>
 
