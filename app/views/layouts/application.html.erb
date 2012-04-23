@@ -23,7 +23,6 @@
 <%= javascript_include_tag "application" %>
     
 <% if Rails.env.development? %>
-    <%= signed_in? %>
     <%= debug(params) %>
     <pre>method : <%= request.method %></pre>
     <pre>path : <%= request.fullpath %> </pre>

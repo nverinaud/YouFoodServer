@@ -1,0 +1,36 @@
+<% provide(:page_title, directorTitle("Les menus")) %>
+
+<section id="products">
+
+    <header class="page-header">
+        <h1>Les Produits</h1>
+    </header>
+
+    <div class="row-fluid">
+        <p class="span9"><%= pluralize(@products.count, "produit", "produits") %></p>
+        <a href="<%= new_product_path %>" class="btn btn-primary span2">Nouveau Produit +</a>
+    </div>
+
+
+    <%= will_paginate %>
+
+    <table class="table table-bordered table-striped products">
+        <% if @menus.any? %>
+            <thead>
+            <th>Nom</th>
+            <th>Catégorie</th>
+            <th>Toujours à la carte</th>
+            </thead>
+            <tbody>
+            <%= render @products %>
+            </tbody>
+        <% else %>
+            <tr>
+                <td>Aucun produit trouvé.</td>
+            </tr>
+        <% end %>
+    </table>
+
+    <%= will_paginate %>
+
+</section>
