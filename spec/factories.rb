@@ -16,5 +16,11 @@ FactoryGirl.define do
     email "cooker@youfood.com"
     password "password"
   end
+
+  factory :menu do
+    sequence(:name) { |n| "Menu #{n}" }
+    sequence(:description) { |n| "Menu #{n} description" }
+    default true
+  end
 end
 
