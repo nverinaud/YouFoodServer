@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module SessionsHelper
 
   def sign_in(user)
@@ -48,6 +50,18 @@ module SessionsHelper
       '/restaurant'
     elsif current_user.is_a? Cooker
       '/orders'
+    end
+  end
+
+  def signed_in_director
+    if !current_user.is_a? Director
+      redirect_to signin_path, notice: "Veuillez vous connecter en tant que directeur."
+    end
+  end
+
+  def signed_in_manager
+    if !current_user.is_a? RestaurantManager
+      redirect_to signin_path, notice: "Veuillez vous connecter en tant que gérant de restaurant."
     end
   end
 
