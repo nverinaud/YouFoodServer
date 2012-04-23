@@ -11,3 +11,9 @@ RSpec::Matchers.define :have_signout_link do
     page.should have_link('Se déconnecter', href: signout_path)
   end
 end
+
+RSpec::Matchers.define :have_title do |text|
+  match do |page|
+    page.should have_selector('title', text: text)
+  end
+end

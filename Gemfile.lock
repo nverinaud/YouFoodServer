@@ -31,6 +31,8 @@ GEM
     annotate (2.4.1.beta1)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    bootstrap-will_paginate (0.0.7)
+      will_paginate
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -177,6 +179,7 @@ PLATFORMS
 DEPENDENCIES
   annotate (~> 2.4.1.beta)
   bcrypt-ruby (= 3.0.1)
+  bootstrap-will_paginate
   capybara (= 1.1.2)
   coffee-rails (= 3.2.2)
   cucumber-rails (= 1.2.1)
@@ -197,4 +200,3 @@ DEPENDENCIES
   spork (~> 0.9.0.rc)
   sqlite3 (= 1.3.5)
   uglifier (= 1.0.3)
-  will_paginate (= 3.0.3)

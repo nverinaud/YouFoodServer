@@ -7,20 +7,25 @@ describe "Menus" do
   subject { page }
 
   describe "List page" do
+    before { visit menus_path }
 
-    it { should have_title "YouFood - Portail de gestion - Les menus" }
+    it { should have_title "YouFood | Portail directeur | Les menus" }
 
     it { should have_selector("h1", text: "Les menus") }
-    it { should have_selector("input", text: "Nouveau menu") }
-    it { should have_selector("th", text: "Titre") }
-    it { should have_selector("th", text: "Nombre de produit") }
-    it { should have_selector("th", text: "Planification") }
+    it { should have_link("Nouveau menu") }
 
     describe "pagination" do
-      before { 100.times { FactoryGirl.create(:menu) } }
+      before {
+        100.times { FactoryGirl.create(:menu) }
+        visit menus_path
+      }
 
-      let(:first_page) { user.microposts.paginate(page: 1) }
-      let(:second_page) { user.microposts.paginate(page: 2) }
+      it { should have_selector("th", text: "Nom") }
+      it { should have_selector("th", text: "Nombre de produit") }
+      it { should have_selector("th", text: "Planification") }
+
+      let(:first_page) { Menu.paginate(page: 1) }
+      let(:second_page) { Menu.paginate(page: 2) }
 
       it { should have_link('Suivant') }
       it { should have_link('2') }
@@ -28,14 +33,14 @@ describe "Menus" do
       it "should list the first page of menus" do
         first_page.each do |menu|
           page.should have_link(menu.name)
-          page.should have_selector("tr", text: menu.products.count)
+          page.should have_selector("td", text: menu.products.count)
         end
       end
 
       it "should not list the second page of menus" do
         second_page.each do |menu|
           page.should_not have_link(menu.name)
-          page.should_not have_selector("tr", text: menu.products.count)
+          page.should_not have_selector("td", text: menu.products.count)
         end
       end
 
