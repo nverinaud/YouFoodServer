@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       sign_in user
       redirect_to current_user_portal_path
     else
-      flash.now[:error] = 'Couple identifiant/mot de passe invalide'
+      flash.now[:error] = "Mot de passe ou nom d'utilisateur incorrect"
       render 'new'
     end
   end
