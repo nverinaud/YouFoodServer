@@ -43,7 +43,6 @@ describe "Menus" do
           page.should_not have_selector("td", text: menu.products.count)
         end
       end
-
     end
   end
 end
