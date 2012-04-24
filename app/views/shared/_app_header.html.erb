@@ -8,6 +8,9 @@
        </a>
        <a class="brand" href="<%= root_path %>">YouFood</a>
        <div class="nav-collapse">
+        <ul class="nav pull-left">
+          <li><a href="<%= products_path %>">Les Produits</a></li>
+        </ul>
        </div>
        <% if signed_in? %>
             <ul class="nav pull-right">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417193418) do
+ActiveRecord::Schema.define(:version => 20120424053735) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -24,11 +24,14 @@ ActiveRecord::Schema.define(:version => 20120417193418) do
     t.string   "name"
     t.string   "abbreviation"
     t.text     "description"
-    t.string   "photoURL"
     t.boolean  "permanent"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "category_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "users", :force => true do |t|

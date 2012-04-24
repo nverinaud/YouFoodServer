@@ -1,0 +1,45 @@
+<% provide(:page_title, full_title("Produit | " + @product.name)) %>
+
+<section id="product-details" class="details">
+
+	<header class="page-header">
+		<h1><%= @product.name %></h1>
+	</header>
+
+	<div class="row-fluid">
+		<div class="span4">
+			<%= product_image_tag(@product) %>
+		</div>
+		<div class="span6">
+			<table>
+				<tbody>
+					<tr>
+						<td>Catégorie</td>
+						<td><%= @product.category.name %></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><%= product_humanize_permanent(@product) %></td>
+					</tr>
+					<tr>
+						<td>Prix</td>
+						<td><%= @product.price %> €</td>
+					</tr>
+					<tr>
+						<td>Abréviation</td>
+						<td><%= @product.abbreviation %></td>
+					</tr>
+					<tr>
+						<td>Description Alléchante</td>
+						<td><%= @product.description %></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="span2">
+			
+		</div>
+	</div>
+
+</section>
+
