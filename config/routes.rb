@@ -17,6 +17,7 @@ YouFoodServer::Application.routes.draw do
   namespace :api do
     match '/' => 'documentation#index'
     match '/auth/request_token' => 'authentication#request_token', via: :post
+    match '/call_waiter' => 'call_waiter#call_waiter', via: :post
   end
   
 end

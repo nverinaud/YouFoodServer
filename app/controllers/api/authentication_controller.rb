@@ -1,4 +1,4 @@
-class Api::AuthenticationController < ApplicationController
+class Api::AuthenticationController < Api::ApiController
   def request_token
     puts params
     user = User.find_by_email(params[:email])

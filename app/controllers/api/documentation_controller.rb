@@ -1,4 +1,4 @@
-class Api::DocumentationController < ApplicationController
+class Api::DocumentationController < Api::ApiController
 	
 	def index
 		render layout: "api/documentation"
