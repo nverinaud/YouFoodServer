@@ -39,12 +39,14 @@ class ProductsController < ApplicationController
             category.delete
           end
         end
+        product.photo = nil
         session[:product] = product
         redirect_to new_product_path
       end
     else
       product = Product.new(params[:product])
       product.valid?
+      product.photo = nil
       session[:product] = product
       redirect_to new_product_path
     end
