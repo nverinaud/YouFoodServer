@@ -34,6 +34,7 @@ describe "Menus" do
         first_page.each do |menu|
           page.should have_link(menu.name)
           page.should have_selector("td", text: menu.products.count)
+          page.should have_selector("td", text: "Semaine #{menu.schedules.week}")
         end
       end
 
@@ -41,6 +42,7 @@ describe "Menus" do
         second_page.each do |menu|
           page.should_not have_link(menu.name)
           page.should_not have_selector("td", text: menu.products.count)
+          page.should_not have_selector("td", text: "Semaine #{menu.schedules.week}")
         end
       end
     end
