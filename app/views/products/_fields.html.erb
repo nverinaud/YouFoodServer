@@ -9,8 +9,8 @@
 
 <div class="row-fluid">
 	<div class="span2">
-		<%= image_tag "empty-food-image.jpg" %>
-		<input type="button" value="Ajouter une image" class="btn span2" />
+		<%= image_tag @product.photo.url(:thumb) %>
+		<%= form.file_field :photo %>
 	</div>
 	<div class="span10">
 		<%= 

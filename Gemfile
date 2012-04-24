@@ -6,6 +6,7 @@ gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'jquery-rails', '2.0.0'
 gem 'simple_form'
+gem "paperclip", "~> 3.0"
 
 group :development do
   gem 'sqlite3', '1.3.5'
