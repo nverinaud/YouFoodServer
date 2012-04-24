@@ -33,16 +33,12 @@ describe "Menus" do
       it "should list the first page of menus" do
         first_page.each do |menu|
           page.should have_link(menu.name)
-          page.should have_selector("td", text: menu.products.count)
-          page.should have_selector("td", text: "Semaine #{menu.schedules.week}")
         end
       end
 
       it "should not list the second page of menus" do
         second_page.each do |menu|
           page.should_not have_link(menu.name)
-          page.should_not have_selector("td", text: menu.products.count)
-          page.should_not have_selector("td", text: "Semaine #{menu.schedules.week}")
         end
       end
     end

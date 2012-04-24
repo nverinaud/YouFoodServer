@@ -1,5 +1,14 @@
 <tr>
     <td><%= link_to(menu.name, menu_path(menu)) %></td>
-    <td>Product count</td>
-    <td>Schedule</td>
+    <td><%= "menu.products.count" %></td>
+    <td>
+        <% if menu.schedules.any? %>
+            Semaine
+            <% menu.schedules.each do |schedule| %>
+                <%= " #{schedule.week}" %>
+            <% end %>
+        <% else %>
+            Aucune planification
+        <% end %>
+    </td>
 </tr>
