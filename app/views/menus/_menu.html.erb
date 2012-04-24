@@ -5,7 +5,14 @@
         <% if menu.schedules.any? %>
             Semaine
             <% menu.schedules.each do |schedule| %>
+<<<<<<< Updated upstream
                 <%= " #{schedule.week}" %>
+=======
+                <%= schedule.week %>
+                <% if schedule != menu.schedules.last %>
+                    ,
+                <% end %>
+>>>>>>> Stashed changes
             <% end %>
         <% else %>
             Aucune planification
