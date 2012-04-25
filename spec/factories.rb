@@ -18,6 +18,11 @@ FactoryGirl.define do
     password "password"
   end
 
+  factory :menu do
+    sequence(:name) { |n| "Menu #{n}" }
+    sequence(:description) { |n| "Menu #{n} description" }
+    default true
+  end
 
   factory :category do
     sequence(:name) { |n| "Category #{n}" }
@@ -25,12 +30,12 @@ FactoryGirl.define do
 
 
   factory :product do
-  	sequence(:price) { |n| n+10 }
-  	sequence(:name) { |n| "Product #{n}" }
-  	sequence(:abbreviation) { |n| "prod#{n}" }
-  	description "Hum I like it !"
+    sequence(:price) { |n| n+10 }
+    sequence(:name) { |n| "Product #{n}" }
+    sequence(:abbreviation) { |n| "prod#{n}" }
+    description "Hum I like it !"
     photo_file_name "http://localhost:3000/assets/images/food-image.jpg"
-  	sequence(:permanent) { |n| n%2 == 0 }
+    sequence(:permanent) { |n| n%2 == 0 }
     category
   end
 

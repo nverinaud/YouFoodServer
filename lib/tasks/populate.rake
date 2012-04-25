@@ -7,6 +7,8 @@ namespace :db do
     make_users
     make_categories
     make_products
+    make_schedules
+    make_menus
   end
 
 
@@ -16,6 +18,35 @@ namespace :db do
     Director.create(name: "Director", email: "director@youfood.com", password: "password")
   end
 
+  def make_menus
+    products = Product.all
+    30.times do |n|
+      name = Faker::Lorem.sentence(2)
+      description = Faker::Lorem.paragraph
+      default = (n%2 == 0)
+      menu = Menu.new(name: name,
+                      description: description,
+                      default: default)
+      menu.products = Array.new
+      rand(15).times do |i|
+        menu.products << products[rand(100)]
+      end
+      menu.save!
+    end
+  end
+
+  def make_schedules
+    menus = Menu.all
+    100.times do |n|
+      week = (n%52)+1
+      start_date = Date.new
+      end_date = 1.week.from_now
+      menu = menus[n%30]
+      schedule = Schedule.new(week: week, start_date: start_date, end_date: end_date)
+      schedule.menu = menu
+      schedule.save
+    end
+  end
 
   def make_categories
     5.times do |n|
@@ -44,5 +75,4 @@ namespace :db do
       product.save!
     end
   end
-
 end
