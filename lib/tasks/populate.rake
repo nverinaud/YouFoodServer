@@ -19,13 +19,18 @@ namespace :db do
   end
 
   def make_menus
+    products = Product.all
     30.times do |n|
       name = Faker::Lorem.sentence(2)
       description = Faker::Lorem.paragraph
       default = (n%2 == 0)
-      Menu.create!(name: name,
-                   description: description,
-                   default: default)
+      menu = Menu.new(name: name,
+                      description: description,
+                      default: default)
+      menu.products = Array.new
+      rand(15).times do |i|
+        menus.products << products[rand(100)]
+      end
     end
   end
 
@@ -59,12 +64,14 @@ namespace :db do
       description = Faker::Lorem.paragraph
       permanent = n%3
       category = categories[n%5]
-      Product.create!(price: price,
-                      name: name,
-                      abbreviation: abbreviation,
-                      description: description,
-                      permanent: permanent,
-                      category: category)
+      product = Product.new(price: price,
+                            name: name,
+                            abbreviation: abbreviation,
+                            description: description,
+                            permanent: permanent,
+                            category: category)
+      product.photo_file_name = '/assets/empty-food-image.jpg'
+      product.save!
     end
   end
 end
