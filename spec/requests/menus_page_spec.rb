@@ -6,7 +6,7 @@ describe "Menus" do
 
   subject { page }
 
-  describe "List page" do
+  describe "List all the menus page" do
 
     describe "When not signed in as director" do
       before { visit menus_path }
@@ -53,6 +53,48 @@ describe "Menus" do
           end
         end
       end
+    end
+  end
+
+  describe "Show one menu page" do
+
+    describe "When not signed in as director" do
+      let(:menu) { FactoryGirl.create(:menu) }
+
+      before { visit menu_path(menu) }
+
+      it { should_not have_title "YouFood | Portail directeur | #{menu.name}" }
+      it { should_not have_selector("h1", text: "Menu #{menu.name}") }
+    end
+
+    describe "When signed in as director" do
+      let(:director) { FactoryGirl.create(:director) }
+      let(:menu) { FactoryGirl.create(:menu) }
+
+      before {
+        sign_in director
+        visit menu_path(menu)
+      }
+
+      it { should have_title "YouFood | Portail directeur | #{menu.name}" }
+      it { should have_selector("h1", text: "#{menu.name}") }
+
+      it { should have_selector("tr", text: menu.description) }
+
+      it "should have a list of schedules weeks" do
+        menu.schedules.each do |schedule|
+          page.should have_selector("li", text: "Semaine #{schedule.week}")
+        end
+      end
+
+      it "should have a link to each products" do
+        menu.products.each do |product|
+          page.should have_link(product.name, href: product_path(product))
+        end
+      end
+
+      it { should have_link("Supprimer") }
+      it { should have_link("Modifier") }
     end
   end
 end

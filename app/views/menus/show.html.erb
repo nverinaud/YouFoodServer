@@ -1,0 +1,49 @@
+<% provide(:page_title, director_title(@menu.name)) %>
+
+<section id="product-details" class="details">
+
+    <header class="page-header">
+        <h1><%= @menu.name %></h1>
+    </header>
+
+    <div class="row-fluid">
+        <div class="span8">
+            <table>
+                <tbody>
+                <tr>
+                    <td>Description</td>
+                    <td><%= @menu.description %></td>
+                </tr>
+                <tr>
+                    <td>Planification</td>
+                    <td>
+                        <ul>
+                            <% @menu.schedules.each do |schedule| %>
+                                <li>Semaine <%= schedule.week %></li>
+                            <% end %>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Produits</td>
+                    <td>
+                        <ul>
+                            <% @menu.products.each do |product| %>
+                                <li><%= link_to(product.name, product_path(product)) %></li>
+                            <% end %>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="span4">
+            <%= link_to "Modifier", edit_menu_path(@menu), class: "btn btn-primary span2" %>
+            <%= link_to "Supprimer", @menu, method: :delete,
+                        confirm: "Êtes-vous sûr de vouloir supprimer le menu #{@menu.name}?",
+                        class: "btn btn-danger span2" %>
+        </div>
+    </div>
+
+</section>
+

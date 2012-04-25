@@ -7,8 +7,8 @@ namespace :db do
     make_users
     make_categories
     make_products
-    make_schedules
     make_menus
+    make_schedules
   end
 
 
