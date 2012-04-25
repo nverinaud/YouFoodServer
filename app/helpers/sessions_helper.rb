@@ -32,7 +32,7 @@ module SessionsHelper
   end
 
   def signed_in_manager?
-    signed_in? && (current_user.is_a? Manager)
+    signed_in? && (current_user.is_a? RestaurantManager)
   end
 
   def redirect_back_or(default)
