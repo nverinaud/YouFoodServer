@@ -34,12 +34,14 @@ namespace :db do
       description = Faker::Lorem.paragraph
       permanent = n%3
       category = categories[n%5]
-      Product.create!(price: price, 
-                      name: name,
-                      abbreviation: abbreviation,
-                      description: description,
-                      permanent: permanent,
-                      category: category)
+      product = Product.new(price: price,
+                            name: name,
+                            abbreviation: abbreviation,
+                            description: description,
+                            permanent: permanent,
+                            category: category)
+      product.photo_file_name = '/assets/empty-food-image.jpg'
+      product.save!
     end
   end
 
