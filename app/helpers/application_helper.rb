@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   # Returns the full title on a per-page basis.
-  def fullTitle(page_title)
+  def full_title(page_title)
     base_title = "YouFood"
     if page_title.empty?
       base_title
@@ -10,7 +10,7 @@ module ApplicationHelper
     end
   end
 
-  def directorTitle(page_title)
+  def director_title(page_title)
     director_title = "Portail directeur"
     if page_title.empty?
       director_title
@@ -19,7 +19,7 @@ module ApplicationHelper
     end
   end
 
-  def restaurantTitle(page_title)
+  def restaurant_title(page_title)
     restaurant_title = "Portail restaurant"
     if page_title.empty?
       restaurant_title
