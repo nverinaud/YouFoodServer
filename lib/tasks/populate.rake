@@ -5,15 +5,8 @@ namespace :db do
   task populate: :environment do
     Rake::Task['db:reset'].invoke
     make_users
-<<<<<<< Updated upstream
-    make_menus
-=======
-<<<<<<< Updated upstream
-=======
     make_menus
     make_schedules
->>>>>>> Stashed changes
->>>>>>> Stashed changes
   end
 
 
@@ -22,8 +15,6 @@ namespace :db do
     RestaurantManager.create(name: "Restaurant Manager", email: "restaurant.manager@youfood.com", password: "password")
     Director.create(name: "Director", email: "director@youfood.com", password: "password")
   end
-<<<<<<< Updated upstream
-
 
   def make_menus
     100.times do |n|
@@ -31,13 +22,10 @@ namespace :db do
       description = Faker::Lorem.paragraph
       default = (n%2 == 0)
       Menu.create!(name: name,
-                      description: description,
-                      default: default)
+                   description: description,
+                   default: default)
     end
   end
-=======
-<<<<<<< Updated upstream
-=======
 
   def make_menus
     db_schedules = Schedule.all
@@ -63,7 +51,5 @@ namespace :db do
       schedule.save
     end
   end
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 end
 
