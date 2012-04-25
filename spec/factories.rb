@@ -18,11 +18,26 @@ FactoryGirl.define do
     password "password"
   end
 
+  factory :schedule do
+    week "10"
+  end
+
   factory :menu do
     sequence(:name) { |n| "Menu #{n}" }
     sequence(:description) { |n| "Menu #{n} description" }
+    schedules {
+      Array(1).sample.times.map do
+        Factory.create(:schedule)
+      end
+    }
+    products {
+      Array(1).sample.times.map do
+        Factory.create(:product)
+      end
+    }
     default true
   end
+
 
   factory :category do
     sequence(:name) { |n| "Category #{n}" }
