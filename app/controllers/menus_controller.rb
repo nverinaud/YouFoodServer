@@ -1,4 +1,5 @@
 class MenusController < ApplicationController
+  before_filter :signed_in_director
 
   # GET /menus/
   def index
