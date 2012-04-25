@@ -29,8 +29,9 @@ namespace :db do
                       default: default)
       menu.products = Array.new
       rand(15).times do |i|
-        menus.products << products[rand(100)]
+        menu.products << products[rand(100)]
       end
+      menu.save!
     end
   end
 
