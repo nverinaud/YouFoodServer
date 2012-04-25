@@ -29,7 +29,7 @@ FactoryGirl.define do
   	sequence(:name) { |n| "Product #{n}" }
   	sequence(:abbreviation) { |n| "prod#{n}" }
   	description "Hum I like it !"
-  	photoURL "http://localhost:3000/assets/images/food-image.jpg"
+    photo_file_name "http://localhost:3000/assets/images/food-image.jpg"
   	sequence(:permanent) { |n| n%2 == 0 }
     category
   end
