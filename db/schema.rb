@@ -32,11 +32,14 @@ ActiveRecord::Schema.define(:version => 20120424102407) do
     t.string   "name"
     t.string   "abbreviation"
     t.text     "description"
-    t.string   "photoURL"
     t.boolean  "permanent"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "category_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "schedules", :force => true do |t|

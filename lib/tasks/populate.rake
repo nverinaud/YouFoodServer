@@ -5,8 +5,10 @@ namespace :db do
   task populate: :environment do
     Rake::Task['db:reset'].invoke
     make_users
-    make_menus
+    make_categories
+    make_products
     make_schedules
+    make_menus
   end
 
 
@@ -17,18 +19,6 @@ namespace :db do
   end
 
   def make_menus
-    100.times do |n|
-      name = Faker::Name.name
-      description = Faker::Lorem.paragraph
-      default = (n%2 == 0)
-      Menu.create!(name: name,
-                   description: description,
-                   default: default)
-    end
-  end
-
-  def make_menus
-    db_schedules = Schedule.all
     30.times do |n|
       name = Faker::Lorem.sentence(2)
       description = Faker::Lorem.paragraph
@@ -51,5 +41,30 @@ namespace :db do
       schedule.save
     end
   end
-end
 
+  def make_categories
+    5.times do |n|
+      name = Faker::Name.first_name
+      Category.create!(name: name)
+    end
+  end
+
+
+  def make_products
+    categories = Category.all
+    100.times do |n|
+      price = n+10
+      name = Faker::Name.name
+      abbreviation = name.downcase.slice(1..10)
+      description = Faker::Lorem.paragraph
+      permanent = n%3
+      category = categories[n%5]
+      Product.create!(price: price,
+                      name: name,
+                      abbreviation: abbreviation,
+                      description: description,
+                      permanent: permanent,
+                      category: category)
+    end
+  end
+end
