@@ -26,17 +26,24 @@
       <column name="updated_at" sqlType="DATETIME" length="2000000000" precision="10" nullable="false" jdbcType="12" />
       <primary-key columns="id" />
     </table>
+    <table name="menus_products" schema="" catalog="" type="TABLE">
+      <column name="menu_id" sqlType="INTEGER" length="2000000000" precision="10" nullable="true" jdbcType="4" />
+      <column name="product_id" sqlType="INTEGER" length="2000000000" precision="10" nullable="true" jdbcType="4" />
+    </table>
     <table name="products" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4" />
       <column name="price" sqlType="DECIMAL" length="2000000000" precision="10" nullable="true" jdbcType="12" />
       <column name="name" sqlType="VARCHAR(255)" length="2000000000" precision="10" nullable="true" jdbcType="12" />
       <column name="abbreviation" sqlType="VARCHAR(255)" length="2000000000" precision="10" nullable="true" jdbcType="12" />
       <column name="description" sqlType="TEXT" length="2000000000" precision="10" nullable="true" jdbcType="12" />
-      <column name="photoURL" sqlType="VARCHAR(255)" length="2000000000" precision="10" nullable="true" jdbcType="12" />
       <column name="permanent" sqlType="BOOLEAN" length="2000000000" precision="10" nullable="true" jdbcType="12" />
       <column name="created_at" sqlType="DATETIME" length="2000000000" precision="10" nullable="false" jdbcType="12" />
       <column name="updated_at" sqlType="DATETIME" length="2000000000" precision="10" nullable="false" jdbcType="12" />
       <column name="category_id" sqlType="INTEGER" length="2000000000" precision="10" nullable="true" jdbcType="4" />
+      <column name="photo_file_name" sqlType="VARCHAR(255)" length="2000000000" precision="10" nullable="true" jdbcType="12" />
+      <column name="photo_content_type" sqlType="VARCHAR(255)" length="2000000000" precision="10" nullable="true" jdbcType="12" />
+      <column name="photo_file_size" sqlType="INTEGER" length="2000000000" precision="10" nullable="true" jdbcType="4" />
+      <column name="photo_updated_at" sqlType="DATETIME" length="2000000000" precision="10" nullable="true" jdbcType="12" />
       <primary-key columns="id" />
     </table>
     <table name="schedules" schema="" catalog="" type="TABLE">
@@ -46,6 +53,7 @@
       <column name="end_date" sqlType="DATE" length="2000000000" precision="10" nullable="true" jdbcType="12" />
       <column name="created_at" sqlType="DATETIME" length="2000000000" precision="10" nullable="false" jdbcType="12" />
       <column name="updated_at" sqlType="DATETIME" length="2000000000" precision="10" nullable="false" jdbcType="12" />
+      <column name="menu_id" sqlType="INTEGER" length="2000000000" precision="10" nullable="true" jdbcType="4" />
       <primary-key columns="id" />
     </table>
     <table name="schema_migrations" schema="" catalog="" type="TABLE">
