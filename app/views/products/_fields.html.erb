@@ -1,7 +1,7 @@
 <header class="page-header">
-	<%= 
-		form.input 	:name, 
-								placeholder: "Nom du Produit", 
+	<%=
+		form.input 	:name,
+								placeholder: "Nom du Produit",
 								input_html: { class: 'span4' },
 								required: false
 	%>
@@ -13,10 +13,10 @@
 		<%= form.file_field :photo %>
 	</div>
 	<div class="span10">
-		<%= 
+		<%=
 			categoryValue = @product.category.name unless @product.category.nil?
 
-			form.input 	:category, 
+			form.input 	:category,
 									placeholder: "Rechercher...",
 									required: false,
 									label: "Catégorie",
@@ -46,21 +46,21 @@
       	</div>
     	</div>
     </div>
-		<%= 
-			form.input 	:abbreviation, 
+		<%=
+			form.input 	:abbreviation,
 									placeholder: "abrev",
-									label: "Abréviation", 
+									label: "Abréviation",
 									input_html: { class: 'span2', maxlength: 10 },
 		%>
-		<%= 
-			form.input 	:description, 
-									as: :text, 
+		<%=
+			form.input 	:description,
+									as: :text,
 									input_html: { rows: 10, class: 'span4' },
 									placeholder: "ex: Mmmmmh trop bon !",
 									label: "Description Alléchante"
 		%>
 		<div class="form-actions">
-		<%= 
+		<%=
 			form.submit	"Valider", class: 'btn btn-primary span2'
 		%>
 			<a class="btn span2" href="<%= products_path %>">Annuler</a>

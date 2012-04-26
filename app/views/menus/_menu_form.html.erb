@@ -1,0 +1,34 @@
+<header class="page-header">
+    <%= form.input :name, placeholder: "Nom du menu", input_html: {class: 'span4'} %>
+</header>
+
+<div class="row-fluid">
+    <div class="span12">
+        <%= form.input :description, placeholder: "Description", as: :text, input_html: {class: 'span10', rows: '5'} %>
+
+        <div class="control-group">
+            <label class="control-label" for="product_name">Produits</label>
+
+            <div class="controls">
+                <div class="input-append">
+                    <input id="menu_products" type="text" class="span4" placeholder="Nom du produit"/>
+                    <input type="submit" value="Ajouter" class="btn btn-primary"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="product_name">Planifications</label>
+
+            <div class="controls">
+                <div class="input-append">
+                    <select class="span4">
+                        <%= options_for_select @schedule_options %>
+                    </select>
+                    <input type="submit" value="Ajouter" class="btn btn-primary"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

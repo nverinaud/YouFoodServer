@@ -1,0 +1,20 @@
+<% provide(:page_title, full_title("Menu | Nouveau")) %>
+
+<section id="menu-new" class="new-element">
+
+    <%= simple_form_for(@menu, html: {multipart: true, class: 'form-horizontal'}) do |f| %>
+        <%= render 'menu_form', form: f %>
+    <% end %>
+
+</section>
+
+<% content_for :js do %>
+    <script type="text/javascript">
+
+        $("#menu_products").autocomplete({
+            delay:0,
+            source: <%= raw @products_names %>
+        });
+
+    </script>
+<% end %>

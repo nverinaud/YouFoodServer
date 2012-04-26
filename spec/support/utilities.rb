@@ -14,3 +14,8 @@ def sign_in(user)
   click_button "Se connecter"
   cookies[:remember_token] = user.remember_token
 end
+
+def create_valid_menu
+  fill_in "Nom", with: "Menu test"
+  fill_in "Description", with: "Lorem ipsum dolor sit amet..."
+end
