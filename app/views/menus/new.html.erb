@@ -10,10 +10,67 @@
 
 <% content_for :js do %>
     <script type="text/javascript">
+        var $productsInput = $("#products_id");
+        var $productsList = $("#products_list");
+        var $productsAutocomplete = $("#product_autocomplete");
+        var products = <%= raw @products_names.to_json %>;
+        var selectedProducts = [];
 
-        $("#menu_products").autocomplete({
-            delay:0,
-            source: <%= raw @products_names %>
+        $(".remove_products").live("click", function () {
+            var deletedProductId = $(this).val();
+            var indexToRemove = 0;
+            for (var i = 0; i < selectedProducts.length; i++) {
+                if (selectedProducts[i].id == deletedProductId)
+                    indexToRemove = i;
+            }
+            selectedProducts.splice(indexToRemove, 1);
+
+            renderProductList();
+            $productsAutocomplete.autocomplete("option", { source:loadProducts() });
+        })
+
+        $("#product_add").click(function () {
+            var chosenProductName = $productsAutocomplete.val();
+            for (var i = 0; i < products.length; i++) {
+                if (products[i].name == chosenProductName) {
+                    selectedProducts.push(products[i]);
+                }
+            }
+            $productsAutocomplete.val("");
+
+            renderProductList();
+            $productsAutocomplete.autocomplete("option", { source:loadProducts() });
+        });
+
+        function loadProducts() {
+            var products_name = [];
+            for (var i = 0; i < products.length; i++) {
+                if ($.inArray(products[i], selectedProducts) == -1)
+                    products_name.push(products[i].name);
+            }
+            return products_name;
+        }
+
+        function renderProductList() {
+            $productsList.show();
+            $productsList.empty();
+            $productsInput.val("");
+            for (var i = 0; i < selectedProducts.length; i++) {
+                $productsInput.val($productsInput.val() + selectedProducts[i].id + ",");
+                $productsList.append(
+                        "<li id=\"" + selectedProducts[i].id + "\">" +
+                                "<span class=\"span4\">" + selectedProducts[i].name + "</span>" +
+                                "<button type=\"button\" " +
+                                "class=\"btn btn-danger remove_products\" value=\"" + selectedProducts[i].id + "\">Supprimer</button>" +
+                                "</li>");
+            }
+        }
+
+        $(function () {
+            $productsAutocomplete.autocomplete({
+                delay:0,
+                source:loadProducts()
+            });
         });
 
     </script>

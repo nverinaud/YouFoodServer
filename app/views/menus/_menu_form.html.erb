@@ -11,8 +11,16 @@
 
             <div class="controls">
                 <div class="input-append">
-                    <input id="menu_products" type="text" class="span4" placeholder="Nom du produit"/>
-                    <input type="submit" value="Ajouter" class="btn btn-primary"/>
+                    <input type="hidden" id="products_id" name="products_id"/>
+                    <ul id="products_list" style="display: none" class="unstyled">
+                        <% @menu.products.each do |product| %>
+                            <%= content_tag "li", id: product.id do %>
+                                <%= product.name %>
+                            <% end %>
+                        <% end %>
+                    </ul>
+                    <input id="product_autocomplete" type="text" class="span4" placeholder="Nom du produit" name="menu_products"/>
+                    <a id="product_add" class="btn btn-primary">Ajouter</a>
                 </div>
             </div>
         </div>
@@ -25,10 +33,14 @@
                     <select class="span4">
                         <%= options_for_select @schedule_options %>
                     </select>
-                    <input type="submit" value="Ajouter" class="btn btn-primary"/>
+                    <input type="submit" value="Planifier" class="btn btn-primary"/>
                 </div>
             </div>
         </div>
 
+        <div class="form-actions">
+            <%= form.button :submit, "Valider", class: 'btn-primary' %>
+            <%= submit_tag 'Annuler', type: :reset, class: "btn" %>
+        </div>
     </div>
 </div>

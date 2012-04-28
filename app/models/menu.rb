@@ -11,7 +11,7 @@
 #
 
 class Menu < ActiveRecord::Base
-  attr_accessible :name, :description, :default
+  attr_accessible :name, :description, :default, :products
 
   # Relations
   has_many :schedules

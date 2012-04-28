@@ -19,13 +19,22 @@ class MenusController < ApplicationController
   # GET /menus/new
   def new
     @menu = Menu.new
-    @products_names = Array.new
-    Product.all.each do |product|
-      @products_names << product.name
-    end
+    @products_names = Product.select("name, id")
     @schedule_options = Array.new
     Schedule.all.each do |schedule|
       @schedule_options << ["Semaine #{schedule.week}", schedule.id]
+    end
+  end
+
+  # POST /menus/create
+  def create
+    menu = Menu.new(params[:menu])
+    menu.products << Product.find(params[:products_id].split(','));
+    if menu.save
+      redirect_to menus_path
+    else
+      flash.now[:error] = "Une erreur est survenue."
+      redirect_to new_product_path
     end
   end
 end
