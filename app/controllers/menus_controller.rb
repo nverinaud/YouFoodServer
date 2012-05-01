@@ -19,17 +19,15 @@ class MenusController < ApplicationController
   # GET /menus/new
   def new
     @menu = Menu.new
-    @products_names = Product.select("name, id")
-    @schedule_options = Array.new
-    Schedule.all.each do |schedule|
-      @schedule_options << ["Semaine #{schedule.week}", schedule.id]
-    end
+    @products = Product.select("name, id")
+    @schedules = Schedule.select("week, id, menu_id")
   end
 
   # POST /menus/create
   def create
     menu = Menu.new(params[:menu])
-    menu.products << Product.find(params[:products_id].split(','));
+    menu.products << Product.find(params[:products_id].split(','))
+    menu.schedules << Schedule.find(params[:schedules_id].split(','))
     if menu.save
       redirect_to menus_path
     else
