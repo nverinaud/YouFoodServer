@@ -91,7 +91,6 @@ section.details {
 
 }
 
-
 /* Forms */
 section.new-element {
 
@@ -132,9 +131,12 @@ section.new-element {
         color: #C09853;
       }
 
+      a.btn {
+        margin-bottom: 0px;
+      }
     }
 
-    div.form-actions  {
+    div.form-actions {
 
       input:first-child {
         margin-right: 15px;
@@ -149,7 +151,6 @@ section.new-element {
   }
 
 }
-
 
 @media (min-width: 768px) and (max-width: 980px) {
   body {

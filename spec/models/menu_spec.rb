@@ -14,7 +14,7 @@ require "rspec"
 
 describe Menu do
   before do
-    @menu = Menu.new
+    @menu = FactoryGirl.create(:menu)
   end
   subject { @menu }
 
@@ -23,4 +23,16 @@ describe Menu do
   it { should respond_to :schedules }
   it { should respond_to :default }
   it { should respond_to :products }
+
+  it { should be_valid }
+
+  describe "Without name" do
+    before { @menu.name = "" }
+    it { should_not be_valid }
+  end
+
+  describe "Without description" do
+    before { @menu.description = "" }
+    it { should_not be_valid }
+  end
 end

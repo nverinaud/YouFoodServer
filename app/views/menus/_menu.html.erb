@@ -6,7 +6,6 @@
             Semaine
             <% menu.schedules.each do |schedule| %>
                 <%= " #{schedule.week}" %>
-                <%= schedule.week %>
                 <% if schedule != menu.schedules.last %>
                     ,
                 <% end %>

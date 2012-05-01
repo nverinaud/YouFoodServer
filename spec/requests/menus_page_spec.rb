@@ -97,4 +97,23 @@ describe "Menus" do
       it { should have_link("Modifier") }
     end
   end
+
+  describe "Menu creation" do
+    before { visit new_menu_path }
+
+    describe "with invalid information" do
+
+      it "should not create a menu" do
+        expect { click_button "Valider" }.should_not change(Menu, :count)
+      end
+    end
+
+    describe "with valid information" do
+      before { create_valid_menu }
+
+      it "should create a menu" do
+        expect { click_button "Valider" }.should change(Micropost, :count).by(1)
+      end
+    end
+  end
 end
