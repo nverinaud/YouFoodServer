@@ -109,8 +109,8 @@ describe "Menus" do
     end
 
     describe "with valid information" do
-
       before { create_valid_menu }
+
       it "should create a menu" do
         expect { click_button "Valider" }.should change(Micropost, :count).by(1)
       end

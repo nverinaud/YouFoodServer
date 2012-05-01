@@ -11,10 +11,12 @@
 #
 
 class Menu < ActiveRecord::Base
-  attr_accessible :name, :description, :default, :products
+  attr_accessible :name, :description, :default
 
   # Relations
   has_many :schedules
   has_and_belongs_to_many :products
 
+  #Constraints
+  validates :name, :description, presence: true
 end
