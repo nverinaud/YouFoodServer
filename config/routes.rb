@@ -1,9 +1,11 @@
 YouFoodServer::Application.routes.draw do
+
   root to: 'sessions#new'
-#  root to: 'api/documentation#index'
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :orders, only: [:index]
+  resources :menus
+  resources :products, only: [:index, :show, :new, :create]
 
   match '/director', to: 'portal#director'
   match '/restaurant', to: 'portal#restaurant_manager'
@@ -15,6 +17,7 @@ YouFoodServer::Application.routes.draw do
 
   namespace :api do
     match '/' => 'documentation#index'
+    match '/auth/request_token' => 'authentication#request_token', via: :post
   end
 
 end

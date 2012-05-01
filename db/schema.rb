@@ -11,7 +11,50 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120413095113) do
+ActiveRecord::Schema.define(:version => 20120425153125) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "menus", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.boolean  "default"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "menus_products", :id => false, :force => true do |t|
+    t.integer "menu_id"
+    t.integer "product_id"
+  end
+
+  create_table "products", :force => true do |t|
+    t.decimal  "price"
+    t.string   "name"
+    t.string   "abbreviation"
+    t.text     "description"
+    t.boolean  "permanent"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "category_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
+  create_table "schedules", :force => true do |t|
+    t.integer  "week"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "menu_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"
@@ -25,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20120413095113) do
     t.datetime "updated_at",      :null => false
     t.string   "password_digest"
     t.string   "remember_token"
+    t.string   "push_url"
   end
 
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"

@@ -26,4 +26,8 @@ doc/
 *.iml
 *.ipr
 *.iws
+*.ids
 .idea/
+
+# Ignore test uploads
+public/system/*

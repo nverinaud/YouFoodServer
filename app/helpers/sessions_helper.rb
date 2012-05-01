@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module SessionsHelper
 
   def sign_in(user)
@@ -25,6 +27,14 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def signed_in_director?
+    signed_in? && (current_user.is_a? Director)
+  end
+
+  def signed_in_manager?
+    signed_in? && (current_user.is_a? RestaurantManager)
+  end
+
   def redirect_back_or(default)
     redirect_to(session[:return_to] || default)
     clear_return_to
@@ -41,6 +51,20 @@ module SessionsHelper
     end
   end
 
+  def signed_in_director
+    unless signed_in_director?
+      store_location
+      redirect_to signin_path, notice: "Veuillez vous connecter en tant que directeur."
+    end
+  end
+
+  def signed_in_manager
+    unless signed_in_manager?
+      store_location
+      redirect_to signin_path, notice: "Veuillez vous connecter en tant que gérant de restaurant."
+    end
+  end
+
   def current_user_portal_path
     if current_user.is_a? Director
       '/director'
@@ -50,6 +74,7 @@ module SessionsHelper
       '/orders'
     end
   end
+
 
   private
 
