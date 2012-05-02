@@ -7,8 +7,8 @@ namespace :db do
     make_users
     make_categories
     make_products
-    make_menus
     make_schedules
+    make_menus
   end
 
 
@@ -31,20 +31,18 @@ namespace :db do
       rand(15).times do |i|
         menu.products << products[rand(100)]
       end
+      menu.schedules << Schedule.find(rand(52))
       menu.save!
     end
   end
 
   def make_schedules
     menus = Menu.all
-    100.times do |n|
-      week = (n%52)+1
+    52.times do |n|
+      week = n+1
       start_date = Date.new
       end_date = 1.week.from_now
-      menu = menus[n%30]
-      schedule = Schedule.new(week: week, start_date: start_date, end_date: end_date)
-      schedule.menu = menu
-      schedule.save
+      Schedule.create!(week: week, start_date: start_date, end_date: end_date)
     end
   end
 
