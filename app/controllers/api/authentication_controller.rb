@@ -1,4 +1,6 @@
 class Api::AuthenticationController < Api::ApiController
+
+  # POST /api/auth/request_token
   def request_token
     @user = User.find_by_email(params[:email])
     if @user && @user.authenticate(params[:pass])

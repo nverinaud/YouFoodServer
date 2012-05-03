@@ -3,6 +3,7 @@
 class Api::MenuController < Api::ApiController
   before_filter :valid_token?
 
+  # GET /api/current_menu
   def current_menu
     today = Time.now
     Menu.all.each do |menu|
@@ -11,6 +12,7 @@ class Api::MenuController < Api::ApiController
           @menu = menu
           @products = menu.products
           @products << Product.find_by_permanent(true)
+          logger.debug(@products)
           render :current_menu
         end
       end
