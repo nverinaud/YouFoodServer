@@ -10,9 +10,7 @@ class Api::MenuController < Api::ApiController
       menu.schedules.each do |schedule|
         if today >= schedule.start_date && today <= schedule.end_date
           @menu = menu
-          @products = menu.products
-          @products << Product.find_by_permanent(true)
-          logger.debug(@products)
+          @products = menu.products | Product.find_all_by_permanent(true)
           render :current_menu
         end
       end
