@@ -47,7 +47,7 @@ namespace :db do
 
     52.times do |n|
       week = n+1
-      start_date = year_first_sunday)+n.week
+      start_date = year_first_sunday+n.week
       end_date = start_date + 1.week
       Schedule.create!(week: week, start_date: start_date, end_date: end_date)
     end
