@@ -19,5 +19,6 @@ YouFoodServer::Application.routes.draw do
     match '/' => 'documentation#index'
     match '/auth/request_token' => 'authentication#request_token', via: :post
     match '/current_menu' => 'menu#current_menu'
+    match '/unauthorized' => 'authentication#unauthorized_access'
   end
 end

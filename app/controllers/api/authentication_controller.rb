@@ -7,4 +7,8 @@ class Api::AuthenticationController < Api::ApiController
       render text: "Mot de passe ou nom d'utilisateur incorrect", status: 403
     end
   end
+
+  def unauthorized_access
+    render text: "Authentification requise", status: 401
+  end
 end

@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class Api::MenuController < Api::ApiController
+  before_filter :valid_token?
 
   def current_menu
     today = Time.now
