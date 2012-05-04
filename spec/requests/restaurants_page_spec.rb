@@ -27,7 +27,7 @@ describe "Restaurants" do
 
       describe "pagination" do
         before {
-          100.times { FactoryGirl.create(:menu) }
+          100.times { FactoryGirl.create(:restaurant) }
           visit restaurants_path
         }
 

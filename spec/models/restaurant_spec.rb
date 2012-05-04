@@ -5,6 +5,8 @@ describe Restaurant do
     @restaurant = FactoryGirl.create(:restaurant)
   end
 
+  subject { @restaurant }
+
   it { should respond_to :name }
   it { should respond_to :city }
   it { should respond_to :phone }
