@@ -11,7 +11,7 @@ describe Restaurant do
   it { should respond_to :invoices }
   it { should respond_to :waiters }
   it { should respond_to :cookers }
+
   it { should be_valid }
 
-  
 end
