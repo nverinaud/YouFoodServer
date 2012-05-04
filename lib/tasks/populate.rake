@@ -9,6 +9,7 @@ namespace :db do
     make_products
     make_schedules
     make_menus
+    make_restaurants
   end
 
 
@@ -79,5 +80,10 @@ namespace :db do
       product.photo_file_name = '/assets/empty-food-image.jpg'
       product.save!
     end
+  end
+
+  def make_restaurants
+    name = Faker::Name.name
+    Restaurant.new(name: name)
   end
 end
