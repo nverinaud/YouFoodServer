@@ -1,0 +1,36 @@
+<% provide(:page_title, director_title("Les restaurants")) %>
+
+<section id="products">
+
+    <header class="page-header">
+        <h1>Les restaurants</h1>
+    </header>
+
+    <div class="row-fluid">
+        <p class="span9"><%= pluralize(@restaurants.count, "restaurants", "restaurants") %></p>
+        <%= link_to 'Nouveau restaurant', new_restaurant_path, class: "btn btn-primary span2" %>
+    </div>
+
+
+    <%= will_paginate %>
+
+    <table class="table table-bordered table-striped">
+        <% if @restaurants.any? %>
+            <thead>
+            <th>Nom</th>
+            <th>Gérant</th>
+            <th></th>
+            </thead>
+            <tbody>
+            <%= render @restaurants %>
+            </tbody>
+        <% else %>
+            <tr>
+                <td>Aucun restaurant trouvé.</td>
+            </tr>
+        <% end %>
+    </table>
+
+    <%= will_paginate %>
+
+</section>
