@@ -54,5 +54,11 @@ FactoryGirl.define do
     category
   end
 
+  factory :restaurant do
+    sequence(:name) { |n| "Restaurant #{n}" }
+    city "Lorem"
+    phone "(+33)0.00.00.00.00"
+    address "0, Ipsum Street"
+  end
 end
 

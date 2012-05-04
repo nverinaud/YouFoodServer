@@ -28,7 +28,7 @@ describe "Restaurants" do
       describe "pagination" do
         before {
           100.times { FactoryGirl.create(:menu) }
-          visit menus_path
+          visit restaurants_path
         }
 
         it { should have_selector("th", text: "Nom") }

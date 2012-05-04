@@ -2,9 +2,13 @@ require "rspec"
 
 describe Restaurant do
   before do
-    @restaurant = Restaurant.new
+    @restaurant = FactoryGirl.create(:restaurant)
   end
 
+  it { should respond_to :name }
+  it { should respond_to :city }
+  it { should respond_to :phone }
+  it { should respond_to :address }
   it { should respond_to :manager }
   it { should respond_to :zones }
   it { should respond_to :tables }
