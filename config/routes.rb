@@ -4,6 +4,7 @@ YouFoodServer::Application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :orders, only: [:index]
+  resources :menus
   resources :products, only: [:index, :show, :new, :create]
 
   match '/director', to: 'portal#director'
@@ -18,6 +19,7 @@ YouFoodServer::Application.routes.draw do
     match '/' => 'documentation#index'
     match '/auth/request_token' => 'authentication#request_token', via: :post
     match '/call_waiter' => 'call_waiter#call_waiter', via: :post
+    match '/current_menu' => 'menu#current_menu'
+    match '/unauthorized' => 'authentication#unauthorized_access'
   end
-  
 end

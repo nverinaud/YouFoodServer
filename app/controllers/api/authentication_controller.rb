@@ -1,13 +1,14 @@
 class Api::AuthenticationController < Api::ApiController
   def request_token
-    puts params
-    user = User.find_by_email(params[:email])
-    if user && user.authenticate(params[:pass])
-      render json: {
-          "youfood_remember_token" => user.remember_token
-      }
+    @user = User.find_by_email(params[:email])
+    if @user && @user.authenticate(params[:pass])
+      render :request_token
     else
       render text: "Mot de passe ou nom d'utilisateur incorrect", status: 403
     end
+  end
+
+  def unauthorized_access
+    render text: "Authentification requise", status: 401
   end
 end

@@ -1,0 +1,42 @@
+<header class="page-header">
+    <%= form.input :name, placeholder: "Nom du menu", input_html: {class: 'span4'} %>
+</header>
+
+<div class="row-fluid">
+    <div class="span12">
+        <%= form.input :description, placeholder: "Description", as: :text, input_html: {class: 'span10', rows: '5'} %>
+
+        <div class="control-group">
+            <label class="control-label" for="product_name">Produits</label>
+
+            <div class="controls">
+                <div class="input-append">
+                    <input type="hidden" id="products_id" name="products_id"/>
+                    <ul id="products_list" style="display: none" class="unstyled">
+                    </ul>
+                    <input id="product_autocomplete" type="text" class="span4" placeholder="Nom du produit" name="menu_products"/>
+                    <a id="product_add" class="btn btn-primary">Ajouter</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="schedule_select">Planifications</label>
+
+            <div class="controls">
+                <div class="input-append">
+                    <input type="hidden" id="schedules_id" name="schedules_id"/>
+                    <ul id="schedules_list" style="display: none" class="unstyled">
+                    </ul>
+                    <input id="schedule_autocomplete" type="text" class="span4" placeholder="Numéro de la semaine" name="menu_schedules"/>
+                    <a id="schedule_add" class="btn btn-primary">Planifier</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <%= form.button :submit, "Valider", class: 'btn-primary' %>
+            <%= submit_tag 'Annuler', type: :reset, class: "btn" %>
+        </div>
+    </div>
+</div>

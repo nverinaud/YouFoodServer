@@ -33,9 +33,10 @@ describe Product do
 	it { should respond_to(:name) }
 	it { should respond_to(:abbreviation) }
 	it { should respond_to(:description) }
-	it { should respond_to(:photoURL) }
+	it { should respond_to(:photo) }
 	it { should respond_to(:permanent) }
 	it { should respond_to(:category) }
+  it { should respond_to(:menus)}
 	its(:category) { should == category }
 
 	it { should be_valid }

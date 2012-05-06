@@ -19,31 +19,33 @@
 
 class Product < ActiveRecord::Base
 
-	attr_accessible :price, 
-									:name, 
-									:abbreviation, 
-									:description, 
-									:permanent,
-									:category,
-									:photo
+  attr_accessible :price,
+                  :name,
+                  :abbreviation,
+                  :description,
+                  :permanent,
+                  :category,
+                  :photo
+  # Relations
+  has_and_belongs_to_many :menus
 
-	# Attachement
-	has_attached_file :photo, 
-										styles: { medium: '300x300>', thumb: '100x100>' },
-										default_url: "/assets/empty-food-image.jpg"
+  # Attachement
+  has_attached_file :photo,
+                    styles: {medium: '300x300>', thumb: '100x100>'},
+                    default_url: "/assets/empty-food-image.jpg"
 
-	validates_attachment 	:photo, presence: true,
-  											content_type: { content_type: ['image/jpg','image/jpeg', 'image/png'] },
-  											size: { in: 0..2.megabytes }
+  validates_attachment :photo, presence: true,
+                       content_type: {content_type: ['image/jpg', 'image/jpeg', 'image/png']},
+                       size: {in: 0..2.megabytes}
 
-	# Relationships
-	belongs_to :category
-	validates_associated :category
+  # Relationships
+  belongs_to :category
+  validates_associated :category
 
-	# Validation
-	validates :price, presence: true, numericality: { greater_than: 0.0 }
-	validates :name, presence: true
-	validates :abbreviation, length: { maximum: 10 }
-	validates :category, presence: true
+  # Validation
+  validates :price, presence: true, numericality: {greater_than: 0.0}
+  validates :name, presence: true
+  validates :abbreviation, length: {maximum: 10}
+  validates :category, presence: true
 
 end

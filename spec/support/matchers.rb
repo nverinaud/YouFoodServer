@@ -12,13 +12,11 @@ RSpec::Matchers.define :have_signout_link do
   end
 end
 
-# <title>
-RSpec::Matchers.define :have_title do |title|
+RSpec::Matchers.define :have_title do |text|
   match do |page|
-    page.should have_selector('title', text: title)
+    page.should have_selector('title', text: text)
   end
 end
-
 
 # <h1>
 RSpec::Matchers.define :have_h1 do |title|
