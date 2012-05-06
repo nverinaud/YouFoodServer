@@ -83,9 +83,12 @@ namespace :db do
   end
 
   def make_restaurants
-    100.times do
+    manager = RestaurantManager.first
+    3.times do
       name = Faker::Name.name
-      Restaurant.create!(name: name, phone: "(+33)0.00.00.00", city: "Paris", address: "8, rue de la fleur")
+      resto = Restaurant.create(name: name, phone: "(+33)0.00.00.00", city: "Paris", address: "8, rue de la fleur")
+      resto.restaurant_manager = manager
+      resto.save
     end
   end
 end

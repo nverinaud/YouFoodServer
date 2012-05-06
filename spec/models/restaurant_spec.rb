@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: restaurants
+#
+#  id         :integer         not null, primary key
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#  name       :string(255)
+#  city       :string(255)
+#  phone      :string(255)
+#  address    :string(255)
+#
+
 require "rspec"
 
 describe Restaurant do

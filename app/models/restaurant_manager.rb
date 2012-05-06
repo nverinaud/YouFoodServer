@@ -18,4 +18,8 @@
 #
 
 class RestaurantManager < User
+
+	# Relations
+	has_one :restaurant
+
 end
