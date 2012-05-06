@@ -7,8 +7,8 @@ namespace :db do
     make_users
     make_categories
     make_products
-    make_menus
     make_schedules
+    make_menus
   end
 
 
@@ -20,7 +20,7 @@ namespace :db do
 
   def make_menus
     products = Product.all
-    30.times do |n|
+    52.times do |n|
       name = Faker::Lorem.sentence(2)
       description = Faker::Lorem.paragraph
       default = (n%2 == 0)
@@ -28,23 +28,28 @@ namespace :db do
                       description: description,
                       default: default)
       menu.products = Array.new
+      menu.schedules = Array.new
       rand(15).times do |i|
         menu.products << products[rand(100)]
       end
+      menu.schedules << Schedule.find(n+1)
       menu.save!
     end
   end
 
   def make_schedules
     menus = Menu.all
-    100.times do |n|
-      week = (n%52)+1
-      start_date = Date.new
-      end_date = 1.week.from_now
-      menu = menus[n%30]
-      schedule = Schedule.new(week: week, start_date: start_date, end_date: end_date)
-      schedule.menu = menu
-      schedule.save
+    year_first_sunday = Time.utc(Time.now.year, 1, 1, 0, 0)
+
+    while year_first_sunday.wday != 0
+      year_first_sunday += 1.day
+    end
+
+    52.times do |n|
+      week = n+1
+      start_date = year_first_sunday+n.week
+      end_date = start_date + 1.week
+      Schedule.create!(week: week, start_date: start_date, end_date: end_date)
     end
   end
 
