@@ -18,30 +18,48 @@
         // Schedules-related DOM elements
         var $schedulesInput = $("#schedules_id");
         var $schedulesList = $("#schedules_list");
-        var $schedulesAutocomplete = $("#schedule_autocomplete");
+        var $schedulesSelect = $("#schedule_select");
         var scheduleWarning = "Un menu est déjà planifié à cette semaine."
 
         // Products lists
         var products = <%= raw @products.to_json %>;
-        var selectedProducts = [];
+        var selectedProducts = <%= raw @menu.products.to_json %>;
 
         // Schedules lists
         var schedules = <%= raw @schedules.to_json %>;
-        var selectedSchedules = [];
+        var selectedSchedules = <%= raw @menu.schedules.to_json %>;
+
+        // form initialization
+        $(document).ready(function () {
+            renderProducts();
+            renderSchedules();
+
+        })
+
+        // check if a selected element list should be displayed or not
+        function defineListDisplay(list) {
+            if (list.children().length == 0)
+                list.hide();
+            else
+                list.show();
+        }
+
+        // remove an item form a list of selected items
+        function removeItem(input, selectedItems) {
+            var itemId = input.val();
+            var indexToRemove = 0;
+            for (var i = 0; i < selectedItems.length; i++) {
+                if (selectedItems[i].id == itemId)
+                    indexToRemove = i;
+            }
+            selectedItems.splice(indexToRemove, 1);
+        }
 
         // Products methods
         // Remove product
         $(".remove_products").live("click", function () {
-            var deletedProductId = $(this).val();
-            var indexToRemove = 0;
-            for (var i = 0; i < selectedProducts.length; i++) {
-                if (selectedProducts[i].id == deletedProductId)
-                    indexToRemove = i;
-            }
-            selectedProducts.splice(indexToRemove, 1);
-
+            removeItem($(this), selectedProducts);
             renderProducts();
-            $productsAutocomplete.autocomplete("option", { source:loadAvailableProducts() });
         })
 
         // Add product
@@ -55,14 +73,19 @@
             $productsAutocomplete.val("");
 
             renderProducts();
-            $productsAutocomplete.autocomplete("option", { source:loadAvailableProducts() });
         });
 
         // Load products autocomplete list
         function loadAvailableProducts() {
             var products_name = [];
             for (var i = 0; i < products.length; i++) {
-                if ($.inArray(products[i], selectedProducts) == -1)
+                var selected = false;
+                for (var j = 0; j < selectedProducts.length; j++) {
+                    if (products[i].id == selectedProducts[j].id) {
+                        selected = true;
+                    }
+                }
+                if (!selected)
                     products_name.push(products[i].name);
             }
             return products_name;
@@ -70,7 +93,6 @@
 
         // Show the product list on the web page
         function renderProducts() {
-            $productsList.show();
             $productsList.empty();
             $productsInput.val("");
             for (var i = 0; i < selectedProducts.length; i++) {
@@ -82,58 +104,59 @@
                                 "class=\"btn btn-danger remove_products\" value=\"" + selectedProducts[i].id + "\">Supprimer</button>" +
                                 "</li>");
             }
+
+            defineListDisplay($productsList);
+
+            $productsAutocomplete.autocomplete({
+                delay:0,
+                source:loadAvailableProducts()
+            });
         }
-
-        // Products autocomplete definition
-        $productsAutocomplete.autocomplete({
-            delay:0,
-            source:loadAvailableProducts()
-        });
-
 
         // Schedules lists
         // Add schedule
         $("#schedule_add").click(function () {
-            var chosenSchedule = $schedulesAutocomplete.val();
+            var chosenSchedule = $schedulesSelect.val();
             for (var i = 0; i < schedules.length; i++) {
-                if (("Semaine " + schedules[i].week ) == chosenSchedule) {
+                if (schedules[i].id == chosenSchedule) {
                     selectedSchedules.push(schedules[i]);
                 }
             }
-            $schedulesAutocomplete.val("");
+            $schedulesSelect.val("");
 
             renderSchedules();
-            $schedulesAutocomplete.autocomplete("option", { source:loadAvailableSchedules() });
         });
 
         // Remove schedule
         $(".remove_schedules").live("click", function () {
-            var deletedScheduleId = $(this).val();
-            var indexToRemove = 0;
-            for (var i = 0; i < selectedSchedules.length; i++) {
-                if (selectedSchedules[i].id == deletedScheduleId)
-                    indexToRemove = i;
-            }
-            selectedSchedules.splice(indexToRemove, 1);
-
+            removeItem($(this), selectedSchedules);
             renderSchedules();
-            $schedulesAutocomplete.autocomplete("option", { source:loadAvailableSchedules() });
         })
 
-        // Load schedules autocomplete list
-        function loadAvailableSchedules() {
-            var schedules_weeks = [];
+        // display available schedule options
+        function renderScheduleOptions() {
+            $schedulesSelect.empty();
             for (var i = 0; i < schedules.length; i++) {
-                if ($.inArray(schedules[i], selectedSchedules) == -1)
-                    schedules_weeks.push("Semaine " + schedules[i].week);
+                var selected = false;
+                for (var j = 0; j < selectedSchedules.length; j++) {
+                    if (schedules[i].id == selectedSchedules[j].id) {
+                        selected = true;
+                    }
+                }
+                if (!selected)
+                    addScheduleOption(schedules[i]);
             }
-            return schedules_weeks;
+        }
+
+        // add an option to the schedule select
+        function addScheduleOption(schedule) {
+            $schedulesSelect.append(
+                    "<option id=\"schedule" + schedule.id + "\" value=\"" + schedule.id + "\">Semaine " + schedule.week + "</option>");
         }
 
 
         // Show the schedule list on the web page
         function renderSchedules() {
-            $schedulesList.show();
             $schedulesList.empty();
             $schedulesInput.val("");
             for (var i = 0; i < selectedSchedules.length; i++) {
@@ -146,13 +169,9 @@
                 if (selectedSchedules[i].menu_id)
                     $("#schedule" + selectedSchedules[i].id).append("<span class=\"help-inline\" style=\"color:#1C628B\">" + scheduleWarning + "</span>");
             }
+
+            defineListDisplay($schedulesList);
+            renderScheduleOptions();
         }
-
-        // Schedule autocomplete definition
-        $schedulesAutocomplete.autocomplete({
-            delay:0,
-            source:loadAvailableSchedules()
-        });
-
     </script>
 <% end %>

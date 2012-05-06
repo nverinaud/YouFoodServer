@@ -5,7 +5,8 @@ YouFoodServer::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :orders, only: [:index]
   resources :menus
-  resources :products, only: [:index, :show, :new, :create]
+  resources :products
+  resources :restaurants
 
   match '/director', to: 'portal#director'
   match '/restaurant', to: 'portal#restaurant_manager'

@@ -16,8 +16,6 @@ def sign_in(user)
 end
 
 def create_valid_menu
-  before do
-    fill_in 'menu[name]', with: "Menu test"
-    fill_in 'menu[description]', with: "Desc test"
-  end
+  fill_in 'menu[name]', with: "Menu test"
+  fill_in 'menu[description]', with: "Desc test"
 end

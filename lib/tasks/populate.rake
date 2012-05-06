@@ -9,6 +9,7 @@ namespace :db do
     make_products
     make_schedules
     make_menus
+    make_restaurants
   end
 
 
@@ -78,6 +79,13 @@ namespace :db do
                             category: category)
       product.photo_file_name = '/assets/empty-food-image.jpg'
       product.save!
+    end
+  end
+
+  def make_restaurants
+    100.times do
+      name = Faker::Name.name
+      Restaurant.create!(name: name, phone: "(+33)0.00.00.00", city: "Paris", address: "8, rue de la fleur")
     end
   end
 end
