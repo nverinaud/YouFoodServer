@@ -18,8 +18,7 @@ class MenusController < ApplicationController
 
   # GET /menus/new
   def new
-    logger.debug @menu
-    @menu ||= Menu.new
+    @menu = Menu.new
     logger.debug @menu.name
     @products = Product.select("name, id")
     @schedules = Schedule.select("week, id, menu_id")
@@ -35,6 +34,8 @@ class MenusController < ApplicationController
     else
       logger.debug @menu.errors
       flash.now[:error] = "Une erreur est survenue."
+      @products = Product.select("name, id")
+      @schedules = Schedule.select("week, id, menu_id")
       render new_menu_path
     end
   end
