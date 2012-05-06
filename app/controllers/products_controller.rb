@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
 
+  before_filter :signed_in_director
+  
 	# GET /products
   def index
   	@products = Product.paginate(page: params[:page])
