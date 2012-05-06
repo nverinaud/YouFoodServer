@@ -20,7 +20,7 @@ class MenusController < ApplicationController
   def new
     @menu = Menu.new
     logger.debug @menu.name
-    @products = Product.select("name, id")
+    @products = Product.where(permanent: false).select("name, id")
     @schedules = Schedule.select("week, id, menu_id")
   end
 
