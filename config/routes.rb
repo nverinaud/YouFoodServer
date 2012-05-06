@@ -6,6 +6,7 @@ YouFoodServer::Application.routes.draw do
   resources :orders, only: [:index]
   resources :menus
   resources :products
+  resources :restaurants
 
   match '/director', to: 'portal#director'
   match '/restaurant', to: 'portal#restaurant_manager'
