@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class ProductsController < ApplicationController
 
   before_filter :signed_in_director
@@ -49,6 +51,19 @@ class ProductsController < ApplicationController
       @product = Product.new(params[:product])
       @product.valid?
       render 'new'
+    end
+  end
+
+
+  # DELETE /products/:id
+  def destroy
+    product = Product.find(params[:id])
+    if product.destroy
+      flash[:success] = "Le produit \"#{product.name}\" a été supprimé."
+      redirect_to products_path
+    else
+      flash[:error] = "Le produit n'existe pas."
+      redirect_to products_path
     end
   end
 
