@@ -37,7 +37,7 @@
 			</table>
 		</div>
 		<div class="span2">
-			
+			<%= link_to "Supprimer", @product, method: :delete, confirm: "Êtes-vous sûre de vouloir supprimer le produit #{@product.name} ?", class: 'btn btn-danger' %>
 		</div>
 	</div>
 
