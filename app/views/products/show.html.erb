@@ -1,4 +1,4 @@
-<% provide(:page_title, full_title("Produit | " + @product.name)) %>
+<% provide(:page_title, "Produit | " + @product.name) %>
 
 <section id="product-details" class="details">
 
@@ -37,7 +37,8 @@
 			</table>
 		</div>
 		<div class="span2">
-			<%= link_to "Supprimer", @product, method: :delete, confirm: "Êtes-vous sûre de vouloir supprimer le produit #{@product.name} ?", class: 'btn btn-danger' %>
+			<%= link_to "Supprimer", @product, method: :delete, confirm: "Êtes-vous sûre de vouloir supprimer le produit #{@product.name} ?", class: 'btn btn-danger span2' %>
+			<%= link_to "Modifier", edit_product_path(@product), class: 'btn btn-primary span2' %>
 		</div>
 	</div>
 
