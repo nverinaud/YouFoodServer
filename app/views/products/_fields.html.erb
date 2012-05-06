@@ -39,7 +39,7 @@
       <label class="control-label" for="product_price">Prix</label>
       <div class="controls">
         <div class="input-append">
-          <input maxlength="7" class="span2" name="product[price]" id="product_price" placeholder="ex: 10.50" type="text"><span class="add-on">€</span>
+          <input maxlength="7" class="span2" name="product[price]" id="product_price" placeholder="ex: 10.50" type="text" value="<%= @product.price %>"><span class="add-on">€</span>
 <% if @product.errors[:price].any? %>
 				<span class="help-inline"><%= @product.errors[:price][0] %></span>
 <% end %>
