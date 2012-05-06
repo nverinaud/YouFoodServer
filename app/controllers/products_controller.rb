@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   
 	# GET /products
   def index
-  	@products = Product.paginate(page: params[:page])
+  	@products = Product.paginate(order: 'created_at DESC', page: params[:page])
   end
 
   # GET /products/:id
@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @categories = Category.select(:name).map { |c| c.name };
+    categories_as_autocomplete
     @product = session[:product] || Product.new
     session[:product] = nil
   end
@@ -31,27 +31,32 @@ class ProductsController < ApplicationController
     category = nil
     if !categoryName.blank?
       category = Category.where(name: categoryName).first_or_create
-      product = category.products.build(params[:product])
-      if product.save
+      @product = category.products.build(params[:product])
+      if @product.save
         redirect_to products_path
       else
         if !category.nil?
-          product.category = Category.new(name: category.name)
+          @product.category = Category.new(name: category.name)
           if category.products.count == 0
             category.delete
           end
         end
-        product.photo = nil
-        session[:product] = product
-        redirect_to new_product_path
+        categories_as_autocomplete
+        render 'new'
       end
     else
-      product = Product.new(params[:product])
-      product.valid?
-      product.photo = nil
-      session[:product] = product
-      redirect_to new_product_path
+      categories_as_autocomplete
+      @product = Product.new(params[:product])
+      @product.valid?
+      render 'new'
     end
   end
+
+
+  private
+
+    def categories_as_autocomplete
+      @categories = Category.select(:name).map { |c| c.name }
+    end
 
 end

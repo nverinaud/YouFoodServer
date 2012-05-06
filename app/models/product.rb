@@ -34,7 +34,7 @@ class Product < ActiveRecord::Base
                     styles: {medium: '300x300>', thumb: '100x100>'},
                     default_url: "/assets/empty-food-image.jpg"
 
-  validates_attachment :photo, presence: true,
+  validates_attachment :photo,
                        content_type: {content_type: ['image/jpg', 'image/jpeg', 'image/png']},
                        size: {in: 0..2.megabytes}
 
