@@ -8,4 +8,7 @@ class Restaurant < ActiveRecord::Base
   # Validation
   validates :name, :phone, :city, :address, presence: true
   validates :name, uniqueness: {case_sensitive: true}
+
+  # Ordering
+  default_scope order: 'restaurants.created_at DESC'
 end
