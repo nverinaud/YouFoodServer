@@ -19,11 +19,38 @@ class EmployeesController < ApplicationController
 
   # GET /restaurant/employees/new
   def new
-  	@employee = User.new
+  	@employee = session[:employee] || User.new
+  	session[:employee] = nil
   end
 
   # POST /restaurant/employees
   def create
+  	type = params[:employee][:type]
+  	params[:employee][:type] = nil
+  	
+  	if !type.nil?
+  		
+  		@employee = nil
+  		
+  		if type == "Cuisto"
+  			@employee = @restaurant.cookers.build(params[:employee])
+  		elsif type == "Serveur"
+  			@employee = @restaurant.waiters.build(params[:employee])
+  		end
+
+  		if !@employee.nil?
+  			if @employee.save
+  				flash[:success] = "Nouvel employé \"#{@employee.name}\" créé !"
+  				redirect_to employee_path(@employee)
+  				return
+  			end
+  		end
+  	end
+
+  	employee = @employee || User.new(params[:employee])
+  	employee.valid?
+  	session[:employee] = employee
+  	redirect_to new_employee_path
   end
 
 private
