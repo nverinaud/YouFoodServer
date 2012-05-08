@@ -16,7 +16,7 @@ class Api::MenuController < Api::ApiController
       end
     end
     if (!@menu)
-      render text: "Aucun menu n'a été planifié cette semaine. Veuillez contacter le gérant du restaurant", status: 403
+      show_error "Aucun menu n'a été planifié cette semaine. Veuillez contacter le gérant du restaurant", 403
     end
   end
 end
