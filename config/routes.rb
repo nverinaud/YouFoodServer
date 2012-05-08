@@ -1,7 +1,5 @@
 YouFoodServer::Application.routes.draw do
 
-  get "employees/index"
-
   root to: 'sessions#new'
 
   resources :sessions, only: [:new, :create, :destroy]
