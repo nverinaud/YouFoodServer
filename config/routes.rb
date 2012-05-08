@@ -15,7 +15,7 @@ YouFoodServer::Application.routes.draw do
   end
 
   match '/director', to: 'portal#director'
-  match '/restaurant', to: 'portal#restaurant_manager'
+  match '/restaurant_manager', to: 'portal#restaurant_manager'
 
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete

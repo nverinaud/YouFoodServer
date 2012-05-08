@@ -68,7 +68,7 @@ private
 			end
 		end
 		flash[:error] = "Vous n'avez pas accès à cet employé."
-		redirect_to '/restaurant'
+		redirect_to current_user_portal_path
 	end
 
 end
