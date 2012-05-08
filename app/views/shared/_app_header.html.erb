@@ -14,6 +14,11 @@
                         <li><a href="<%= products_path %>">Les Produits</a></li>
                         <li><a href="<%= menus_path %>">Les Menus</a></li>
                     <% end %>
+
+                    <% if signed_in_manager? %>
+                        <li><a href="<%= employees_path %>">Le Personnel</a></li>
+                        <li><a href="#">La Salle</a></li>
+                    <% end %>
                 </ul>
             </div>
             <% if signed_in? %>

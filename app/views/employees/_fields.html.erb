@@ -1,0 +1,92 @@
+<header class="page-header">
+  <div class="control-group string optional <%= "error" unless employee.errors[:name].blank? %>">
+    <div class="controls">
+      <input class="string optional span6" id="employee_name" name="employee[name]" placeholder="Nom" size="50" type="text" value="<%= employee.name %>">
+    <% unless employee.errors[:name].blank? %>
+      <p class="help-inline"><%= employee.errors[:name].first %></p>
+    <% end %>
+    </div>
+  </div>
+</header>
+
+<div class="row-fluid">
+  <div class="span12">
+    <div class="control-group email required <%= "error" unless employee.errors[:email].blank? %>">
+      <label class="email required control-label" for="employee_email">
+        <abbr title="required">*</abbr> E-mail</label>
+        <div class="controls">
+          <input class="string email required span4" id="employee_email" name="employee[email]" placeholder="me@youfood.com" size="50" type="email" value="<%= employee.email %>">
+        <% unless employee.errors[:email].blank? %>
+          <p class="help-inline"><%= employee.errors[:email].first %></p>
+        <% end %>
+        </div>
+      </div>
+
+    <%=
+        form.input :type,
+                   label: "Poste",
+                   collection: ["Cuisto", "Serveur"],
+                   selected: employee_job_name(employee),
+                   include_blank: false,
+                   as: :select,
+                   required: false,
+                   input_html: {class: 'span4'}
+    %>
+
+    <%=
+        form.input :phone,
+                   label: "Téléphone",
+                   required: false,
+                   input_html: {class: 'span4'}
+    %>
+
+    <%=
+        form.input :address,
+                   placeholder: "Rue",
+                   label: "Adresse",
+                   required: false,
+                   input_html: {class: 'span4'}
+    %>
+
+    <%=
+        form.input :zipCode,
+                   placeholder: "Code Postal",
+                   label: false,
+                   required: false,
+                   input_html: {class: 'span2'}
+    %>
+
+    <%=
+        form.input :city,
+                   placeholder: "Ville",
+                   label: false,
+                   required: false,
+                   input_html: {class: 'span2'}
+    %>
+
+    <div class="control-group password required <%= "error" unless employee.errors[:password].blank? %>">
+      <label class="password required control-label" for="employee_password">
+        <abbr title="required">*</abbr> Accès</label>
+        <div class="controls">
+          <input class="password required span4" id="employee_password" name="employee[password]" placeholder="Mot de passe" size="50" type="password">
+        <% unless employee.errors[:password].blank? %>
+          <p class="help-inline"><%= employee.errors[:password].first %></p>
+        <% end %>
+        </div>
+      </div>
+
+    <%=
+        form.input :password_confirmation,
+                   placeholder: "Confirmation",
+                   label: false,
+                   input_html: {class: 'span4'}
+    %>
+      
+    <div class="form-actions">
+      <%=
+        form.submit "Valider", class: 'btn btn-primary span2'
+      %>
+      <a class="btn span2" href="<%= employees_path %>">Annuler</a>
+    </div>
+  </div>
+</div>
