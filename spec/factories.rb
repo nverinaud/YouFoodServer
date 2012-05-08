@@ -16,6 +16,7 @@ FactoryGirl.define do
     name "Cooker"
     email "cooker@youfood.com"
     password "password"
+    restaurant
   end
 
   factory :schedule do

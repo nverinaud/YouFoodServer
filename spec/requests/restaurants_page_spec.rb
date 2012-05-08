@@ -27,7 +27,7 @@ describe "Restaurants" do
 
       describe "pagination" do
         before {
-          100.times { FactoryGirl.create(:restaurant) }
+          30.times { FactoryGirl.create(:restaurant) }
           visit restaurants_path
         }
 
@@ -54,6 +54,40 @@ describe "Restaurants" do
           end
         end
       end
+    end
+  end
+
+  describe "Show one restaurant page" do
+    let(:restaurant) { FactoryGirl.create(:restaurant) }
+
+    describe "When not signed in as director" do
+
+      before { visit restaurant_path(restaurant) }
+
+      it { should_not have_title "YouFood | Portail directeur | #{restaurant.name}" }
+      it { should_not have_selector("h1", text: "#{restaurant.name}") }
+    end
+
+    describe "When signed in as director" do
+      let(:director) { FactoryGirl.create(:director) }
+
+      before {
+        sign_in director
+        visit restaurant_path(restaurant)
+      }
+
+      it { should have_title "YouFood | Portail directeur | #{restaurant.name}" }
+      it { should have_selector("h1", text: "#{restaurant.name}") }
+      it { should have_selector("h3", text: "#{restaurant.restaurant_manager.email}") }
+
+      it { should have_selector("tr", text: "#{restaurant.restaurant_manager.name}") }
+      it { should have_selector("tr", text: "#{restaurant.phone}") }
+      it { should have_selector("tr", text: "#{restaurant.address} #{restaurant.city}") }
+      it { should have_selector("tr", text: "#{restaurant.waiters.count} serveurs") }
+
+      it { should have_link("Statistiques de ce restaurant") }
+      it { should have_link("Supprimer") }
+      it { should have_link("Modifier") }
     end
   end
 end
