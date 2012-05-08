@@ -17,6 +17,15 @@ class EmployeesController < ApplicationController
   def show
   end
 
+  # GET /restaurant/employees/new
+  def new
+  	@employee = User.new
+  end
+
+  # POST /restaurant/employees
+  def create
+  end
+
 private
 
 	def get_restaurant
@@ -32,7 +41,7 @@ private
 			end
 		end
 		flash[:error] = "Vous n'avez pas accès à cet employé."
-		redirect_to root_path
+		redirect_to '/restaurant'
 	end
 
 end

@@ -16,6 +16,7 @@
 <%= render 'shared/app_header' %>
 
 <div class="container">
+  <%= debug(flash) %>
   <% flash.each do |key, value| %>
     <%= content_tag(:div, value, class: "alert alert-#{key}") %>
   <% end %>
