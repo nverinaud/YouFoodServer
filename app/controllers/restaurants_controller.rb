@@ -5,4 +5,14 @@ class RestaurantsController < ApplicationController
   def index
     @restaurants = Restaurant.paginate(page: params[:page])
   end
+
+  # GET /restaurants/:id
+  def show
+    begin
+      @restaurant = Restaurant.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:error] = "Le restaurant ##{params[:id]} n'existe pas."
+      redirect_to restaurants_path
+    end
+  end
 end
