@@ -19,6 +19,13 @@ FactoryGirl.define do
     restaurant
   end
 
+  factory :waiter do
+    name "Waiter"
+    email "waiter@youfood.com"
+    password "password"
+    restaurant
+  end
+
   factory :schedule do
     week "10"
   end
@@ -61,6 +68,12 @@ FactoryGirl.define do
     phone "(+33)0.00.00.00.00"
     address "0, Ipsum Street"
     restaurant_manager
+  end
+
+  factory :zone do
+    sequence(:name) { "Zone #{n}" }
+    waiter
+    restaurant
   end
 end
 
