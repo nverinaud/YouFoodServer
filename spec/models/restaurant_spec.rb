@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: restaurants
+#
+#  id         :integer         not null, primary key
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#  name       :string(255)
+#  city       :string(255)
+#  phone      :string(255)
+#  address    :string(255)
+#
+
 require "rspec"
 
 describe Restaurant do
@@ -11,7 +24,7 @@ describe Restaurant do
   it { should respond_to :city }
   it { should respond_to :phone }
   it { should respond_to :address }
-  it { should respond_to :manager }
+  it { should respond_to :restaurant_manager }
   it { should respond_to :zones }
   it { should respond_to :tables }
   it { should respond_to :invoices }

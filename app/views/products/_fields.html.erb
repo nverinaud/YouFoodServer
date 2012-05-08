@@ -1,69 +1,73 @@
 <header class="page-header">
-	<%=
-		form.input 	:name,
-								placeholder: "Nom du Produit",
-								input_html: { class: 'span4' },
-								required: false
-	%>
+    <%=
+        form.input :name,
+                   placeholder: "Nom du Produit",
+                   input_html: {class: 'span4'},
+                   required: false
+    %>
 </header>
 
 <div class="row-fluid">
-	<div class="span2">
-		<%= image_tag @product.photo.url(:thumb) %>
-		<%= form.file_field :photo %>
-	</div>
-	<div class="span10">
-		<%=
-			categoryValue = @product.category.name unless @product.category.nil?
-
-			form.input 	:category,
-									placeholder: "Rechercher...",
-									required: false,
-									label: "Catégorie",
-									input_html: { class: 'span4', value: categoryValue || "" },
-									hint: "Info: pour créer une nouvelle catégorie, entrez son nom !"
-		%>
-		<div class="control-group">
-      <label class="control-label">Toujours à la carte ?</label>
-      <div class="controls">
-      	<label class="radio inline"><input type="radio" name="product[permanent]" value="true" /> Oui</label>
-      	<label class="radio inline"><input checked type="radio" name="product[permanent]" value="false" /> Non</label>
-      </div>
+    <div class="span2">
+        <%= image_tag @product.photo.url(:thumb) %>
+        <%= form.file_field :photo %>
     </div>
+    <div class="span10">
+        <%=
+            categoryValue = @product.category.name unless @product.category.nil?
 
-<% if @product.errors[:price].any? %>
-			<div class="control-group error">
-<% else %>
-    	<div class="control-group">
-<% end %>
-      <label class="control-label" for="product_price">Prix</label>
-      <div class="controls">
-        <div class="input-append">
-          <input maxlength="7" class="span2" name="product[price]" id="product_price" placeholder="ex: 10.50" type="text"><span class="add-on">€</span>
-<% if @product.errors[:price].any? %>
-				<span class="help-inline"><%= @product.errors[:price][0] %></span>
-<% end %>
-      	</div>
-    	</div>
+            form.input :category,
+                       placeholder: "Rechercher...",
+                       required: false,
+                       label: "Catégorie",
+                       input_html: {class: 'span4', value: categoryValue || ""},
+                       hint: "Info: pour créer une nouvelle catégorie, entrez son nom !"
+        %>
+        <div class="control-group">
+            <label class="control-label">Toujours à la carte ?</label>
+
+            <div class="controls">
+                <label class="radio inline"><input type="radio" name="product[permanent]" value="true"/> Oui</label>
+                <label class="radio inline"><input checked type="radio" name="product[permanent]" value="false"/>
+                    Non</label>
+            </div>
+        </div>
+
+        <% if @product.errors[:price].any? %>
+            <div class="control-group error">
+        <% else %>
+            <div class="control-group">
+        <% end %>
+        <label class="control-label" for="product_price">Prix</label>
+
+        <div class="controls">
+            <div class="input-append">
+                <input maxlength="7" class="span2" name="product[price]" id="product_price" placeholder="ex: 10.50" type="text" value="<%= @product.price %>"><span class="add-on">€</span>
+                <% if @product.errors[:price].any? %>
+                    <span class="help-inline"><%= @product.errors[:price][0] %></span>
+                <% end %>
+            </div>
+        </div>
+        </div>
+        <%=
+            form.input :abbreviation,
+                       placeholder: "abrev",
+                       label: "Abréviation",
+                       input_html: {class: 'span2', maxlength: 10}
+        %>
+        <%=
+            form.input :description,
+                       as: :text,
+                       input_html: {rows: 10, class: 'span4'},
+                       placeholder: "ex: Mmmmmh trop bon !",
+                       label: "Description Alléchante"
+        %>
+        <div class="form-actions">
+            <%=
+                form.submit "Valider", class: 'btn btn-primary span2'
+            %>
+            <a class="btn span2" href="<%= products_path %>">Annuler</a>
+        </div>
+        </div>
     </div>
-		<%=
-			form.input 	:abbreviation,
-									placeholder: "abrev",
-									label: "Abréviation",
-									input_html: { class: 'span2', maxlength: 10 },
-		%>
-		<%=
-			form.input 	:description,
-									as: :text,
-									input_html: { rows: 10, class: 'span4' },
-									placeholder: "ex: Mmmmmh trop bon !",
-									label: "Description Alléchante"
-		%>
-		<div class="form-actions">
-		<%=
-			form.submit	"Valider", class: 'btn btn-primary span2'
-		%>
-			<a class="btn span2" href="<%= products_path %>">Annuler</a>
-		</div>
-	</div>
 </div>

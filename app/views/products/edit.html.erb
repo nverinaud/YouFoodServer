@@ -1,6 +1,6 @@
-<% provide(:page_title, "Produit | Nouveau") %>
+<% provide(:page_title, "Produit | #{@product.name} | Modifier") %>
 
-<section id="product-new" class="new-element">
+<section id="product-edit" class="new-element">
 
     <%= simple_form_for(@product, html: {multipart: true, class: 'form-horizontal'}) do |f| %>
         <%= render 'fields', form: f %>

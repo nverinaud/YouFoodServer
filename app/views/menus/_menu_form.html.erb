@@ -28,14 +28,15 @@
                     <input type="hidden" id="schedules_id" name="schedules_id"/>
                     <ul id="schedules_list" style="display: none" class="unstyled">
                     </ul>
-                    <input id="schedule_autocomplete" type="text" class="span4" placeholder="Numéro de la semaine" name="menu_schedules"/>
+                    <select id="schedule_select" class="span4">
+                    </select>
                     <a id="schedule_add" class="btn btn-primary">Planifier</a>
                 </div>
             </div>
         </div>
 
         <div class="form-actions">
-            <%= form.button :submit, "Valider", class: 'btn-primary' %>
+            <%= form.button :submit, 'Valider', class: 'btn-primary' %>
             <%= submit_tag 'Annuler', type: :reset, class: "btn" %>
         </div>
     </div>
