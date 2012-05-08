@@ -7,8 +7,8 @@ FactoryGirl.define do
   end
 
   factory :restaurant_manager do
-    name "Restaurant Manager"
-    email "restaurant.manager@youfood.com"
+    sequence(:name) { |n| "Restaurant Manager #{n}" }
+    sequence(:email) { |n| "restaurant.manager#{n}@youfood.com" }
     password "password"
   end
 
@@ -59,6 +59,7 @@ FactoryGirl.define do
     city "Lorem"
     phone "(+33)0.00.00.00.00"
     address "0, Ipsum Street"
+    restaurant_manager
   end
 end
 
