@@ -19,5 +19,13 @@
 #
 
 class Waiter < User
+	
   attr_accessible :push_url
+
+  # Relations
+  belongs_to :restaurant
+
+  # Validations
+  validates :restaurant_id, presence: true
+
 end

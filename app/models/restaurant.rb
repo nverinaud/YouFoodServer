@@ -18,6 +18,7 @@ class Restaurant < ActiveRecord::Base
   # Relations
   belongs_to :restaurant_manager
   has_many :cookers
+  has_many :waiters
 
   # Validation
   validates :name, :phone, :city, :address, presence: true
@@ -26,4 +27,9 @@ class Restaurant < ActiveRecord::Base
 
   # Ordering
   default_scope order: 'restaurants.created_at DESC'
+
+  # Utils
+  def employees
+  	self.cookers | self.waiters
+  end
 end

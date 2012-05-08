@@ -1,5 +1,7 @@
 YouFoodServer::Application.routes.draw do
 
+  get "employees/index"
+
   root to: 'sessions#new'
 
   resources :sessions, only: [:new, :create, :destroy]
@@ -7,6 +9,10 @@ YouFoodServer::Application.routes.draw do
   resources :menus
   resources :products
   resources :restaurants
+
+  scope '/restaurant' do
+    resources :employees
+  end
 
   match '/director', to: 'portal#director'
   match '/restaurant', to: 'portal#restaurant_manager'

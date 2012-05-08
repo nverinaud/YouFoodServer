@@ -10,13 +10,13 @@ namespace :db do
     make_schedules
     make_menus
     make_restaurants
+    make_cooker_and_waiter
   end
 
 
   def make_users
-    Cooker.create(name: "Cooker", email: "cooker@youfood.com", password: "password")
-    RestaurantManager.create(name: "Restaurant Manager", email: "restaurant.manager@youfood.com", password: "password")
-    Director.create(name: "Director", email: "director@youfood.com", password: "password")
+    RestaurantManager.create!(name: "Restaurant Manager", email: "restaurant.manager@youfood.com", password: "password")
+    Director.create!(name: "Director", email: "director@youfood.com", password: "password")
   end
 
   def make_menus
@@ -91,4 +91,11 @@ namespace :db do
       resto.save
     end
   end
+
+  def make_cooker_and_waiter
+    resto = Restaurant.first
+    resto.cookers.create!(name: "Cooker", email: "cooker@youfood.com", password: "password")
+    resto.waiters.create!(name: "Waiter", email: "waiter@youfood.com", password: "password")
+  end
+
 end
