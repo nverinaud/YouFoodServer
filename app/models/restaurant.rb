@@ -19,6 +19,7 @@ class Restaurant < ActiveRecord::Base
   belongs_to :restaurant_manager
   has_many :cookers
   has_many :waiters
+  has_many :zones
 
   # Validation
   validates :name, :phone, :city, :address, presence: true
@@ -30,6 +31,6 @@ class Restaurant < ActiveRecord::Base
 
   # Utils
   def employees
-  	self.cookers | self.waiters
+    self.cookers | self.waiters
   end
 end
