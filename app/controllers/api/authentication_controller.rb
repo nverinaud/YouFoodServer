@@ -11,6 +11,6 @@ class Api::AuthenticationController < Api::ApiController
   end
 
   def unauthorized_access
-    render text: "Authentification requise", status: 401
+    show_error "Authentification requise", 401
   end
 end

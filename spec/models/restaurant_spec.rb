@@ -25,7 +25,7 @@ describe Restaurant do
   it { should respond_to :city }
   it { should respond_to :phone }
   it { should respond_to :address }
-  it { should respond_to :manager }
+  it { should respond_to :restaurant_manager }
   it { should respond_to :zones }
   it { should respond_to :tables }
   it { should respond_to :invoices }
