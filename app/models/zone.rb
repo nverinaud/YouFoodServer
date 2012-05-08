@@ -3,6 +3,7 @@ class Zone < ActiveRecord::Base
 
   # Relations
   belongs_to :restaurant
+  belongs_to :waiter
 
   #Constraints
 end
