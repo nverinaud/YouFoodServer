@@ -11,6 +11,7 @@
             <div class="nav-collapse">
                 <ul class="nav pull-left">
                     <% if signed_in_director? %>
+                        <li><a href="<%= restaurants_path %>">Les Restaurants</a></li>
                         <li><a href="<%= products_path %>">Les Produits</a></li>
                         <li><a href="<%= menus_path %>">Les Menus</a></li>
                     <% end %>
