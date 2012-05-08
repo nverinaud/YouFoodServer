@@ -8,7 +8,7 @@ describe "Authentication" do
 
   describe "Signin page" do
     before { visit signin_path }
-    it { should have_title "YouFood - Acceuil" }
+    it { should have_title "YouFood | Acceuil" }
     it { should have_selector("img", alt: "Food picture") }
     it { should have_selector("legend", text: "Connexion") }
   end
@@ -34,7 +34,7 @@ describe "Authentication" do
         let(:director) { FactoryGirl.create(:director) }
         before { sign_in director }
 
-        it { should have_title "YouFood - Portail de gestion - Directeur" }
+        it { should have_title "YouFood | Portail de gestion | Directeur" }
         it { should have_signout_link }
         it { should have_selector("h1", text: "Directeur") }
         it { should have_link('Gérer les restaurants') }
@@ -43,7 +43,6 @@ describe "Authentication" do
         it { should have_link('Voir les statistiques') }
         it { should have_link('Créer un restaurant') }
         it { should have_link('Créer un menu') }
-        it { should have_link('Gérer un produit') }
 
         describe "show page should be the portal" do
           before { visit root_path }
@@ -61,7 +60,7 @@ describe "Authentication" do
         let(:restaurant_manager) { FactoryGirl.create(:restaurant_manager) }
         before { sign_in restaurant_manager }
 
-        it { should have_title "YouFood - Portail de gestion - Restaurant" }
+        it { should have_title "YouFood | Portail de gestion | Restaurant" }
         it { should have_signout_link }
         it { should have_selector("h1", text: "Restaurant") }
         it { should have_link('Gérer le personnel') }
@@ -70,7 +69,7 @@ describe "Authentication" do
         it { should have_link('Gérer les commandes') }
       end
 
-      describe "as a restaurant manager" do
+      describe "as a cooker" do
         let(:cooker) { FactoryGirl.create(:cooker) }
         before { sign_in cooker }
 

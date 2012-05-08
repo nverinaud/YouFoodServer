@@ -67,11 +67,11 @@ module SessionsHelper
 
   def current_user_portal_path
     if current_user.is_a? Director
-      '/director'
+      render 'portal/director'
     elsif current_user.is_a? RestaurantManager
-      '/restaurant'
+      render 'portal/restaurant_manager'
     elsif current_user.is_a? Cooker
-      '/orders'
+      redirect_to orders_path
     end
   end
 
