@@ -10,4 +10,8 @@ module EmployeesHelper
 		end
 	end
 
+	def user_is_an_employee?(user)
+		user.is_a?(Cooker) || user.is_a?(Waiter)
+	end
+
 end
