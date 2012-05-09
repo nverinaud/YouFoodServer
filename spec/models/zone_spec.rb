@@ -2,7 +2,7 @@ require "rspec"
 
 describe Zone do
   before do
-    @zone = FactoryGirl.create(:zone)
+    @zone = FactoryGirl.create(:zones)
   end
 
   subject { @zone }

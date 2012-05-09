@@ -27,7 +27,7 @@ describe Waiter do
   subject { @waiter }
 
   it { should respond_to :restaurant }
-  it { should respond_to :zone }
+  it { should respond_to :zones }
   it { should respond_to :push_url }
 
   it { should be_valid }

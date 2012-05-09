@@ -20,12 +20,11 @@ describe "Zones" do
         visit zones_path
       }
 
-
       it { should have_link("Nouvelle zone") }
 
       describe "pagination" do
         before {
-          30.times { FactoryGirl.create(:zone) }
+          30.times { FactoryGirl.create(:zones) }
           visit restaurants_path
         }
 

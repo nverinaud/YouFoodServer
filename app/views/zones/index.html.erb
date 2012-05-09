@@ -1,0 +1,30 @@
+<% provide(:page_title, restaurant_title("La salle")) %>
+
+<section id="products">
+
+    <header class="page-header">
+        <h1>Les zones</h1>
+    </header>
+
+    <div class="row-fluid">
+        <p class="span9"><%= pluralize(@zones.count, "zone", "zones") %></p>
+        <%= link_to 'Nouvelle zone', new_zone_path, class: "btn btn-primary span2" %>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <% if @zones.any? %>
+            <thead>
+            <th>Nom</th>
+            <th>Nombre de tables</th>
+            <th></th>
+            </thead>
+            <tbody>
+            <%= render @zones %>
+            </tbody>
+        <% else %>
+            <tr>
+                <td>Aucune zone trouvée.</td>
+            </tr>
+        <% end %>
+    </table>
+</section>

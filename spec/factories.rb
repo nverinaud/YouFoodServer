@@ -70,7 +70,7 @@ FactoryGirl.define do
     restaurant_manager
   end
 
-  factory :zone do
+  factory :zones do
     sequence(:name) { "Zone #{n}" }
     waiter
     restaurant

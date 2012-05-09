@@ -7,6 +7,7 @@ YouFoodServer::Application.routes.draw do
   resources :menus
   resources :products
   resources :restaurants
+  resources :zones
 
   scope '/restaurant' do
     resources :employees
