@@ -9,13 +9,14 @@ namespace :db do
     make_products
     make_schedules
     make_menus
+    make_restaurants
+    make_cooker_and_waiter
   end
 
 
   def make_users
-    Cooker.create(name: "Cooker", email: "cooker@youfood.com", password: "password")
-    RestaurantManager.create(name: "Restaurant Manager", email: "restaurant.manager@youfood.com", password: "password")
-    Director.create(name: "Director", email: "director@youfood.com", password: "password")
+    RestaurantManager.create!(name: "Restaurant Manager", email: "restaurant.manager@youfood.com", password: "password")
+    Director.create!(name: "Director", email: "director@youfood.com", password: "password")
   end
 
   def make_menus
@@ -80,4 +81,21 @@ namespace :db do
       product.save!
     end
   end
+
+  def make_restaurants
+    manager = RestaurantManager.first
+    3.times do
+      name = Faker::Name.name
+      resto = Restaurant.create(name: name, phone: "(+33)0.00.00.00", city: "Paris", address: "8, rue de la fleur")
+      resto.restaurant_manager = manager
+      resto.save
+    end
+  end
+
+  def make_cooker_and_waiter
+    resto = Restaurant.first
+    resto.cookers.create!(name: "Cooker", email: "cooker@youfood.com", password: "password")
+    resto.waiters.create!(name: "Waiter", email: "waiter@youfood.com", password: "password")
+  end
+
 end

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # == Schema Information
 #
 # Table name: products
@@ -34,7 +36,7 @@ class Product < ActiveRecord::Base
                     styles: {medium: '300x300>', thumb: '100x100>'},
                     default_url: "/assets/empty-food-image.jpg"
 
-  validates_attachment :photo, presence: true,
+  validates_attachment :photo,
                        content_type: {content_type: ['image/jpg', 'image/jpeg', 'image/png']},
                        size: {in: 0..2.megabytes}
 
@@ -43,9 +45,12 @@ class Product < ActiveRecord::Base
   validates_associated :category
 
   # Validation
-  validates :price, presence: true, numericality: {greater_than: 0.0}
-  validates :name, presence: true
-  validates :abbreviation, length: {maximum: 10}
-  validates :category, presence: true
+  validates :price, presence: { message: "Vous devez donner un prix." },
+                    numericality: { greater_than: 0.50, 
+                      message: "Le prix doit être supérieur à 0.50€." }
+  validates :name, presence: { message: "Le nom est requis." }
+  validates :abbreviation, length: {maximum: 10, 
+                            message: "L'abbreviation ne doit pas excéder 10 caractères." }
+  validates :category, presence: { message: "Vous devez choisir ou créer une catégorie." }
 
 end

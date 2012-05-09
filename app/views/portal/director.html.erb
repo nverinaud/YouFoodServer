@@ -1,12 +1,11 @@
-<% provide(:page_title, "YouFood - Portail de gestion - Directeur") %>
+<% provide(:page_title, director_title("Directeur")) %>
 
 <h1>Portail de gestion - Directeur</h1>
 <hr/>
-<a class="tile" href="#">Gérer les restaurants</a>
-<a class="tile" href="#">Gérer les menus</a>
-<a class="tile" href="#">Gérer les produits</a>
+<a class="tile" href="<%= restaurants_path %>">Gérer les restaurants</a>
+<a class="tile" href="<%= menus_path %>">Gérer les menus</a>
+<a class="tile" href="<%= products_path %>">Gérer les produits</a>
 <a class="tile" href="#">Voir les statistiques</a>
-<a class="tile" href="#">Gérer les restaurants</a>
-<a class="tile" href="#">Créer un restaurant</a>
-<a class="tile" href="#">Créer un menu</a>
-<a class="tile" href="#">Gérer un produit</a>
+<a class="tile" href="<%= new_restaurant_path %>">Créer un restaurant</a>
+<a class="tile" href="<%= new_menu_path %>">Créer un menu</a>
+<a class="tile" href="<%= new_product_path %>">Créer un produit</a>

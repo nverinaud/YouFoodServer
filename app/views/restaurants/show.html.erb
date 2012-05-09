@@ -1,0 +1,48 @@
+<% provide(:page_title, director_title(@restaurant.name)) %>
+
+<section id="product-details" class="details">
+
+    <header class="page-header">
+        <h1><%= @restaurant.name %></h1>
+
+        <h3><%= @restaurant.restaurant_manager.email %></h3>
+    </header>
+
+    <div class="row-fluid">
+        <div class="span8">
+            <table>
+                <tbody>
+                <tr>
+                    <td>Gérant</td>
+                    <td><%= @restaurant.restaurant_manager.name %></td>
+                </tr>
+                <tr>
+                    <td>Contact</td>
+                    <td><%= @restaurant.phone %></td>
+                </tr>
+                <tr>
+                    <td>Adresse</td>
+                    <td><%= "#{@restaurant.address} #{@restaurant.city}" %></td>
+                </tr>
+                <tr>
+                    <td>Couverts</td>
+                    <td>xx couverts</td>
+                </tr>
+                <tr>
+                    <td>Serveurs</td>
+                    <td>xx serveurs</td>
+                </tr>
+                </tbody>
+            </table>
+            <%= link_to "Statistiques de ce restaurant", "#", class: "btn btn-primary span3" %>
+        </div>
+        <div class="span4">
+            <%= link_to "Modifier", edit_restaurant_path(@restaurant), class: "btn btn-primary span2" %>
+            <%= link_to "Supprimer", @restaurant, method: :delete,
+                        confirm: "Êtes-vous sûr de vouloir supprimer le restaurant #{@restaurant.name}?",
+                        class: "btn btn-danger span2" %>
+        </div>
+    </div>
+
+</section>
+

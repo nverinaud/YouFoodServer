@@ -1,0 +1,42 @@
+<% provide(:page_title, "Restaurant #{@restaurant.name} | #{@employee.name}") %>
+
+<section id="employee-details" class="details">
+
+	<header class="page-header">
+		<h1><%= @employee.name %></h1>
+	</header>
+
+	<div class="row-fluid">
+		<div class="span9">
+			<table>
+				<tbody>
+					<tr>
+						<td>Email</td>
+						<td><%= @employee.email %></td>
+					</tr>
+					<tr>
+						<td>Poste</td>
+						<td><%= employee_job_name @employee %></td>
+					</tr>
+					<tr>
+						<td>Adresse</td>
+						<td>
+							<%= @employee.address %><br/>
+							<%= @employee.zipCode %> <%= @employee.city %>
+						</td>
+					</tr>
+					<tr>
+						<td>Téléphone</td>
+						<td><%= @employee.phone %></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="span2">
+			<%= link_to "Supprimer", employee_path(@employee), method: :delete, confirm: "Êtes-vous sûre de vouloir supprimer l'employé #{@employee.name} ?", class: 'btn btn-danger span2' %>
+			<%= link_to "Modifier", edit_employee_path(@employee), class: 'btn btn-primary span2' %>
+		</div>
+	</div>
+
+</section>
+

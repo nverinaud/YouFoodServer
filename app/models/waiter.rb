@@ -15,8 +15,17 @@
 #  password_digest :string(255)
 #  remember_token  :string(255)
 #  push_url        :string(255)
+#  restaurant_id   :integer
 #
 
 class Waiter < User
+	
   attr_accessible :push_url
+
+  # Relations
+  belongs_to :restaurant
+
+  # Validations
+  validates :restaurant_id, presence: true
+
 end

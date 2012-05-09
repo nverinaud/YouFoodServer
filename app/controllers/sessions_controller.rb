@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
+
   def new
     if signed_in?
-      redirect_to current_user_portal_path
+      current_user_portal_path
     end
   end
 
@@ -9,7 +10,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       sign_in user
-      redirect_to current_user_portal_path
+      redirect_to action: 'new'
     else
       flash.now[:error] = "Mot de passe ou nom d'utilisateur incorrect"
       render 'new'
