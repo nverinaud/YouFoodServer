@@ -21,10 +21,10 @@ namespace :db do
 
   def make_menus
     products = Product.find_all_by_permanent(false)
-    count = -1;
+    count = 0;
     52.times do |n|
-      name = Faker::Lorem.sentence(2)
-      description = Faker::Lorem.paragraph
+      name = Faker::Name.name
+      description = Faker::Lorem.name
       default = (n%2 == 0)
       menu = Menu.new(name: name,
                       description: description,
@@ -32,7 +32,11 @@ namespace :db do
       menu.products = Array.new
       menu.schedules = Array.new
       rand(50).times do |i|
-         menu.products << products[++count] #EPITECH inside
+          if(count < products.count)
+            menu.products << products[count]
+            puts "<<<<<<<<<<<<<<<<<<<<<<<<<<< ADD PRODUCT #{products[count].name}"
+            count += 1
+         end
       end
       menu.schedules << Schedule.find(n+1)
       menu.save!
