@@ -31,10 +31,9 @@ namespace :db do
                       default: default)
       menu.products = Array.new
       menu.schedules = Array.new
-      rand(50).times do |i|
+      rand(10).times do |i|
           if(count < products.count)
             menu.products << products[count]
-            puts "<<<<<<<<<<<<<<<<<<<<<<<<<<< ADD PRODUCT #{products[count].name}"
             count += 1
          end
       end
@@ -69,7 +68,7 @@ namespace :db do
 
   def make_products
     categories = Category.all
-    200.times do |n|
+    520.times do |n|
       price = n+10
       name = Faker::Name.name
       abbreviation = name.downcase.slice(1..10)
