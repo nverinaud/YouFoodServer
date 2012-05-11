@@ -11,6 +11,7 @@ namespace :db do
     make_menus
     make_restaurants
     make_cooker_and_waiter
+    make_zones
   end
 
 
@@ -84,18 +85,26 @@ namespace :db do
 
   def make_restaurants
     manager = RestaurantManager.first
-    3.times do
-      name = Faker::Name.name
-      resto = Restaurant.create(name: name, phone: "(+33)0.00.00.00", city: "Paris", address: "8, rue de la fleur")
-      resto.restaurant_manager = manager
-      resto.save
-    end
+    name = Faker::Name.name
+    resto = Restaurant.create(name: name, phone: "(+33)0.00.00.00", city: "Paris", address: "8, rue de la fleur")
+    resto.restaurant_manager = manager
+    resto.save
   end
 
   def make_cooker_and_waiter
     resto = Restaurant.first
     resto.cookers.create!(name: "Cooker", email: "cooker@youfood.com", password: "password")
     resto.waiters.create!(name: "Waiter", email: "waiter@youfood.com", password: "password")
+  end
+
+  def make_zones
+    resto = Restaurant.first
+    30.times do |n|
+      name = Faker::Name.name
+      zone = Zone.new(name: name)
+      zone.restaurant = resto
+      zone.save!
+    end
   end
 
 end
