@@ -1,5 +1,5 @@
 <tr>
-    <td><%= link_to(zone.name, zone_path(zone)) %></td>
+    <td><%= zone.name %></td>
     <td><%= pluralize(10, "table", "tables") %></td>
     <td>
         <%= link_to('Supprimer', @zone, method: :delete,
