@@ -20,6 +20,7 @@ class Restaurant < ActiveRecord::Base
   has_many :cookers
   has_many :waiters
   has_many :zones
+  has_many :tables
 
   # Validation
   validates :name, :phone, :city, :address, presence: true

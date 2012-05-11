@@ -1,26 +1,26 @@
 FactoryGirl.define do
 
   factory :director do
-    name  Faker::Name.name
+    name Faker::Name.name
     email Faker::Internet.email
     password "password"
   end
 
   factory :restaurant_manager do
-    name  Faker::Name.name
+    name Faker::Name.name
     email Faker::Internet.email
     password "password"
   end
 
   factory :cooker do
-    name  Faker::Name.name
+    name Faker::Name.name
     email Faker::Internet.email
     password "password"
     restaurant
   end
 
   factory :waiter do
-    name  Faker::Name.name
+    name Faker::Name.name
     email Faker::Internet.email
     password "password"
     restaurant
@@ -73,6 +73,11 @@ FactoryGirl.define do
   factory :zone do
     sequence(:name) { "Zone #{n}" }
     restaurant
+  end
+
+  factory :table do
+    name Faker::Name.name
+    forks_nb rand(10)
   end
 end
 
