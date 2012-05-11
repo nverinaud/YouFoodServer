@@ -1,5 +1,5 @@
 class Table < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :forks_nb
 
   #Relations
   belongs_to :restaurant

@@ -1,6 +1,6 @@
 <tr>
     <td><%= zone.name %></td>
-    <td><%= pluralize(10, "table", "tables") %></td>
+    <td><%= pluralize(zone.tables.count, "table", "tables") %></td>
     <td>
         <%= link_to('Supprimer', @zone, method: :delete,
                     confirm: "Êtes-vous sûr de vouloir supprimer la zone #{zone.name}?") %>

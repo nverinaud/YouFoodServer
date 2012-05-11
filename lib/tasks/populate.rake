@@ -12,6 +12,7 @@ namespace :db do
     make_restaurants
     make_cooker_and_waiter
     make_zones
+    make_tables
   end
 
 
@@ -107,4 +108,16 @@ namespace :db do
     end
   end
 
+  def make_tables
+    resto = Restaurant.first
+    zones = resto.zones
+    50.times do |n|
+      name = "Table #{Faker::Name.name}"
+      forks_nb = rand(10)
+      table = Table.new(name: name, forks_nb: forks_nb)
+      table.zone = zones[n%zones.count]
+      table.restaurant = resto
+      table.save!
+    end
+  end
 end

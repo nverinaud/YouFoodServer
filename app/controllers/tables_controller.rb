@@ -1,6 +1,6 @@
 class TablesController < ApplicationController
   include RestaurantsHelper
-  before_filter :get_restaurant
+  before_filter :signed_in_manager, :get_restaurant
 
   #GET /tables/
   def index
