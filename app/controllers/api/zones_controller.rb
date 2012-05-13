@@ -7,7 +7,7 @@ class Api::ZonesController < Api::ApiController
 
   #GET /api/zones
   def zones
-
+    @zones = @restaurant.zones
     render :zones
   end
 end

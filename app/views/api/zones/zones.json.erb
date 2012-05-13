@@ -1,34 +1,23 @@
 [
+    <% @zones.each do |zone| %>
     {
-        "id":1,
-        "name":"Zone GeeK",
+        "id": <%= zone.id %>,
+        "name": "<%= zone.name %>",
         "tables":[
+            <% zone.tables.each do |table|%>
             {
-                "id":2,
-                "name":"Table Starcraft",
-                "forks_nb":6
-            },
-            {
-                "id":3,
-                "name":"Table Warcraft",
-                "forks_nb":4
+                "id": <%= table.id %>,
+                "name": "<%= table.name %>",
+                "forks_nb": <%= table.forks_nb %>
             }
-        ]
-    },
-    {
-        "id":7,
-        "name":"Zone SUPINFO",
-        "tables":[
-            {
-                "id":2,
-                "name":"Table STA",
-                "forks_nb":12
-            },
-            {
-                "id":3,
-                "name":"Table Etudiants 1",
-                "forks_nb":18
-            }
+            <% if table != zone.tables.last %>
+            ,
+            <% end %>
+            <% end %>
         ]
     }
+    <% if zone != @zones.last %>
+    ,
+    <% end %>
+    <%end %>
 ]
