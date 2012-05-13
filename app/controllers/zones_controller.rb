@@ -2,7 +2,7 @@
 
 class ZonesController < ApplicationController
   include RestaurantsHelper
-  before_filter :signed_in_manager, :get_restaurant
+  before_filter :signed_in_manager, :get_restaurant, :valid_restaurant?
 
   # GET /zones/
   def index
