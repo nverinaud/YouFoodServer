@@ -19,7 +19,6 @@ class MenusController < ApplicationController
   # GET /menus/new
   def new
     @menu = Menu.new
-    logger.debug @menu.name
     @products = Product.where(permanent: false).select("name, id")
     @schedules = Schedule.select("week, id, menu_id")
   end
@@ -32,7 +31,6 @@ class MenusController < ApplicationController
     if @menu.save
       redirect_to menus_path
     else
-      logger.debug @menu.errors
       flash.now[:error] = "Une erreur est survenue."
       @products = Product.select("name, id")
       @schedules = Schedule.select("week, id, menu_id")

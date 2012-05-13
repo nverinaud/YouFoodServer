@@ -19,11 +19,12 @@
 #
 
 class Waiter < User
-	
+
   attr_accessible :push_url
 
   # Relations
   belongs_to :restaurant
+  has_one :zone
 
   # Validations
   validates :restaurant_id, presence: true

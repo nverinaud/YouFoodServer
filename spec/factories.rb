@@ -1,20 +1,27 @@
 FactoryGirl.define do
 
   factory :director do
-    name "Director"
-    email "director@youfood.com"
+    name Faker::Name.name
+    email Faker::Internet.email
     password "password"
   end
 
   factory :restaurant_manager do
-    sequence(:name) { |n| "Restaurant Manager #{n}" }
-    sequence(:email) { |n| "restaurant.manager#{n}@youfood.com" }
+    name Faker::Name.name
+    email Faker::Internet.email
     password "password"
   end
 
   factory :cooker do
-    name "Cooker"
-    email "cooker@youfood.com"
+    name Faker::Name.name
+    email Faker::Internet.email
+    password "password"
+    restaurant
+  end
+
+  factory :waiter do
+    name Faker::Name.name
+    email Faker::Internet.email
     password "password"
     restaurant
   end
@@ -61,6 +68,16 @@ FactoryGirl.define do
     phone "(+33)0.00.00.00.00"
     address "0, Ipsum Street"
     restaurant_manager
+  end
+
+  factory :zone do
+    sequence(:name) { "Zone #{n}" }
+    restaurant
+  end
+
+  factory :table do
+    name Faker::Name.name
+    forks_nb rand(10)
   end
 end
 

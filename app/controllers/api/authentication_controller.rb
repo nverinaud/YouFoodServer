@@ -6,7 +6,7 @@ class Api::AuthenticationController < Api::ApiController
     if @user && @user.authenticate(params[:pass])
       render :request_token
     else
-      render text: "Mot de passe ou nom d'utilisateur incorrect", status: 403
+      show_error "Mot de passe ou nom d'utilisateur incorrect", 403
     end
   end
 

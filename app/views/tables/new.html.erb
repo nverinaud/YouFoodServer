@@ -1,0 +1,9 @@
+<% provide(:page_title, full_title("La salle")) %>
+
+<section id="menu-new" class="new-element">
+
+    <%= simple_form_for(@table, html: {multipart: true, class: 'form-horizontal'}) do |f| %>
+        <%= render 'table_form', form: f %>
+    <% end %>
+
+</section>

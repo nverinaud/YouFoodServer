@@ -7,6 +7,8 @@ YouFoodServer::Application.routes.draw do
   resources :menus
   resources :products
   resources :restaurants
+  resources :zones
+  resources :tables
 
   scope '/restaurant' do
     resources :employees
@@ -25,6 +27,8 @@ YouFoodServer::Application.routes.draw do
     match '/auth/request_token' => 'authentication#request_token', via: :post
     match '/call_waiter' => 'call_waiter#call_waiter', via: :post
     match '/current_menu' => 'menu#current_menu'
+    match '/zones' => 'restaurants#zones'
+    match '/tables' => 'restaurants#tables'
     match '/unauthorized' => 'authentication#unauthorized_access'
   end
 end
