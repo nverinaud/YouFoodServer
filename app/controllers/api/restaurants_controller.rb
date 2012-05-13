@@ -1,6 +1,4 @@
-# encoding: utf-8
-
-class Api::ZonesController < Api::ApiController
+class Api::RestaurantsController < Api::ApiController
   include RestaurantsHelper
 
   before_filter :valid_token?, :get_restaurant, :api_valid_restaurant?
