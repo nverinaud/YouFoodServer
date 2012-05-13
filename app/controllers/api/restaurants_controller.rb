@@ -11,6 +11,7 @@ class Api::RestaurantsController < Api::ApiController
 
   #GET /api/tables
   def tables
+    @tables = @restaurant.tables
     render :tables
   end
 end

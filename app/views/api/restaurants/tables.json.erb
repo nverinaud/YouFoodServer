@@ -1,20 +1,18 @@
 [
+    <% @tables.each do |table|%>
     {
-        "id" : 1,
-        "name" : "Table STA",
-        "forks_nb" : 12,
-        "zone" : {
-            "id" : 2,
-            "name" : "Zone SUPINFO"
+        "id": <%= table.id %>,
+        "name":"<%= table.name %>",
+        "forks_nb": <%= table.forks_nb %>
+        <% if table.zone %>,
+        "zone":{
+            "id": <%= table.zone.id %>,
+            "name":"<%= table.zone.name %>"
         }
-    },
-    {
-        "id" : 2,
-        "name" : "Table Etudiants 1",
-        "forks_nb" : 18,
-        "zone" : {
-            "id" : 2,
-            "name" : "Zone SUPINFO"
-        }
+        <% end %>
     }
+    <% if table != @tables.last %>
+    ,
+    <% end %>
+    <% end %>
 ]
