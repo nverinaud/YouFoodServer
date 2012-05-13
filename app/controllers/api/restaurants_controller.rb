@@ -8,4 +8,10 @@ class Api::RestaurantsController < Api::ApiController
     @zones = @restaurant.zones
     render :zones
   end
+
+  #GET /api/tables
+  def tables
+    @tables = @restaurant.tables
+    render :tables
+  end
 end

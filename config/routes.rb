@@ -28,6 +28,7 @@ YouFoodServer::Application.routes.draw do
     match '/call_waiter' => 'call_waiter#call_waiter', via: :post
     match '/current_menu' => 'menu#current_menu'
     match '/zones' => 'restaurants#zones'
+    match '/tables' => 'restaurants#tables'
     match '/unauthorized' => 'authentication#unauthorized_access'
   end
 end
