@@ -1,0 +1,23 @@
+[
+    <% @zones.each do |zone| %>
+    {
+        "id": <%= zone.id %>,
+        "name": "<%= zone.name %>",
+        "tables":[
+            <% zone.tables.each do |table|%>
+            {
+                "id": <%= table.id %>,
+                "name": "<%= table.name %>",
+                "forks_nb": <%= table.forks_nb %>
+            }
+            <% if table != zone.tables.last %>
+            ,
+            <% end %>
+            <% end %>
+        ]
+    }
+    <% if zone != @zones.last %>
+    ,
+    <% end %>
+    <%end %>
+]
