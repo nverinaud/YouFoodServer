@@ -1,5 +1,5 @@
 class Table < ActiveRecord::Base
-  attr_accessible :name, :forks_nb
+  attr_accessible :name, :forks_nb, :zone_id
 
   #Relations
   belongs_to :restaurant
