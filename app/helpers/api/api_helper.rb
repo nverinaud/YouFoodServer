@@ -17,7 +17,7 @@ module Api::ApiHelper
     @current_user ||= user_from_token_header
   end
 
-  def current_user(user)
+  def current_user=(user)
     @current_user = user
   end
 

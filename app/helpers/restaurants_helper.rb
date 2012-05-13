@@ -2,8 +2,9 @@
 
 module RestaurantsHelper
   def get_restaurant
-    @restaurant = current_user.restaurant
-
+    if (current_user.respond_to?(:restaurant))
+      @restaurant = current_user.restaurant
+    end
   end
 
   def valid_restaurant?
@@ -12,4 +13,5 @@ module RestaurantsHelper
       redirect_to root_path
     end
   end
+
 end
