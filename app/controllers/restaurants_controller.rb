@@ -1,7 +1,6 @@
 # encoding: utf-8 
 class RestaurantsController < ApplicationController
   before_filter :signed_in_director
-  before_filter :manager_from_params, only: [:create]
 
   # GET /restaurants
   def index
@@ -20,43 +19,28 @@ class RestaurantsController < ApplicationController
 
   # GET /restaurants/new
   def new
-    @restaurant = session[:restaurant] || Restaurant.new
-    session[:restaurant] = nil
+    @restaurant = Restaurant.new
+    @restaurant.restaurant_manager = RestaurantManager.new
   end
 
   # POST /restaurants
   def create
     @restaurant = Restaurant.new(params[:restaurant])
-    @restaurant.restaurant_manager = @manager
+    manager = @restaurant.restaurant_manager
 
-    if @manager.valid? && @restaurant.valid?
-      @manager.save
-      @restaurant.save
-      flash[:success] = "Restaurant créé avec succès !"
-      redirect_to @restaurant
-      return
+    if manager.save # this step is required since manager does not have an id yet
+      manager.reload
+      @restaurant.restaurant_manager = manager
+      if @restaurant.save
+        flash[:success] = "Restaurant créé avec succès !"
+        redirect_to @restaurant
+      else
+        @restaurant.restaurant_manager.destroy
+        render 'new'
+      end
+    else
+      render 'new'
     end
-
-    @restaurant.errors[:manager_name] = @manager.errors[:name]
-    @restaurant.errors[:manager_email] = @manager.errors[:email]
-    @restaurant.errors[:manager_password] = @manager.errors[:password]
-    @restaurant.errors[:manager_password_confirmation] = @manager.errors[:password_confirmation]
-    render 'new'
-  end
-
-private
-
-  def manager_from_params
-    @manager = RestaurantManager.new
-    @manager.name = params[:restaurant][:manager_name]
-    @manager.email = params[:restaurant][:manager_email]
-    @manager.password = params[:restaurant][:manager_password]
-    @manager.password_confirmation = params[:restaurant][:manager_password_confirmation]
-
-    params[:restaurant].delete :manager_name
-    params[:restaurant].delete :manager_email
-    params[:restaurant].delete :manager_password
-    params[:restaurant].delete :manager_password_confirmation
   end
 
 end

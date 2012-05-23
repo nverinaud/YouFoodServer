@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # == Schema Information
 #
 # Table name: users
@@ -24,17 +26,16 @@ class User < ActiveRecord::Base
   has_secure_password
   before_save :create_remember_token
 
-  validates :name, presence: true
-  validates :email, presence: true
+  validates :name, presence: { message: "Le nom est requis." }
+  validates :email, presence: { message: "L'email est requis."}
 
   valid_email_regex = /\A[\w+\-._]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email,
-            presence: true,
-            format: {with: valid_email_regex},
-            uniqueness: {case_sensitive: false}
+            format: { with: valid_email_regex, message: "L'email est invalide." },
+            uniqueness: { case_sensitive: false, message: "Ce nom existe déjà." }
 
   validates :password,
-            length: {minimum: 8}
+            length: { minimum: 8, message: "8 caractères minimum." }
 
   private
 

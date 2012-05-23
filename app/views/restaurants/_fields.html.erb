@@ -8,23 +8,27 @@
   %>
   
   <%=
-    form.input :manager_email,
+
+    form.fields_for :restaurant_manager do |builder|
+      builder.input :email,
                placeholder: "email@youfood.com",
-               disabled: true,
                input_html: {class: 'span4'},
                required: false,
                label: false
+    end
   %>
 </header>
 
 <div class="row-fluid">
   <div class="span10">
     <%=
-      form.input :manager_name,
-                  placeholder: "Nom du Gérant",
-                  input_html: {class: 'span4'},
-                  required: false,
-                  label: "Gérant"
+      form.fields_for :restaurant_manager do |builder|
+        builder.input :name,
+                    placeholder: "Nom du Gérant",
+                    input_html: {class: 'span4'},
+                    required: false,
+                    label: "Gérant"
+      end
     %>
 
     <%=
@@ -61,19 +65,23 @@
     %>
 
     <%=
-      form.input :manager_password,
-                  placeholder: "Mot de Passe",
-                  input_html: {class: 'span4'},
-                  required: false,
-                  label: "Accès"
+      form.fields_for :restaurant_manager do |builder|
+        builder.input :password,
+                    placeholder: "Mot de Passe",
+                    input_html: {class: 'span4'},
+                    required: false,
+                    label: "Accès"
+      end
     %>
 
     <%=
-      form.input :manager_password_confirmation,
-                  placeholder: "Confirmation",
-                  input_html: {class: 'span4'},
-                  required: false,
-                  label: false
+      form.fields_for :restaurant_manager do |builder|
+        builder.input :password_confirmation,
+                    placeholder: "Confirmation",
+                    input_html: {class: 'span4'},
+                    required: false,
+                    label: false
+      end
     %>
 
     <div class="form-actions">

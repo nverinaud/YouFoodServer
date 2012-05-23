@@ -17,6 +17,7 @@
 
 class Restaurant < ActiveRecord::Base
   attr_accessible :name, :phone, :city, :postal_code, :address
+  attr_accessible :restaurant_manager_attributes
 
   # Relations
   belongs_to :restaurant_manager
@@ -28,20 +29,8 @@ class Restaurant < ActiveRecord::Base
   validates :restaurant_manager_id, presence: {message: "Un manager est requis."}
 
   # Creation
-  #accepts_nested_attributes_for :restaurant_manager
+  accepts_nested_attributes_for :restaurant_manager
 
   # Ordering
   default_scope order: 'restaurants.created_at DESC'
-
-  def manager_name
-  end
-
-  def manager_password
-  end
-
-  def manager_password_confirmation
-  end
-
-  def manager_email
-  end
 end
