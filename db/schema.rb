@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120506160933) do
+ActiveRecord::Schema.define(:version => 20120511135329) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120506160933) do
     t.string   "phone"
     t.string   "address"
     t.integer  "restaurant_manager_id"
+    t.integer  "postal_code"
   end
 
   create_table "schedules", :force => true do |t|

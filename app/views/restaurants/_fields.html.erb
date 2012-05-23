@@ -1,0 +1,86 @@
+<header class="page-header">
+  <%=
+    form.input :name,
+               placeholder: "Nom du Restaurant",
+               input_html: {class: 'span4'},
+               required: false,
+               label: false
+  %>
+  
+  <%=
+    form.input :manager_email,
+               placeholder: "email@youfood.com",
+               disabled: true,
+               input_html: {class: 'span4'},
+               required: false,
+               label: false
+  %>
+</header>
+
+<div class="row-fluid">
+  <div class="span10">
+    <%=
+      form.input :manager_name,
+                  placeholder: "Nom du Gérant",
+                  input_html: {class: 'span4'},
+                  required: false,
+                  label: "Gérant"
+    %>
+
+    <%=
+      form.input :phone,
+                  placeholder: "03.00.00.00.00",
+                  input_html: {class: 'span4'},
+                  required: false,
+                  label: "Numéro de Contact"
+    %>
+
+    <%=
+      form.input :address,
+                  placeholder: "Numéro, voie",
+                  input_html: {class: 'span4'},
+                  required: false,
+                  label: "Adresse"
+    %>
+
+    <%=
+      form.input :postal_code,
+                  as: :string,
+                  placeholder: "Code Postal",
+                  input_html: {class: 'span2'},
+                  required: false,
+                  label: false
+    %>
+
+    <%=
+      form.input :city,
+                  placeholder: "Ville",
+                  input_html: {class: 'span2'},
+                  required: false,
+                  label: false
+    %>
+
+    <%=
+      form.input :manager_password,
+                  placeholder: "Mot de Passe",
+                  input_html: {class: 'span4'},
+                  required: false,
+                  label: "Accès"
+    %>
+
+    <%=
+      form.input :manager_password_confirmation,
+                  placeholder: "Confirmation",
+                  input_html: {class: 'span4'},
+                  required: false,
+                  label: false
+    %>
+
+    <div class="form-actions">
+      <%=
+        form.submit "Valider", class: 'btn btn-primary span2'
+      %>
+      <a class="btn span2" href="<%= products_path %>">Annuler</a>
+    </div>
+  </div>
+</div>

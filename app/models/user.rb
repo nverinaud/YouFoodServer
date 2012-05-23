@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true
 
-  valid_email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  valid_email_regex = /\A[\w+\-._]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email,
             presence: true,
             format: {with: valid_email_regex},
