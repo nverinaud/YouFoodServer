@@ -13,6 +13,7 @@ namespace :db do
     make_cooker_and_waiter
     make_zones
     make_tables
+    add_another_waiter_with_a_zone
   end
 
 
@@ -86,10 +87,11 @@ namespace :db do
 
   def make_restaurants
     manager = RestaurantManager.first
+    manager.password = "password" # Saving a restaurant will check the manager validity...
     name = Faker::Name.name
     resto = Restaurant.create(name: name, phone: "(+33)0.00.00.00", city: "Paris", address: "8, rue de la fleur")
     resto.restaurant_manager = manager
-    resto.save
+    resto.save!
   end
 
   def make_cooker_and_waiter
@@ -100,7 +102,7 @@ namespace :db do
 
   def make_zones
     resto = Restaurant.first
-    30.times do |n|
+    6.times do |n|
       name = Faker::Name.name
       zone = Zone.new(name: name)
       zone.restaurant = resto
@@ -111,7 +113,7 @@ namespace :db do
   def make_tables
     resto = Restaurant.first
     zones = resto.zones
-    50.times do |n|
+    18.times do |n|
       name = "Table #{Faker::Name.name}"
       forks_nb = rand(10)
       table = Table.new(name: name, forks_nb: forks_nb)
@@ -119,5 +121,11 @@ namespace :db do
       table.restaurant = resto
       table.save!
     end
+  end
+
+  def add_another_waiter_with_a_zone
+    waiter = Restaurant.first.waiters.build(name: "Waiter Got A Zone", email: "waiter_got_a_zone@youfood.com", password: "password")
+    waiter.zone = Zone.first
+    waiter.save!
   end
 end

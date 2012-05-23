@@ -29,6 +29,16 @@
 						<td>Téléphone</td>
 						<td><%= @employee.phone %></td>
 					</tr>
+<% if @employee.is_a? Waiter %>
+					<tr>
+						<td>Zone</td>
+	<% if @employee.zone.nil? %>
+						<td>Aucune zone.</td>
+	<% else %>
+						<td><%= @employee.zone.name %> (<%= pluralize(@employee.zone.tables.count, "table", "tables") %>)</td>
+	<% end %>
+					</tr>
+<% end %>
 				</tbody>
 			</table>
 		</div>
