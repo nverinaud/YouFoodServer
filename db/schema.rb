@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120511135940) do
     t.string   "phone"
     t.string   "address"
     t.integer  "restaurant_manager_id"
+    t.integer  "postal_code"
   end
 
   create_table "schedules", :force => true do |t|
