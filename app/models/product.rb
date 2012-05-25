@@ -45,12 +45,12 @@ class Product < ActiveRecord::Base
   validates_associated :category
 
   # Validation
-  validates :price, presence: { message: "Vous devez donner un prix." },
-                    numericality: { greater_than: 0.50, 
-                      message: "Le prix doit être supérieur à 0.50€." }
-  validates :name, presence: { message: "Le nom est requis." }
-  validates :abbreviation, length: {maximum: 10, 
-                            message: "L'abbreviation ne doit pas excéder 10 caractères." }
-  validates :category, presence: { message: "Vous devez choisir ou créer une catégorie." }
+  validates :price, presence: {message: "Vous devez donner un prix."},
+            numericality: {greater_than: 0.50,
+                           message: "Le prix doit être supérieur à 0.50€."}
+  validates :name, presence: {message: "Le nom est requis."}
+  validates :abbreviation, length: {maximum: 10,
+                                    message: "L'abbreviation ne doit pas excéder 10 caractères."}
+  validates :category, presence: {message: "Vous devez choisir ou créer une catégorie."}
 
 end

@@ -23,6 +23,8 @@ YouFoodServer::Application.routes.draw do
   match '/orders', to: 'orders#index'
 
   namespace :api do
+    resources :invoices, only: [:index, :create, :update]
+
     match '/' => 'documentation#index'
     match '/auth/request_token' => 'authentication#request_token', via: :post
     match '/call_waiter' => 'call_waiter#call_waiter', via: :post
