@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Api::InvoicesController < Api::ApiController
 
   # GET /api/invoices
@@ -7,15 +9,28 @@ class Api::InvoicesController < Api::ApiController
 
   #PUT /api/invoices/:id
   def update
-    show_error "Not yet implemented", 403
+    invoice_id = params[:id]
+    invoices_products = params[:invoice_products]
+
+    @invoice = Invoice.find(invoice_id)
+
+    invoices_products.each do |product|
+      relation = InvoiceProducts.where("product_id = ? AND invoice_id = ?", product[:id], @invoice.id)
+      if (relation[0])
+        relation[0].comment = product[:comment]
+        relation[0].save
+      end
+    end
+
+    @invoice.state = params[:state]
+
+    if (!@invoice.save)
+      show_error "Impossible de mettre à jour la commande", 403
+    end
   end
 
   #POST /api/invoices
   def create
-    logger.debug params
-
-    logger.debug(" Price : #{params[:price]}")
-
     @invoice = Invoice.new(price: params[:price], state: 0)
 
     @invoice.table = Table.find(params[:table_id])
