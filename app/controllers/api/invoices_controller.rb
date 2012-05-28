@@ -20,14 +20,25 @@ class Api::InvoicesController < Api::ApiController
 
     @invoice.table = Table.find(params[:table_id])
 
-    invoices_products = params[:invoice_products]
-
-    invoices_products.each do |product|
-      @invoice.products << Product.find(product[:product_id])
-    end
+    error = false
 
     if (!@invoice.save)
-      show_error "Not yet implemented", 403
+      error = true
+    else
+      invoices_products = params[:invoice_products]
+      invoices_products.each do |product|
+        relation = InvoiceProducts.new(comment: product[:comment])
+        relation.product = Product.find(product[:product_id])
+        relation.invoice = @invoice
+        if (!relation.save)
+          @invoice.delete
+          error = true
+        end
+      end
+    end
+
+    if error
+      show_error "Impossible de passer la commande", 403
     end
   end
 end

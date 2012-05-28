@@ -13,6 +13,5 @@
 class Invoice < ActiveRecord::Base
   attr_accessible :price, :state
 
-  has_and_belongs_to_many :products
   belongs_to :table
 end
