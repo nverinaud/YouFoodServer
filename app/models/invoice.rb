@@ -11,7 +11,12 @@
 #
 
 class Invoice < ActiveRecord::Base
-  attr_accessible :price, :state
+  attr_accessible :price, :state, :updated_at
 
+  # Relations
   belongs_to :table
+  belongs_to :restaurant
+  has_many :invoices_products
+  has_many :products, :through => :invoices_products
+
 end

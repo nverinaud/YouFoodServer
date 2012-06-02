@@ -1,4 +1,4 @@
-class InvoiceProducts < ActiveRecord::Base
+class InvoicesProduct < ActiveRecord::Base
   attr_accessible :comment
 
   #Relations

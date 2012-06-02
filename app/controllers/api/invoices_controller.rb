@@ -1,29 +1,26 @@
 # encoding: utf-8
 
 class Api::InvoicesController < Api::ApiController
+  include RestaurantsHelper
+
+  before_filter :valid_token?, :get_restaurant, :api_valid_restaurant?
 
   # GET /api/invoices
   def index
-    show_error "Not yet implemented", 403
+
   end
 
   #PUT /api/invoices/:id
   def update
-    invoice_id = params[:id]
-    invoices_products = params[:invoice_products]
-
-    @invoice = Invoice.find(invoice_id)
-
-    invoices_products.each do |product|
-      relation = InvoiceProducts.where("product_id = ? AND invoice_id = ?", product[:id], @invoice.id)
+    @invoice = Invoice.find(params[:id])
+    params[:invoice_products].each do |product|
+      relation = InvoicesProduct.where("product_id = ? AND invoice_id = ?", product[:id], @invoice.id)
       if (relation[0])
         relation[0].comment = product[:comment]
         relation[0].save
       end
     end
-
     @invoice.state = params[:state]
-
     if (!@invoice.save)
       show_error "Impossible de mettre à jour la commande", 403
     end
@@ -32,17 +29,14 @@ class Api::InvoicesController < Api::ApiController
   #POST /api/invoices
   def create
     @invoice = Invoice.new(price: params[:price], state: 0)
-
     @invoice.table = Table.find(params[:table_id])
-
+    @invoice.restaurant = @restaurant
     error = false
-
     if (!@invoice.save)
       error = true
     else
-      invoices_products = params[:invoice_products]
-      invoices_products.each do |product|
-        relation = InvoiceProducts.new(comment: product[:comment])
+      params[:invoice_products].each do |product|
+        relation = InvoicesProduct.new(comment: product[:comment])
         relation.product = Product.find(product[:product_id])
         relation.invoice = @invoice
         if (!relation.save)
@@ -51,7 +45,6 @@ class Api::InvoicesController < Api::ApiController
         end
       end
     end
-
     if error
       show_error "Impossible de passer la commande", 403
     end
