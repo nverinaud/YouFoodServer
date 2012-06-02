@@ -7,7 +7,7 @@ class Api::InvoicesController < Api::ApiController
 
   # GET /api/invoices
   def index
-
+    
   end
 
   #PUT /api/invoices/:id
