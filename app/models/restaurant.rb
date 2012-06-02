@@ -25,6 +25,7 @@ class Restaurant < ActiveRecord::Base
   has_many :waiters
   has_many :zones
   has_many :tables
+  has_many :invoices
 
   # Validation
   validates :name, presence: {message: "Le nom est requis."}
