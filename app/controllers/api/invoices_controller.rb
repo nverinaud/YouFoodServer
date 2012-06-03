@@ -2,12 +2,19 @@
 
 class Api::InvoicesController < Api::ApiController
   include RestaurantsHelper
+  include Api::ApiRestaurantHelper
 
-  before_filter :valid_token?, :get_restaurant, :api_valid_restaurant?
+  before_filter :valid_token?, :get_restaurant, :api_valid_restaurant?, :api_valid_zone?
 
   # GET /api/invoices
   def index
-    
+    logger.debug "zone : #{@zone}"
+    tables_id = Table.select(:id).find_by_zone_id(@zone.id)
+    @invoices = Invoice.find_all_by_table_id(tables_id)
+    if (params[:state])
+      asked_state_invoices = Invoice.find_all_by_state(params[:state])
+      @invoices = @invoices & asked_state_invoices
+    end
   end
 
   #PUT /api/invoices/:id

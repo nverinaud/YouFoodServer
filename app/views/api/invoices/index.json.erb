@@ -1,5 +1,5 @@
 [
-    <% @restaurant.invoices.each do |invoice| %>
+    <% @invoices.each do |invoice| %>
     {
         "id":<%= invoice.id %>,
         "table_id": <%= invoice.table.id %>,
@@ -8,7 +8,7 @@
         "state": <%= invoice.state %>,
         "updated_at":"<%= invoice.updated_at %>"
     }
-    <% if invoice != @restaurant.invoices.last %>
+    <% if invoice != @invoices.last %>
     ,
     <%end %>
     <% end %>

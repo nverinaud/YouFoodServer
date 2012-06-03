@@ -1,5 +1,6 @@
 class Api::RestaurantsController < Api::ApiController
   include RestaurantsHelper
+  include Api::ApiRestaurantHelper
 
   before_filter :valid_token?, :get_restaurant, :api_valid_restaurant?
 
