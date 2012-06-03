@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: tables
+#
+#  id            :integer         not null, primary key
+#  name          :string(255)
+#  forks_nb      :integer
+#  created_at    :datetime        not null
+#  updated_at    :datetime        not null
+#  restaurant_id :integer
+#  zone_id       :integer
+#
+
 require "rspec"
 
 describe Table do
