@@ -28,10 +28,4 @@ module Api::ApiHelper
   def show_error(error, status)
     render json: {error: error}, status: status
   end
-
-  def api_valid_restaurant?
-    if (!@restaurant)
-      show_error "Vous ne pouvez pas acceder à cette ressouce.", 401
-    end
-  end
 end

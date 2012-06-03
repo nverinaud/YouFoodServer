@@ -10,8 +10,8 @@ namespace :db do
     make_schedules
     make_menus
     make_restaurants
-    make_cooker_and_waiter
     make_zones
+    make_cooker_and_waiter
     make_tables
   end
 
@@ -95,7 +95,10 @@ namespace :db do
   def make_cooker_and_waiter
     resto = Restaurant.first
     resto.cookers.create!(name: "Cooker", email: "cooker@youfood.com", password: "password")
-    resto.waiters.create!(name: "Waiter", email: "waiter@youfood.com", password: "password")
+    waiter = Waiter.new(name: "Waiter", email: "waiter@youfood.com", password: "password")
+    waiter.zone = Zone.first
+    waiter.restaurant = resto
+    waiter.save!
   end
 
   def make_zones
