@@ -1,8 +1,9 @@
-<% provide(:page_title, restaurant_title("Restaurant")) %>
+<% provide(:page_title, restaurant_title("")) %>
 
 <h1>Portail de gestion - Restaurant</h1>
 <hr/>
+
 <a class="tile" href="<%= employees_path %>">Gérer le personnel</a>
-<a class="tile" href="#">Gérer la salle</a>
+<%= link_to 'Gérer la salle', '/restaurant_manager/room', class: 'tile' %>
 <a class="tile" href="<%= new_employee_path %>">Créer un nouvel employé</a>
 <a class="tile" href="#">Gérer les commandes</a>

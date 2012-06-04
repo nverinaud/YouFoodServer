@@ -10,6 +10,7 @@
 #  phone                 :string(255)
 #  address               :string(255)
 #  restaurant_manager_id :integer
+#  postal_code           :integer
 #
 
 require "rspec"

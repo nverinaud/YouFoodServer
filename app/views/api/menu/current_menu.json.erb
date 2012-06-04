@@ -11,7 +11,7 @@
             "name":"<%= product.name %>",
             "abbreviation":"<%= product.abbreviation %>",
             "description":"<%= product.description %>",
-            "photo_url":"<%= "#{request.host}#{product.photo.url}"%>",
+            "photo_url":"<%= "#{request.protocol}#{request.host_with_port}#{product.photo.url}"%>",
             "price": <%= product.price %>,
             "category":{
                 "id":"<%= product.category.id %>",

@@ -1,0 +1,15 @@
+[
+    <% @invoices.each do |invoice| %>
+    {
+        "id":<%= invoice.id %>,
+        "table_id": <%= invoice.table.id %>,
+        "price": <%= invoice.price %>,
+        "invoice_products_count":<%= invoice.products.count %>,
+        "state": <%= invoice.state %>,
+        "updated_at":"<%= invoice.updated_at %>"
+    }
+    <% if invoice != @invoices.last %>
+    ,
+    <%end %>
+    <% end %>
+]
