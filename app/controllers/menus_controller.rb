@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class MenusController < ApplicationController
   before_filter :signed_in_director
 
@@ -35,6 +37,18 @@ class MenusController < ApplicationController
       @products = Product.select("name, id")
       @schedules = Schedule.select("week, id, menu_id")
       render new_menu_path
+    end
+  end
+
+  # DELETE /menus/:id
+  def destroy
+    menu = Menu.find(params[:id])
+    if menu.destroy
+      flash[:success] = "Le menu \"#{menu.name}\" a été supprimé."
+      redirect_to menus_path
+    else
+      flash[:error] = "Le menu n'existe pas."
+      redirect_to menu_path
     end
   end
 end
