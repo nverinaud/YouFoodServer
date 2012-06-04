@@ -37,7 +37,11 @@
 
         <div class="form-actions">
             <%= form.button :submit, 'Valider', class: 'btn-primary' %>
-            <%= submit_tag 'Annuler', type: :reset, class: "btn" %>
+            <% if (params[:action] = 'edit') %>
+                <%= link_to "Annuler", @menu, class: "btn" %>
+            <% else %>
+                <%= submit_tag 'Annuler', type: :reset, class: "btn" %>
+            <% end %>
         </div>
     </div>
 </div>
