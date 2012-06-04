@@ -18,7 +18,7 @@
 
                     <% if signed_in_manager? %>
                         <li><a href="<%= employees_path %>">Le Personnel</a></li>
-                        <li><a href="#">La Salle</a></li>
+                        <li><%= link_to "La salle", '/restaurant_manager/room' %> </li>
                     <% end %>
                 </ul>
             </div>
