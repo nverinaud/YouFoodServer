@@ -1,7 +1,13 @@
 <tr>
     <td><%= table.name %></td>
     <td><%= table.forks_nb %></td>
-    <td><%= table.zone.name %></td>
+    <td>
+        <% if table.zone %>
+            <%= table.zone.name %>
+        <% else %>
+            Aucune zone associée
+        <% end %>
+    </td>
     <td>
         <%= link_to('Supprimer', @table, method: :delete,
                     confirm: "Êtes-vous sûr de vouloir supprimer la zone #{table.name}?") %>
