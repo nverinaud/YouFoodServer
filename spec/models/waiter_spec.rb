@@ -15,17 +15,26 @@
 #  password_digest :string(255)
 #  remember_token  :string(255)
 #  push_url        :string(255)
+#  restaurant_id   :integer
 #
 
 require "rspec"
 
 describe Waiter do
   before do
-    @waiter = Waiter.new(name: "Waiter", email: "waiter@youfood.com", password: "password")
+    @waiter = FactoryGirl.create(:waiter)
   end
   subject { @waiter }
 
   it { should respond_to :restaurant }
-  it { should respond_to :zone }
+  it { should respond_to :zones }
   it { should respond_to :push_url }
+
+  it { should be_valid }
+
+  describe "empty restaurant" do
+    before { @waiter.restaurant = nil }
+    it { should_not be_valid }
+  end
+
 end

@@ -1,0 +1,34 @@
+<% provide(:page_title, "Restaurant #{@restaurant.name} | Employees") %>
+
+<section id="employees">
+
+<header class="page-header">
+	<h1>Le Personnel</h1>
+</header>
+
+	<div class="row-fluid">
+		<p class="span9"></p>
+		<a href="" class="btn btn-primary span2">Nouvel Employé +</a>
+	</div>
+	
+
+<table class="table table-bordered table-striped employees">
+	<% if @employees.any? %>
+		<thead>
+			<td>Identifiant</td>
+			<td>Nom</td>
+			<td>Poste</td>
+		</thead>
+		<tbody>
+			<% @employees.each do |employee| %>
+				<%= render 'employee' %>
+			<% end %>
+		</tbody>
+	<% else %>
+		<tr>
+			<td>Aucun employé trouvé.</td>
+		</tr>
+	<% end %>
+</table>
+
+</section>

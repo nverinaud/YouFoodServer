@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # == Schema Information
 #
 # Table name: users
@@ -15,6 +17,7 @@
 #  password_digest :string(255)
 #  remember_token  :string(255)
 #  push_url        :string(255)
+#  restaurant_id   :integer
 #
 
 class User < ActiveRecord::Base
@@ -24,17 +27,17 @@ class User < ActiveRecord::Base
   has_secure_password
   before_save :create_remember_token
 
-  validates :name, presence: true
-  validates :email, presence: true
+  # Validations
+  validates :name, presence: { message: "Le nom est obligatoire." }
+  validates :email, presence: { message: "L'email est obligatoire." }
 
-  valid_email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  valid_email_regex = /\A[\w+\-._]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email,
-            presence: true,
-            format: {with: valid_email_regex},
-            uniqueness: {case_sensitive: false}
+            format: { with: valid_email_regex, message: "L'email est invalide." },
+            uniqueness: { case_sensitive: false, message: "Ce nom existe déjà." }
 
   validates :password,
-            length: {minimum: 8}
+            length: { minimum: 8, message: "8 caractères minimum." }
 
   private
 

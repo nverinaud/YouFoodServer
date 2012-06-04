@@ -15,7 +15,12 @@
 #  password_digest :string(255)
 #  remember_token  :string(255)
 #  push_url        :string(255)
+#  restaurant_id   :integer
 #
 
 class RestaurantManager < User
+
+	# Relations
+	has_one :restaurant
+
 end

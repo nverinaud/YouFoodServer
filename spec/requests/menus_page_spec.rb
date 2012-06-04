@@ -27,7 +27,7 @@ describe "Menus" do
 
       describe "pagination" do
         before {
-          100.times { FactoryGirl.create(:menu) }
+          30.times { FactoryGirl.create(:menu) }
           visit menus_path
         }
 

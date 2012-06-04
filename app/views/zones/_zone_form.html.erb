@@ -1,0 +1,28 @@
+<header class="page-header">
+    <%= form.input :name, placeholder: "Nom de la zone", input_html: {class: 'span4'} %>
+</header>
+
+<div class="row-fluid">
+    <div class="span12">
+
+        <div class="control-group">
+            <label class="control-label" for="schedule_select">Tables</label>
+
+            <div class="controls">
+                <div class="input-append">
+                    <input type="hidden" id="tables_id" name="tables_id"/>
+                    <ul id="tables_list" style="display: none" class="unstyled">
+                    </ul>
+                    <select id="table_select" class="span4">
+                    </select>
+                    <a id="table_add" class="btn btn-primary">Ajouter</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <%= form.button :submit, 'Valider', class: 'btn-primary' %>
+            <%= submit_tag 'Annuler', type: :reset, class: "btn" %>
+        </div>
+    </div>
+</div>
