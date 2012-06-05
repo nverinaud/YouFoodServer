@@ -8,10 +8,4 @@
             Aucune zone associée
         <% end %>
     </td>
-    <td>
-        <%= link_to('Supprimer', @table, method: :delete,
-                    confirm: "Êtes-vous sûr de vouloir supprimer la zone #{table.name}?") %>
-
-        <%= link_to('Modifier', edit_table_path(table)) %>
-    </td>
 </tr>
