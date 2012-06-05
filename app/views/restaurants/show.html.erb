@@ -26,11 +26,11 @@
                 </tr>
                 <tr>
                     <td>Couverts</td>
-                    <td>xx couverts</td>
+                    <td><%= pluralize(@restaurant.capacity, "couvert", "couverts") %></td>
                 </tr>
                 <tr>
-                    <td>Serveurs</td>
-                    <td>xx serveurs</td>
+                    <td>Employés</td>
+                    <td><%= pluralize(@restaurant.employees.count, "employé", "employés") %></td>
                 </tr>
                 </tbody>
             </table>
