@@ -5,6 +5,13 @@
 <div class="row-fluid">
     <div class="span12">
 
+        <%=
+            form.association :waiter,
+                             label: 'Responsable',
+                             collection: @waiters,
+                             input_html: {class: 'span4'}
+        %>
+
         <div class="control-group">
             <label class="control-label" for="schedule_select">Tables</label>
 

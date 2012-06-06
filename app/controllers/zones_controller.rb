@@ -13,6 +13,7 @@ class ZonesController < ApplicationController
   def new
     @zone = Zone.new
     @tables = @restaurant.tables
+    @waiers = @restaurant.waiters
   end
 
   #POST /zones/create
@@ -26,6 +27,7 @@ class ZonesController < ApplicationController
     else
       flash.now[:error] = "Une erreur est survenue."
       @tables = @restaurant.tables
+      @waiters = @restaurant.waiters
       render new_zone_path
     end
   end
