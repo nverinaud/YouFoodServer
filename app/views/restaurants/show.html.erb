@@ -26,15 +26,14 @@
                 </tr>
                 <tr>
                     <td>Couverts</td>
-                    <td>xx couverts</td>
+                    <td><%= pluralize(@restaurant.capacity, "couvert", "couverts") %></td>
                 </tr>
                 <tr>
-                    <td>Serveurs</td>
-                    <td>xx serveurs</td>
+                    <td>Employés</td>
+                    <td><%= pluralize(@restaurant.employees.count, "employé", "employés") %></td>
                 </tr>
                 </tbody>
             </table>
-            <%= link_to "Statistiques de ce restaurant", "#", class: "btn btn-primary span3" %>
         </div>
         <div class="span4">
             <%= link_to "Modifier", edit_restaurant_path(@restaurant), class: "btn btn-primary span2" %>
