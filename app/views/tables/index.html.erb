@@ -1,0 +1,31 @@
+<% provide(:page_title, restaurant_title("La salle")) %>
+
+<section id="products">
+
+    <header class="page-header">
+        <h1>Les tables</h1>
+    </header>
+
+    <div class="row-fluid">
+        <p class="span9"><%= pluralize(@tables.count, "table", "tables") %></p>
+        <%= link_to 'Nouvelle table', new_table_path, class: "btn btn-primary span2" %>
+    </div>
+
+    <table class="table table-bordered table-striped index">
+        <% if @tables.any? %>
+            <thead>
+                <th>Nom</th>
+                <th>Nombre de couverts</th>
+                <th>Zone</th>
+                <th></th>
+            </thead>
+            <tbody>
+            <%= render @tables %>
+            </tbody>
+        <% else %>
+            <tr>
+                <td>Aucune table trouvée.</td>
+            </tr>
+        <% end %>
+    </table>
+</section>

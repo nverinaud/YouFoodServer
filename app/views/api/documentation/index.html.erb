@@ -83,6 +83,17 @@ Host: youfoodserver.herokuapp.com
 						<strong>Example Values: </strong>secret+food, i+love+cocoa
 					</td>
 				</tr>
+				<tr>
+					<td>
+						push_url<br/>
+						<em>optional</em>
+					</td>
+					<td>
+						Specific to waiters. Provide the url to which push information.<br/>
+						If you don't provide the url, the last known url is used.<br/>
+						<strong>Example Values: </strong>http://sn1.notify.live.net/throttledthirdparty/01.00/AAEmUMSnjDlRRrL8_qKMTouIADRkI5MEVFMEQ
+					</td>
+				</tr>
 			</tbody>
 		</table>
 		<h3>Example Request</h3>
@@ -95,6 +106,10 @@ Host: youfoodserver.herokuapp.com
 				<tr>
 					<td><strong>POST data</strong></td>
 					<td class="code">email=restaurant@youfood.com&pass=secret+food</td>
+				</tr>
+				<tr>
+					<td><strong>POST data (waiter)</strong></td>
+					<td class="code">email=restaurant@youfood.com&pass=secret+food&push_url=http://sn1.notify.live.net/<br/>throttledthirdparty/01.00/AAEmUMSnjDlRR</td>
 				</tr>
 			</tbody>
 		</table>
@@ -283,7 +298,7 @@ Host: youfoodserver.herokuapp.com
 			<tbody>
 				<tr>
 					<td><strong>GET</strong></td>
-					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices?zone_id=3&state=waiting&since_id=19</td>
+					<td class="code">http://<em>youfoodserver.herokuapp.com</em>/api/invoices?zone_id=3&state=0&since_id=19</td>
 				</tr>
 			</tbody>
 		</table>
@@ -294,7 +309,7 @@ Host: youfoodserver.herokuapp.com
 		"table_id" : 2,
 		"price": 55.4,
 		"invoice_products_count" : 4,
-		"state" : "waiting",
+		"state" : 0,
 		"updated_at" : "08/08/2012 12:33:21"
 	},
 	{
@@ -302,7 +317,7 @@ Host: youfoodserver.herokuapp.com
 		"table_id" : 87,
 		"price": 25.4,
 		"invoice_products_count" : 2,
-		"state" : "waiting",
+		"state" : 0,
 		"updated_at" : "08/08/2012 12:33:21"
 	}
 ]
@@ -363,7 +378,7 @@ Host: youfoodserver.herokuapp.com
 			"comment" : null
 		}
 	],
-	"state" : "waiting"
+	"state" : 0
 }
 </pre>
 	</article>
@@ -401,7 +416,7 @@ Host: youfoodserver.herokuapp.com
 					</td>
 					<td>
 						The new state of the invoice.<br/>
-						<strong>Example Values: </strong>waiting, ready
+						<strong>Example Values: </strong>0 (waiting), 1 (ready)
 					</td>
 				</tr>
 				<tr>
@@ -434,7 +449,7 @@ Host: youfoodserver.herokuapp.com
 			"comment" : "à point, sauce poivre"
 		}
 	],
-	"state" : "ready"
+	"state" : 1
 }
 </pre>
 					</td>

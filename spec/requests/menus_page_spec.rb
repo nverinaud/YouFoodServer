@@ -4,6 +4,7 @@ require 'spec_helper'
 
 describe "Menus" do
 
+  let(:director) { FactoryGirl.create(:director) }
   subject { page }
 
   describe "List all the menus page" do
@@ -16,7 +17,6 @@ describe "Menus" do
     end
 
     describe "When signed in as director" do
-      let(:director) { FactoryGirl.create(:director) }
       before {
         sign_in director
         visit menus_path
@@ -27,7 +27,7 @@ describe "Menus" do
 
       describe "pagination" do
         before {
-          100.times { FactoryGirl.create(:menu) }
+          30.times { FactoryGirl.create(:menu) }
           visit menus_path
         }
 
@@ -57,10 +57,9 @@ describe "Menus" do
   end
 
   describe "Show one menu page" do
+    let(:menu) { FactoryGirl.create(:menu) }
 
     describe "When not signed in as director" do
-      let(:menu) { FactoryGirl.create(:menu) }
-
       before { visit menu_path(menu) }
 
       it { should_not have_title "YouFood | Portail directeur | #{menu.name}" }
@@ -68,9 +67,6 @@ describe "Menus" do
     end
 
     describe "When signed in as director" do
-      let(:director) { FactoryGirl.create(:director) }
-      let(:menu) { FactoryGirl.create(:menu) }
-
       before {
         sign_in director
         visit menu_path(menu)
@@ -99,7 +95,10 @@ describe "Menus" do
   end
 
   describe "Menu creation" do
-    before { visit new_menu_path }
+    before do
+      sign_in director
+      visit new_menu_path
+    end
 
     describe "with invalid information" do
 
@@ -109,10 +108,12 @@ describe "Menus" do
     end
 
     describe "with valid information" do
-      before { create_valid_menu }
+      before do
+        create_valid_menu
+      end
 
       it "should create a menu" do
-        expect { click_button "Valider" }.should change(Micropost, :count).by(1)
+        expect { click_button "Valider" }.should change(Menu, :count).by(1)
       end
     end
   end

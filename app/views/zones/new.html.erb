@@ -1,0 +1,100 @@
+<% provide(:page_title, full_title("La salle")) %>
+
+<section id="menu-new" class="new-element">
+
+    <%= simple_form_for(@zone, html: {multipart: true, class: 'form-horizontal'}) do |f| %>
+        <%= render 'zone_form', form: f %>
+    <% end %>
+
+</section>
+
+<% content_for :js do %>
+    <script type="text/javascript">
+        var $tablesInput = $("#tables_id");
+        var $tablesList = $("#tables_list");
+        var $tablesSelect = $("#table_select");
+        var tableWarning = "Cette table est déjà associée à une zone."
+
+        var tables = <%= raw @tables.to_json %>;
+        var selectedTables = <%= raw @zone.tables.to_json %>;
+
+        // form initialization
+        $(document).ready(function () {
+            renderTables();
+        })
+
+        // check if a selected element list should be displayed or not
+        function defineListDisplay(list) {
+            if (list.children().length == 0)
+                list.hide();
+            else
+                list.show();
+        }
+
+        // remove an item form a list of selected items
+        function removeItem(input, selectedItems) {
+            var itemId = input.val();
+            var indexToRemove = 0;
+            for (var i = 0; i < selectedItems.length; i++) {
+                if (selectedItems[i].id == itemId)
+                    indexToRemove = i;
+            }
+            selectedItems.splice(indexToRemove, 1);
+        }
+
+        $("#table_add").click(function () {
+            var chosenTable = $tablesSelect.val();
+            for (var i = 0; i < tables.length; i++) {
+                if (tables[i].id == chosenTable) {
+                    selectedTables.push(tables[i]);
+                }
+            }
+            $tablesSelect.val("");
+
+            renderTables();
+        });
+
+        $(".remove_tables").live("click", function () {
+            removeItem($(this), selectedTables);
+            renderTables();
+        })
+
+        function renderTableOptions() {
+            $tablesSelect.empty();
+            for (var i = 0; i < tables.length; i++) {
+                var selected = false;
+                for (var j = 0; j < selectedTables.length; j++) {
+                    if (tables[i].id == selectedTables[j].id) {
+                        selected = true;
+                    }
+                }
+                if (!selected)
+                    addTableOption(tables[i]);
+            }
+        }
+
+        function addTableOption(table) {
+            $tablesSelect.append(
+                    "<option id=\"table" + table.id + "\" value=\"" + table.id + "\">" + table.name + "</option>");
+        }
+
+
+        function renderTables() {
+            $tablesList.empty();
+            $tablesInput.val("");
+            for (var i = 0; i < selectedTables.length; i++) {
+                $tablesInput.val($tablesInput.val() + selectedTables[i].id + ",");
+                $tablesList.append(
+                        "<li id=\"table" + selectedTables[i].id + "\">" +
+                                "<span class=\"span4\">" + selectedTables[i].name + "</span>" +
+                                "<button type=\"button\" " +
+                                "class=\"btn btn-danger remove_tables\" value=\"" + selectedTables[i].id + "\">Supprimer</button></li>");
+                if (selectedTables[i].zone_id)
+                    $("#table" + selectedTables[i].id).append("<span class=\"help-inline\" style=\"color:#1C628B\">" + tableWarning + "</span>");
+            }
+
+            defineListDisplay($tablesList);
+            renderTableOptions();
+        }
+    </script>
+<% end %>

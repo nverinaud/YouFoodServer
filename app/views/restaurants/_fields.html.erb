@@ -1,0 +1,94 @@
+<header class="page-header">
+  <%=
+    form.input :name,
+               placeholder: "Nom du Restaurant",
+               input_html: {class: 'span4'},
+               required: false,
+               label: false
+  %>
+  
+  <%=
+
+    form.fields_for :restaurant_manager do |builder|
+      builder.input :email,
+               placeholder: "email@youfood.com",
+               input_html: {class: 'span4'},
+               required: false,
+               label: false
+    end
+  %>
+</header>
+
+<div class="row-fluid">
+  <div class="span10">
+    <%=
+      form.fields_for :restaurant_manager do |builder|
+        builder.input :name,
+                    placeholder: "Nom du Gérant",
+                    input_html: {class: 'span4'},
+                    required: false,
+                    label: "Gérant"
+      end
+    %>
+
+    <%=
+      form.input :phone,
+                  placeholder: "03.00.00.00.00",
+                  input_html: {class: 'span4'},
+                  required: false,
+                  label: "Numéro de Contact"
+    %>
+
+    <%=
+      form.input :address,
+                  placeholder: "Numéro, voie",
+                  input_html: {class: 'span4'},
+                  required: false,
+                  label: "Adresse"
+    %>
+
+    <%=
+      form.input :postal_code,
+                  as: :string,
+                  placeholder: "Code Postal",
+                  input_html: {class: 'span2'},
+                  required: false,
+                  label: false
+    %>
+
+    <%=
+      form.input :city,
+                  placeholder: "Ville",
+                  input_html: {class: 'span2'},
+                  required: false,
+                  label: false
+    %>
+
+    <%=
+      form.fields_for :restaurant_manager do |builder|
+        builder.input :password,
+                    placeholder: "Mot de Passe",
+                    input_html: {class: 'span4'},
+                    required: false,
+                    label: "Accès"
+      end
+    %>
+
+    <%=
+      form.fields_for :restaurant_manager do |builder|
+        builder.input :password_confirmation,
+                    placeholder: "Confirmation",
+                    input_html: {class: 'span4'},
+                    required: false,
+                    label: false
+      end
+    %>
+
+    <div class="form-actions">
+      <%=
+        form.submit "Valider", class: 'btn btn-primary span2'
+      %>
+      <a class="btn span2" href="<%= products_path %>">Annuler</a>
+    </div>
+  </div>
+</div>

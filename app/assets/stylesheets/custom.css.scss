@@ -14,6 +14,18 @@ body {
   }
 }
 
+table.index {
+
+  margin-top: 10px;
+
+  thead {
+    background-color: #aaa;
+    color: white;
+    font-weight: bold;
+  }
+
+}
+
 .authentication-form {
   width: 300px;
   display: inline-block;
@@ -162,4 +174,9 @@ section.new-element {
   body {
     padding-top: 0px;
   }
+}
+
+/** Form action link **/
+form a {
+  margin-bottom: 0px !important;
 }

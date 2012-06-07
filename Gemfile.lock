@@ -94,6 +94,7 @@ GEM
       thor (~> 0.14)
     json (1.6.5)
     libnotify (0.5.9)
+      ffi (~> 1.0.0)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)

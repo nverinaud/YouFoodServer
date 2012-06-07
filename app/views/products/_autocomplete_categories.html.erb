@@ -1,0 +1,43 @@
+<% content_for :js do %>
+    <script type="text/javascript">
+        var product_categories = <%= raw @categories.to_json %>;
+
+        var $help = $("#product_category ~ p.help-block");
+        var originalHelp = $help.text();
+        var newCategInfo = "(!) Cette catégorie n'existe pas et sera créée."
+        var existingCategInfo = "Cette catégorie existe et sera utilisée."
+        var $categoryInput = $("#product_category");
+
+        checkCategoryInputAndFeedbackUser();
+
+        $categoryInput.autocomplete({
+            delay:0,
+            source:product_categories,
+            close:function (event, ui) {
+                checkCategoryInputAndFeedbackUser();
+            }
+        });
+
+        $categoryInput.blur(function () {
+            checkCategoryInputAndFeedbackUser();
+        });
+
+        function checkCategoryInputAndFeedbackUser() {
+            var val = $categoryInput.val()
+
+            if (!val) {
+                $help.text(originalHelp);
+                $help.removeClass('warning');
+            }
+            else if ($.inArray(val, product_categories) != -1) {
+                $help.text(existingCategInfo);
+                $help.removeClass('warning');
+            }
+            else {
+                $help.text(newCategInfo);
+                $help.addClass('warning');
+            }
+        }
+
+    </script>
+<% end %>

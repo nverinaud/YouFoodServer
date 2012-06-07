@@ -1,0 +1,25 @@
+<header class="page-header">
+    <%= form.input :name, placeholder: "Nom de la table", input_html: {class: 'span4'} %>
+</header>
+
+<div class="row-fluid">
+    <div class="span12">
+
+        <%= form.input :forks_nb,
+                       placeholder: "Nombre",
+                       label: "Nombre de couverts",
+                       input_html: {class: 'span4'}
+        %>
+
+        <%= form.association :zone,
+                       label: Zone,
+                       collection: @zones,
+                       input_html: {class: 'span4'}
+        %>
+
+        <div class="form-actions">
+            <%= form.button :submit, 'Valider', class: 'btn-primary' %>
+            <%= link_to 'Annuler', tables_path, class: "btn" %>
+        </div>
+    </div>
+</div>

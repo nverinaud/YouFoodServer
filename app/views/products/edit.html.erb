@@ -1,0 +1,13 @@
+<% provide(:page_title, "Produit | #{@product.name} | Modifier") %>
+
+<section id="product-edit" class="new-element">
+
+    <%= simple_form_for(@product, html: {multipart: true, class: 'form-horizontal'}) do |f| %>
+        <%= render 'fields', form: f %>
+    <% end %>
+
+</section>
+
+<% if @categories.any? %>
+    <%= render 'autocomplete_categories' %>
+<% end %>

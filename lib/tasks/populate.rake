@@ -9,13 +9,17 @@ namespace :db do
     make_products
     make_schedules
     make_menus
+    make_restaurants
+    make_zones
+    make_cooker_and_waiter
+    make_tables
+    add_another_waiter_with_a_zone
   end
 
 
   def make_users
-    Cooker.create(name: "Cooker", email: "cooker@youfood.com", password: "password")
-    RestaurantManager.create(name: "Restaurant Manager", email: "restaurant.manager@youfood.com", password: "password")
-    Director.create(name: "Director", email: "director@youfood.com", password: "password")
+    RestaurantManager.create!(name: "Restaurant Manager", email: "restaurant.manager@youfood.com", password: "password")
+    Director.create!(name: "Director", email: "director@youfood.com", password: "password")
   end
 
   def make_menus
@@ -79,5 +83,52 @@ namespace :db do
       product.photo_file_name = '/assets/empty-food-image.jpg'
       product.save!
     end
+  end
+
+  def make_restaurants
+    manager = RestaurantManager.first
+    manager.password = "password" # Saving a restaurant will check the manager validity...
+    name = Faker::Name.name
+    resto = Restaurant.create(name: name, phone: "(+33)0.00.00.00", city: "Paris", address: "8, rue de la fleur")
+    resto.restaurant_manager = manager
+    resto.save!
+  end
+
+  def make_cooker_and_waiter
+    resto = Restaurant.first
+    resto.cookers.create!(name: "Cooker", email: "cooker@youfood.com", password: "password")
+    waiter = Waiter.new(name: "Waiter", email: "waiter@youfood.com", password: "password")
+    waiter.zone = Zone.first
+    waiter.restaurant = resto
+    waiter.save!
+  end
+
+  def make_zones
+    resto = Restaurant.first
+    6.times do |n|
+      name = Faker::Name.name
+      zone = Zone.new(name: name)
+      zone.restaurant = resto
+      zone.save!
+    end
+  end
+
+  def make_tables
+    resto = Restaurant.first
+    zones = resto.zones
+    18.times do |n|
+      name = "Table #{Faker::Name.name}"
+      forks_nb = rand(10)
+      table = Table.new(name: name, forks_nb: forks_nb)
+      table.zone = zones[n%zones.count]
+      table.restaurant = resto
+      table.save!
+    end
+  end
+
+  def add_another_waiter_with_a_zone
+    waiter = Restaurant.first.waiters.build(name: "Waiter Got A Zone", email: "waiter_got_a_zone@youfood.com", password: "password")
+    waiter.zone = Zone.first
+    waiter.save!
   end
 end

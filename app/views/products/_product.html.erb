@@ -3,4 +3,5 @@
 	<td><%= product.category.name %></td>
 	<td><%= product_humanize_permanent(product) %></td>
 	<td><%= product.price %> €</td>
+	<td><%= link_to "Supprimer", product, method: :delete, confirm: "Êtes-vous sûre de vouloir supprimer le produit #{product.name} ?" %></td>
 </tr>

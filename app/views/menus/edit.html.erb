@@ -1,0 +1,12 @@
+<% provide(:page_title, full_title("Menu | #{@menu.name} | Modifier")) %>
+
+<section id="menu-new" class="new-element">
+
+    <%= simple_form_for(@menu, html: {multipart: true, class: 'form-horizontal'}) do |f| %>
+        <%= render 'menu_form', form: f %>
+    <% end %>
+
+</section>
+
+<%= render 'menus_autocomplete' %>
+

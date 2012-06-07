@@ -17,6 +17,9 @@ class Menu < ActiveRecord::Base
   has_many :schedules
   has_and_belongs_to_many :products
 
-  #Constraints
+  # Constraints
   validates :name, :description, presence: true
+
+  # Ordering
+  default_scope order: 'menus.created_at DESC'
 end
