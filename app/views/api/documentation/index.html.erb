@@ -83,6 +83,17 @@ Host: youfoodserver.herokuapp.com
 						<strong>Example Values: </strong>secret+food, i+love+cocoa
 					</td>
 				</tr>
+				<tr>
+					<td>
+						push_url<br/>
+						<em>optional</em>
+					</td>
+					<td>
+						Specific to waiters. Provide the url to which push information.<br/>
+						If you don't provide the url, the last known url is used.<br/>
+						<strong>Example Values: </strong>http://sn1.notify.live.net/throttledthirdparty/01.00/AAEmUMSnjDlRRrL8_qKMTouIADRkI5MEVFMEQ
+					</td>
+				</tr>
 			</tbody>
 		</table>
 		<h3>Example Request</h3>
@@ -95,6 +106,10 @@ Host: youfoodserver.herokuapp.com
 				<tr>
 					<td><strong>POST data</strong></td>
 					<td class="code">email=restaurant@youfood.com&pass=secret+food</td>
+				</tr>
+				<tr>
+					<td><strong>POST data (waiter)</strong></td>
+					<td class="code">email=restaurant@youfood.com&pass=secret+food&push_url=http://sn1.notify.live.net/<br/>throttledthirdparty/01.00/AAEmUMSnjDlRR</td>
 				</tr>
 			</tbody>
 		</table>
