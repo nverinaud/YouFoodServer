@@ -141,8 +141,9 @@ namespace :db do
     50.times do |n|
       price = 0
       invoice = Invoice.new(state: 0)
-      invoice.table = Table.first
-      invoice.restaurant = Restaurant.first
+      waiter = Waiter.find_by_email("waiter@youfood.com")
+      invoice.table = waiter.zone.tables[0]
+      invoice.restaurant = waiter.restaurant
       invoice.save
       products = Product.all
       2.times do |i|
