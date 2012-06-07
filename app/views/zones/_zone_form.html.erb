@@ -5,6 +5,13 @@
 <div class="row-fluid">
     <div class="span12">
 
+        <%=
+            form.association :waiter,
+                             label: 'Responsable',
+                             collection: @waiters,
+                             input_html: {class: 'span4'}
+        %>
+
         <div class="control-group">
             <label class="control-label" for="schedule_select">Tables</label>
 
@@ -22,7 +29,7 @@
 
         <div class="form-actions">
             <%= form.button :submit, 'Valider', class: 'btn-primary' %>
-            <%= submit_tag 'Annuler', type: :reset, class: "btn" %>
+            <%= link_to 'Annuler', zones_path, class: "btn" %>
         </div>
     </div>
 </div>

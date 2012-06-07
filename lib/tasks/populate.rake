@@ -13,6 +13,7 @@ namespace :db do
     make_zones
     make_cooker_and_waiter
     make_tables
+    make_invoices
     add_another_waiter_with_a_zone
   end
 
@@ -134,5 +135,24 @@ namespace :db do
     waiter = Restaurant.first.waiters.build(name: "Waiter Got A Zone", email: "waiter_got_a_zone@youfood.com", password: "password")
     waiter.zone = Zone.first
     waiter.save!
+  end
+
+  def make_invoices
+    50.times do |n|
+      price = 0
+      invoice = Invoice.new(state: 0)
+      invoice.table = Table.first
+      invoice.restaurant = Restaurant.first
+      invoice.save
+      products = Product.all
+      2.times do |i|
+        relation = InvoicesProduct.new(comment: "comment")
+        relation.product = products[i]
+        relation.invoice = invoice
+        relation.save
+        price = price + relation.product.price
+      end
+      invoice.update_attribute(:price, price)
+    end
   end
 end

@@ -42,4 +42,12 @@ class Restaurant < ActiveRecord::Base
   def employees
     self.cookers | self.waiters
   end
+
+  def capacity
+    capacity = 0
+    self.tables.each do |table|
+      capacity += table.forks_nb.to_i
+    end
+    return capacity
+  end
 end
