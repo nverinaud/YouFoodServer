@@ -86,6 +86,7 @@ GEM
       guard (>= 0.8.4)
       spork (>= 0.8.4)
     hike (1.2.1)
+    htmlentities (4.3.1)
     i18n (0.6.0)
     journey (1.0.3)
     jquery-rails (2.0.0)
@@ -199,6 +200,7 @@ DEPENDENCIES
   growl (= 1.0.3)
   guard-rspec (= 0.5.5)
   guard-spork (= 0.3.2)
+  htmlentities
   jquery-rails (= 2.0.0)
   libnotify (= 0.5.9)
   paperclip (~> 3.0)
