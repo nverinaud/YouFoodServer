@@ -24,7 +24,9 @@ class User < ActiveRecord::Base
   attr_accessible :id, :email, :password, :password_confirmation,
                   :type, :name, :phone, :address, :zipCode, :city,
                   :remember_token
+  
   has_secure_password
+  
   before_save :create_remember_token
 
   # Validations

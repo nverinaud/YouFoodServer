@@ -6,10 +6,46 @@ class Api::CallWaiterController < Api::ApiController
 
 	def call_waiter
 		table_id = params[:table_id]
-		if table_id
-			
+		
+		if !table_id
+			show_error "Argument 'table_id' manquant.", 412
+			return
+		end
+
+		table = Table.find(table_id)
+		if !table
+			show_error "Aucune table avec id #{table_id}.", 500
+			return
+		end
+
+		zone = table.zone
+		if !zone
+			show_error "La table #{table.id} n'est pas associée à une zone.", 500
+			return
+		end
+
+		waiter = zone.waiter
+		if !waiter
+			show_error "Aucun serveur ne gère la zone #{zone.id}.", 500
+			return
+		end
+
+		if !waiter.push_url
+			show_error "Impossible de contacter le serveur #{waiter.id}.", 500
+			return
+		end
+
+		options = {
+			type: 1,
+			table_id: table.id
+		}
+
+		response = MicrosoftPushNotificationService.send_notification waiter.push_url, :raw, options
+
+		if !response.is_a? Net::HTTPSuccess
+			show_error "Le serveur n'est pas joignable.", response.code
 		else
-			show_error "Argument 'table_id' manquant.", 403
+			render json: {message: "Le serveur a été contacté. Veuillez patienter..."}, status: 200
 		end
 	end
 
