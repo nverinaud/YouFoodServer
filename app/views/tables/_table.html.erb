@@ -8,4 +8,8 @@
             Aucune zone associée
         <% end %>
     </td>
+    <td>
+        <%= link_to "Supprimer", table, method: :delete,
+                    confirm: "Êtes-vous sûr de vouloir supprimer la table #{table.name}?" %>
+    </td>
 </tr>
