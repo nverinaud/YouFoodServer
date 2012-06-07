@@ -27,8 +27,12 @@
             <label class="control-label">Toujours à la carte ?</label>
 
             <div class="controls">
-                <label class="radio inline"><input type="radio" name="product[permanent]" value="true"/> Oui</label>
-                <label class="radio inline"><input checked type="radio" name="product[permanent]" value="false"/>
+              <%  
+                checkYES = @product.permanent? ? "checked" : ""
+                checkNO  = @product.permanent? ? "" : "checked"
+              %>
+                <label class="radio inline"><input <%= checkYES %> type="radio" name="product[permanent]" value="true"/> Oui</label>
+                <label class="radio inline"><input <%= checkNO %> type="radio" name="product[permanent]" value="false"/>
                     Non</label>
             </div>
         </div>

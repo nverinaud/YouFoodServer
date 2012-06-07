@@ -11,7 +11,7 @@
 #
 
 class Zone < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :waiter_id
 
   # Relations
   belongs_to :restaurant
