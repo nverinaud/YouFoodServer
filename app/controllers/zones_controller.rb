@@ -31,4 +31,16 @@ class ZonesController < ApplicationController
       render new_zone_path
     end
   end
+
+  # DELETE /zones/:id
+  def destroy
+    zone = Zone.find(params[:id])
+    if zone.destroy
+      flash[:success] = "La zone \"#{zone.name}\" a été supprimée."
+      redirect_to zones_path
+    else
+      flash[:error] = "La zone n'existe pas."
+      redirect_to zones_path
+    end
+  end
 end
