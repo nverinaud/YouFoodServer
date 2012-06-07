@@ -15,6 +15,7 @@ class TablesController < ApplicationController
     @zones = @restaurant.zones
   end
 
+  # POST /tables
   def create
     @table = Table.new(params[:table])
     @table.restaurant = @restaurant
@@ -25,6 +26,18 @@ class TablesController < ApplicationController
       flash.now[:error] = "Une erreur est survenue."
       @zones = @restaurant.zones
       render new_table_path
+    end
+  end
+
+  # DELETE /tables/:id
+  def destroy
+    table = Table.find(params[:id])
+    if table.destroy
+      flash[:success] = "La table \"#{table.name}\" a été supprimée."
+      redirect_to tables_path
+    else
+      flash[:error] = "La table n'existe pas."
+      redirect_to tables_path
     end
   end
 end
