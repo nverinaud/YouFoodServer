@@ -17,6 +17,14 @@ class Api::InvoicesController < Api::ApiController
     end
   end
 
+  # GET /api/invoices/
+  def show
+    @invoice = Invoice.find(params[:id])
+    if(!@invoice)
+      show_error "L'invoice n'existe pas", 500
+    end
+  end
+
   #PUT /api/invoices/:id
   def update
     @invoice = Invoice.find(params[:id])
@@ -29,7 +37,7 @@ class Api::InvoicesController < Api::ApiController
     end
     @invoice.state = params[:state]
     if (!@invoice.save)
-      show_error "Impossible de mettre à jour la commande", 403
+      show_error "Impossible de mettre à jour la commande", 500
     end
   end
 
@@ -53,7 +61,7 @@ class Api::InvoicesController < Api::ApiController
       end
     end
     if error
-      show_error "Impossible de passer la commande", 403
+      show_error "Impossible de passer la commande", 500
     end
   end
 end
