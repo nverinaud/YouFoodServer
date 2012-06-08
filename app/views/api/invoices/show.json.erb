@@ -1,0 +1,20 @@
+{
+    "id": <%= @invoice.id %>,
+    "price": <%= @invoice.price %>,
+    "invoice_products":[
+        <% @invoice.invoices_products.each do |invoice_product|%>
+        {
+            "id":<%= invoice_product.id %>,
+            "product":{
+                "id":<%= invoice_product.product.id %>,
+                "name":"<%= invoice_product.product.name %>"
+            },
+            "comment":"<%= invoice_product.comment %>"
+        }
+        <% if invoice_product != @invoice.invoices_products.last %>
+        ,
+        <%end%>
+        <%end%>
+    ],
+    "state":<%= @invoice.state %>
+}
