@@ -20,7 +20,7 @@ class Api::InvoicesController < Api::ApiController
   # GET /api/invoices/
   def show
     @invoice = Invoice.find(params[:id])
-    if(!@invoice)
+    if (!@invoice)
       show_error "L'invoice n'existe pas", 500
     end
   end
@@ -28,20 +28,19 @@ class Api::InvoicesController < Api::ApiController
   #PUT /api/invoices/:id
   def update
     @invoice = Invoice.find(params[:id])
-    params[:invoice_products].each do |product|
-      relation = InvoicesProduct.where("product_id = ? AND invoice_id = ?", product[:id], @invoice.id)
-      if (relation[0])
-        relation[0].comment = product[:comment]
-        relation[0].save
-      end
+    params[:invoice_products].each do |new_invoice_product|
+      invoice_product = InvoicesProduct.find(new_invoice_product[:id])
+      invoice_product.comment = new_invoice_product[:comment]
+      invoice_product.save
     end
+
     @invoice.state = params[:state]
     if (!@invoice.save)
       show_error "Impossible de mettre à jour la commande", 500
     end
   end
 
-  #POST /api/invoices
+#POST /api/invoices
   def create
     @invoice = Invoice.new(price: params[:price], state: 0)
     @invoice.table = Table.find(params[:table_id])
