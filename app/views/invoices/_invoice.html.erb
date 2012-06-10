@@ -1,4 +1,11 @@
 
-<div class="span4 invoice" id="invoice-<%= invoice.id %>">
-	<h2><%= invoice.table.name %></h2>
+<div class="span3 invoice well" id="invoice-<%= invoice.id %>">
+	<h3><%= invoice.table.name %></h3>
+	<a class="btn btn-primary btn-large invoice-call-waiter">Appeller le serveur</a>
+	<hr/>
+	<div class="invoice-products">
+		<% invoice.invoices_products.each do |ip| %>
+			<%= render 'invoice_product', invoice_product: ip %>
+		<% end %>
+	</div>
 </div>
