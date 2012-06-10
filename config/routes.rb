@@ -3,7 +3,6 @@ YouFoodServer::Application.routes.draw do
   root to: 'sessions#new'
 
   resources :sessions, only: [:new, :create, :destroy]
-  resources :orders, only: [:index]
   resources :menus
   resources :products
   resources :restaurants
@@ -12,6 +11,7 @@ YouFoodServer::Application.routes.draw do
 
   scope '/restaurant' do
     resources :employees
+    resources :invoices, only: [:index]
   end
 
   match '/director', to: 'portal#director'
@@ -20,8 +20,6 @@ YouFoodServer::Application.routes.draw do
 
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
-
-  match '/orders', to: 'orders#index'
 
   namespace :api do
     resources :invoices, only: [:index, :show, :create, :update]

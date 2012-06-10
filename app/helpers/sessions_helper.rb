@@ -82,7 +82,7 @@ module SessionsHelper
     elsif current_user.is_a? RestaurantManager
       render 'portal/restaurant_manager'
     elsif current_user.is_a? Cooker
-      redirect_to orders_path
+      redirect_to invoices_path
     end
   end
 
