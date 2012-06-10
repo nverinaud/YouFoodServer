@@ -35,6 +35,10 @@ module SessionsHelper
     signed_in? && (current_user.is_a? RestaurantManager)
   end
 
+  def signed_in_cooker?
+    signed_in? && (current_user.is_a? Cooker)
+  end
+
   def redirect_back_or(default)
     redirect_to(session[:return_to] || default)
     clear_return_to
@@ -62,6 +66,13 @@ module SessionsHelper
     unless signed_in_manager?
       store_location
       redirect_to signin_path, notice: "Veuillez vous connecter en tant que gérant de restaurant."
+    end
+  end
+
+  def signed_in_cooker
+    unless signed_in_cooker?
+      store_location
+      redirect_to signin_path, notice: "Veuillez vous connecter en tant que cuisinier."
     end
   end
 
