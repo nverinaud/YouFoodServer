@@ -1,7 +1,8 @@
 
 <div class="span3 invoice well" id="invoice-<%= invoice.id %>">
 	<h3><%= invoice.table.name %></h3>
-	<a class="btn btn-primary btn-large invoice-call-waiter">Appeller le serveur</a>
+	<% data_url = "/restaurant/invoices/#{invoice.id}/call-waiter/#{invoice.table.id}" %>
+	<a class="btn btn-primary btn-large invoice-call-waiter" data-url="<%= data_url %>">Appeller le serveur</a>
 	<hr/>
 	<div class="invoice-products">
 		<% invoice.invoices_products.each do |ip| %>

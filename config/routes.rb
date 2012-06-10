@@ -12,6 +12,7 @@ YouFoodServer::Application.routes.draw do
   scope '/restaurant' do
     resources :employees
     resources :invoices, only: [:index]
+    match '/invoices/:invoice_id/call-waiter/:table_id', to: "invoices#call_waiter"
   end
 
   match '/director', to: 'portal#director'

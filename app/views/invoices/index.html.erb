@@ -3,3 +3,73 @@
 <div class="row-fluid">
 	<%= render @invoices %>
 </div>
+
+<% content_for :js do %>
+	<script>
+		$('a.invoice-call-waiter').click(function(){
+
+			var $this = $(this);
+
+			$this.text("Appel en cours...");
+			$this.removeClass('invoice-call-waiter');
+			$this.removeClass('btn-primary');
+
+			var url = $this.attr('data-url');
+
+			$.get(url, function(data){}).success(function(){
+
+				resetCallWaiterLink($this);
+				var alert = {};
+				alert.type = 'success';
+				alert.message = 'Le serveur a été appelé.';
+
+				var $alertDiv = createAlertBlock(alert);
+				$alertDiv.insertAfter($this);
+
+			}).error(function(){
+
+				resetCallWaiterLink($this);
+				var alert = {};
+				alert.type = "error";
+				alert.title = 'Erreur !';
+				alert.message = "Le serveur n'a pas pû être contacté. Rééssayez plus tard.";
+
+				var $alertDiv = createAlertBlock(alert);
+				$alertDiv.insertAfter($this);
+
+			});
+
+		});
+
+		function resetCallWaiterLink($a)
+		{
+			$a.text('Appeller le serveur');
+			$a.addClass('invoice-call-waiter');
+			$a.addClass('btn-primary');
+		}
+
+
+		// Insert an alert block with the specified alert into an element.
+		// @param alert A hash that must contain 2 keys :
+		//					- type: the type of the alert ("warning", "error", "success")
+		//					- title: the title puts into <strong/>
+		//					- message: the message for the alert puts after the title
+		function createAlertBlock(alert)
+		{
+			var $alertDiv = $('<div/>');
+			$alertDiv.addClass('alert alert-' + alert["type"]);
+
+			var $btn = $('<button/>');
+			$btn.addClass('close');
+			$btn.attr('data-dismiss', "alert");
+			$btn.text('x');
+			$alertDiv.html($btn);
+
+			var $strong = $('<strong/>');
+			$strong.text(alert['title']);
+			$alertDiv.append($strong);
+			$alertDiv.append(" " + alert["message"]);
+			return $alertDiv;
+		}
+	</script>
+<% end %>
