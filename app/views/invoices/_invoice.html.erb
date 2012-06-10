@@ -8,4 +8,5 @@
 			<%= render 'invoice_product', invoice_product: ip %>
 		<% end %>
 	</div>
+	<p>Commandé il y a <%= time_ago_in_words invoice.updated_at %></p>
 </div>
