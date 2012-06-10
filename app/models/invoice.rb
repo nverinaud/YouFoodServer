@@ -16,7 +16,7 @@ class Invoice < ActiveRecord::Base
   # Relations
   belongs_to :table
   belongs_to :restaurant
-  has_many :invoices_products
+  has_many :invoices_products, dependent: :delete_all
   has_many :products, :through => :invoices_products
 
 end
