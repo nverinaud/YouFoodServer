@@ -1,0 +1,25 @@
+[
+    <% @invoices.each do |invoice| %>
+    {
+        "id":<%= invoice.id %>,
+        "table_name":"<%= invoice.table.name %>",
+        "table_id":<%= invoice.table.id %>,
+        "updated_at":"<%= invoice.updated_at.iso8601 %>",
+        "invoices_products":[
+            <% invoice.invoices_products.each do |invoice_product|%>
+            {
+                "id":<%= invoice_product.id %>,
+                "product_name":"<%= invoice_product.product.name %>",
+                "comment":"<%= invoice_product.comment %>"
+            }
+            <% if invoice.invoices_products.last != invoice_product%>
+            ,
+            <%end%>
+            <%end%>
+        ]
+    }
+    <% if invoice != @invoices.last %>
+    ,
+    <%end%>
+    <%end%>
+]
