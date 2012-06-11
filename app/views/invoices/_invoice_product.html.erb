@@ -1,0 +1,18 @@
+
+<% 
+	product = invoice_product.product 
+	comment = invoice_product.comment
+%>
+
+<div class="invoice-product clear">
+	<button class="btn btn-primary float-left" id="invoice-product-<%= invoice_product.id %>">OK</button>
+	<div class="float-left">
+		<h4><%= product.name %></h4>
+		<p>
+			<% comment.split(',').each do |entry| %>
+			<%= entry %><br/>
+			<% end %>
+		</p>
+	</div>
+</div>
+<hr class="clear"/>
