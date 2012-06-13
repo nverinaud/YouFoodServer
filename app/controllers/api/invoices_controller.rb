@@ -4,7 +4,7 @@ class Api::InvoicesController < Api::ApiController
   include RestaurantsHelper
   include Api::ApiRestaurantHelper
 
-  before_filter :valid_token?, :get_restaurant, :api_valid_restaurant?, :api_valid_zone?
+  before_filter :valid_token?, :get_restaurant, :api_valid_restaurant?
   before_filter :api_valid_zone?, except: [:create]
 
   # GET /api/invoices
