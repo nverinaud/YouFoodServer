@@ -21,4 +21,8 @@ class Table < ActiveRecord::Base
   #Constraints
   validates :name, presence: true, uniqueness: {case_sensitive: true}
   validates :restaurant_id, presence: true
+
+  def waiter
+  	self.zone.waiter
+  end
 end

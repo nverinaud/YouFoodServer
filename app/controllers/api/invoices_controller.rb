@@ -4,7 +4,8 @@ class Api::InvoicesController < Api::ApiController
   include RestaurantsHelper
   include Api::ApiRestaurantHelper
 
-  before_filter :valid_token?, :get_restaurant, :api_valid_restaurant?, :api_valid_zone?
+  before_filter :valid_token?, :get_restaurant, :api_valid_restaurant?
+  before_filter :api_valid_zone?, except: [:create]
 
   # GET /api/invoices
   def index
@@ -42,25 +43,79 @@ class Api::InvoicesController < Api::ApiController
 
 #POST /api/invoices
   def create
-    @invoice = Invoice.new(price: params[:price], state: 0)
-    @invoice.table = Table.find(params[:table_id])
+    price = params[:price]
+    if !price || price == 0
+      show_error "Le prix est invalide.", 403
+      return
+    end
+
+    table_id = params[:table_id]
+    if !table_id
+      show_error "L'attribute table_id est obligatoire.", 403
+      return
+    end
+
+    @invoice = Invoice.new(price: price, state: 0)
+
+    begin
+      table = Table.find(table_id)
+    rescue ActiveRecord::RecordNotFound
+      show_error "Aucune table n'existe avec l'id ##{table_id}.", 404
+      return
+    end
+
+    waiter = table.waiter
+    if !waiter
+      show_error "Aucun serveur ne gère cette table. (##{table_id}).", 404
+      return
+    end
+
+    if !waiter.push_url
+      show_error "Le serveur est injoignable.", 500
+      return
+    end
+
+    @invoice.table = table
     @invoice.restaurant = @restaurant
-    error = false
+
     if (!@invoice.save)
-      error = true
-    else
-      params[:invoice_products].each do |product|
-        relation = InvoicesProduct.new(comment: product[:comment])
-        relation.product = Product.find(product[:product_id])
-        relation.invoice = @invoice
-        if (!relation.save)
-          @invoice.delete
-          error = true
-        end
+      show_error "Une erreur est survenue lors de la commande.", 500
+      return
+    end
+  
+    products = params[:invoice_products]
+    if !products
+      show_error "Vous devez ajouter des produits à votre commande.", 403
+      return
+    end
+
+    products.each do |product|
+      relation = InvoicesProduct.new(comment: product[:comment])
+      relation.product = Product.find(product[:product_id])
+      relation.invoice = @invoice
+      if (!relation.save)
+        @invoice.delete
+        show_error "Le produit ##{product[:product_id]} est invalide", 500
+        return
       end
     end
-    if error
-      show_error "Impossible de passer la commande", 500
+    
+    options = {
+      type: 0,
+      table_id: table.id
+    }
+
+    response = MicrosoftPushNotificationService.send_notification waiter.push_url, :raw, options
+
+    if !response.is_a? Net::HTTPSuccess
+      json_hash = {
+        invoice_id: @invoice.id,
+        error: "Le server n'est pas joignable.",
+        push_response_code: response.code
+      }
+      render json: json_hash
+      return
     end
+
   end
 end

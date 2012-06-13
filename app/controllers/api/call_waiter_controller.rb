@@ -18,15 +18,9 @@ class Api::CallWaiterController < Api::ApiController
 			return
 		end
 
-		zone = table.zone
-		if !zone
-			show_error "La table #{table.id} n'est pas associée à une zone.", 500
-			return
-		end
-
-		waiter = zone.waiter
+		waiter = table.waiter
 		if !waiter
-			show_error "Aucun serveur ne gère la zone #{zone.id}.", 500
+			show_error "Aucun serveur ne gère la table ##{table_id}.", 500
 			return
 		end
 

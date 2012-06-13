@@ -1,0 +1,166 @@
+<% javascript_include_tag 'jquery.timeago.js' %>
+
+<h1 id="invoice-count"><%= pluralize(@invoices.count, "commande", "commandes") %></h1>
+
+<div id="invoices-container" class="row-fluid">
+    <%= render @invoices %>
+</div>
+
+<% content_for :js do %>
+    <script>
+        // timeago jQuery plugins
+        $(document).ready(function () {
+            $("abbr.timeago").timeago();
+        });
+
+        $('a.invoice-call-waiter').click(function () {
+
+            var $this = $(this);
+
+            $this.text("Appel en cours...");
+            $this.removeClass('invoice-call-waiter');
+            $this.removeClass('btn-primary');
+
+            var url = $this.attr('data-url');
+
+            $.get(url,
+                    function (data) {
+                    }).success(
+                    function () {
+
+                        resetCallWaiterLink($this);
+                        var alert = {};
+                        alert.type = 'success';
+                        alert.message = 'Le serveur a été appelé.';
+
+                        var $alertDiv = createAlertBlock(alert);
+                        $alertDiv.insertAfter($this);
+
+                    }).error(function () {
+
+                        resetCallWaiterLink($this);
+                        var alert = {};
+                        alert.type = "error";
+                        alert.title = 'Erreur !';
+                        alert.message = "Le serveur n'a pas pû être contacté. Rééssayez plus tard.";
+
+                        var $alertDiv = createAlertBlock(alert);
+                        $alertDiv.insertAfter($this);
+
+                    });
+
+        });
+
+        function resetCallWaiterLink($a) {
+            $a.text('Appeller le serveur');
+            $a.addClass('invoice-call-waiter');
+            $a.addClass('btn-primary');
+        }
+
+
+        // Insert an alert block with the specified alert into an element.
+        // @param alert A hash that must contain 2 keys :
+        //					- type: the type of the alert ("warning", "error", "success")
+        //					- title: the title puts into <strong/>
+        //					- message: the message for the alert puts after the title
+        function createAlertBlock(alert) {
+            var $alertDiv = $('<div/>');
+            $alertDiv.addClass('alert alert-' + alert["type"]);
+
+            var $btn = $('<button/>');
+            $btn.addClass('close');
+            $btn.attr('data-dismiss', "alert");
+            $btn.text('x');
+            $alertDiv.html($btn);
+
+            var $strong = $('<strong/>');
+            $strong.text(alert['title']);
+            $alertDiv.append($strong);
+            $alertDiv.append(" " + alert["message"]);
+            return $alertDiv;
+        }
+
+        // Webworker to retrieve to fake real time invoice appearing
+        var webWorker;
+        var lastRefresh = new Date();
+        var invoiceCount = <%= @invoices.count %>
+
+                $(document).ready(function () {
+                    if (typeof(Worker) !== "undefined") {
+                        if (typeof(webWorker) == "undefined") {
+                            webWorker = new Worker("<%= "#{request.protocol}#{request.host_with_port}/assets/invoice-worker.js" %>");
+                        }
+
+                        webWorker.onmessage = function (event) {
+                            $.ajax({
+                                url:'<%= "#{request.protocol}#{request.host_with_port}/restaurant/invoices?since=" %>' + lastRefresh.toUTCString(),
+                                success:function (data) {
+                                    lastRefresh = new Date();
+                                    renderInvoices(data);
+                                },
+                                dataType:'json'
+                            });
+                        };
+                    }
+                    else {
+                        var $errorDiv = createAlertBlock("Votre navigateur n'est pas assez récent.");
+                        $('.container-fluid').prepend($errorDiv);
+                    }
+                });
+
+        function renderInvoices(invoices) {
+            for (var i = 0; i < invoices.length; i++) {
+                invoiceCount++;
+                addInvoice(invoices[i]);
+            }
+            // Change the title
+            var invoicesString;
+            if (invoiceCount > 0)
+                invoicesString = "commandes";
+            else
+                invoicesString = "commande";
+            $('#invoice-count').html(invoiceCount + " " + invoicesString);
+        }
+
+        function addInvoice(invoice) {
+            // If the block already exists, remove it to create a new one
+            var $invoiceBlock = $('#invoice-" + invoice.id ')
+            if ($invoiceBlock != 'undefined') {
+                $invoiceBlock.remove();
+            }
+
+            var invoiceBlock = '<div class="span3 invoice well" id="invoice-"' + invoice.id + '>';
+            invoiceBlock += '<h3>' + invoice.table_name + '</h3>';
+            var data_url = "/restaurant/invoices/" + invoice.id + "/call-waiter/" + invoice.table_id;
+            invoiceBlock += '<a class="btn btn-primary btn-large invoice-call-waiter" data-url="' + data_url + '">Appeller le serveur</a>';
+            invoiceBlock += '<hr/>';
+            invoiceBlock += '<div class="invoice-products">';
+            for (var i = 0; i < invoice.invoices_products.length; i++) {
+                invoiceBlock += addProduct(invoice.invoices_products[i]);
+            }
+            invoiceBlock += '</div>';
+            invoiceBlock += '<p>Commandé <abbr id="timeago-' + invoice.id + '" class="timeago" title="' + invoice.updated_at + '"></abbr>.</p>';
+            invoiceBlock += '</div>';
+
+            $('#invoices-container').prepend(invoiceBlock);
+
+            $("abbr#timeago-" + invoice.id).timeago();
+        }
+
+        function addProduct(invoice_product) {
+            var productBlock = '<div class="invoice-product clear">'
+            productBlock += '<button class="btn btn-primary float-left" id="invoice-product-' + invoice_product.id + '">OK</button>'
+            productBlock += '<div class="float-left">'
+            productBlock += ' <h4>' + invoice_product.product_name + '</h4>'
+            productBlock += '<p>'
+            var comments = invoice_product.comment.split(',');
+            for (var i = 0; i < comments.length; i++) {
+                productBlock += comments[i];
+                productBlock += '<br/>'
+            }
+            productBlock += '</p></div></div><hr class="clear"/>'
+            console.log(productBlock);
+            return productBlock;
+        }
+    </script>
+<% end %>

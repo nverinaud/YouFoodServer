@@ -140,7 +140,8 @@ namespace :db do
   def make_invoices
     50.times do |n|
       price = 0
-      invoice = Invoice.new(state: 0)
+      state = n < 3 ? 1 : 0
+      invoice = Invoice.new(state: state)
       waiter = Waiter.find_by_email("waiter@youfood.com")
       invoice.table = waiter.zone.tables[0]
       invoice.restaurant = waiter.restaurant

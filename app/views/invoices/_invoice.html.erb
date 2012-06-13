@@ -1,0 +1,12 @@
+<div class="span3 invoice well" id="invoice-<%= invoice.id %>">
+    <h3><%= invoice.table.name %></h3>
+    <% data_url = "/restaurant/invoices/#{invoice.id}/call-waiter/#{invoice.table.id}" %>
+    <a class="btn btn-primary btn-large invoice-call-waiter" data-url="<%= data_url %>">Appeller le serveur</a>
+    <hr/>
+    <div class="invoice-products">
+        <% invoice.invoices_products.each do |ip| %>
+            <%= render 'invoice_product', invoice_product: ip %>
+        <% end %>
+    </div>
+    <p>Commandé <abbr class="timeago" title="<%= invoice.updated_at.iso8601 %>"></abbr>.</p>
+</div>
