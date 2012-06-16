@@ -15,6 +15,30 @@ class TablesController < ApplicationController
     @zones = @restaurant.zones
   end
 
+  # GET tables/:id/edit
+  def edit
+    begin
+      @table = Table.find(params[:id])
+      @zones = @restaurant.zones
+    rescue ActiveRecord::RecordNotFound
+      flash[:error] = "La table ##{params[:id]} n'existe pas."
+      redirect_to tables_path
+    end
+  end
+
+  # PUT /tables/:id
+  def update
+    @table = Table.find(params[:id])
+    if @table.update_attributes(params[:table])
+      flash[:success] = "La table \"#{@table.name}\" a été mise à jour !"
+      redirect_to @tables
+    else
+      flash[:error] = "Une erreur est survenue. Essayez à nouveau."
+      @zones = @restaurant.zones
+      render 'edit'
+    end
+  end
+
   # POST /tables
   def create
     @table = Table.new(params[:table])
@@ -29,7 +53,7 @@ class TablesController < ApplicationController
     end
   end
 
-  # DELETE /tables/:id
+# DELETE /tables/:id
   def destroy
     table = Table.find(params[:id])
     if table.destroy
@@ -40,4 +64,5 @@ class TablesController < ApplicationController
       redirect_to tables_path
     end
   end
+
 end
