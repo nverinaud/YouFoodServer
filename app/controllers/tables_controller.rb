@@ -31,7 +31,7 @@ class TablesController < ApplicationController
     @table = Table.find(params[:id])
     if @table.update_attributes(params[:table])
       flash[:success] = "La table \"#{@table.name}\" a été mise à jour !"
-      redirect_to @tables
+      redirect_to tables_path
     else
       flash[:error] = "Une erreur est survenue. Essayez à nouveau."
       @zones = @restaurant.zones
