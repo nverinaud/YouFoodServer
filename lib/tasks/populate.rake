@@ -85,7 +85,6 @@ namespace :db do
                             description: description,
                             permanent: permanent,
                             category: category)
-      product.photo_file_name = '/assets/empty-food-image.jpg'
       product.save!
     end
   end
