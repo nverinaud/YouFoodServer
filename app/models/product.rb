@@ -33,8 +33,17 @@ class Product < ActiveRecord::Base
 
   # Attachement
   has_attached_file :photo,
-                    styles: {medium: '300x300>', thumb: '100x100>'},
-                    default_url: "/assets/empty-food-image.jpg"
+                    styles: {
+                      medium: '300x300>', 
+                      thumb: '100x100>'
+                    },
+                    default_url: "https://s3.amazonaws.com/"+ENV['S3_BUCKET_NAME']+"/empty-food-image.jpg",
+                    storage: :s3,
+                    bucket: ENV['S3_BUCKET_NAME'],
+                    s3_credentials: {
+                      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+                      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+                    }
 
   validates_attachment :photo,
                        content_type: {content_type: ['image/jpg', 'image/jpeg', 'image/png']},
