@@ -24,18 +24,22 @@ namespace :db do
   end
 
   def make_menus
-    products = Product.all
+    products = Product.find_all_by_permanent(false)
+    count = 0;
     52.times do |n|
-      name = Faker::Lorem.sentence(2)
-      description = Faker::Lorem.paragraph
+      name = Faker::Name.name
+      description = Faker::Lorem.name
       default = (n%2 == 0)
       menu = Menu.new(name: name,
                       description: description,
                       default: default)
       menu.products = Array.new
       menu.schedules = Array.new
-      rand(15).times do |i|
-        menu.products << products[rand(100)]
+      rand(10).times do |i|
+          if(count < products.count)
+            menu.products << products[count]
+            count += 1
+         end
       end
       menu.schedules << Schedule.find(n+1)
       menu.save!
@@ -59,7 +63,7 @@ namespace :db do
   end
 
   def make_categories
-    5.times do |n|
+    10.times do |n|
       name = Faker::Name.first_name
       Category.create!(name: name)
     end
@@ -68,13 +72,13 @@ namespace :db do
 
   def make_products
     categories = Category.all
-    100.times do |n|
+    520.times do |n|
       price = n+10
       name = Faker::Name.name
       abbreviation = name.downcase.slice(1..10)
       description = Faker::Lorem.paragraph
       permanent = n%3
-      category = categories[n%5]
+      category = categories[(n%10)]
       product = Product.new(price: price,
                             name: name,
                             abbreviation: abbreviation,
