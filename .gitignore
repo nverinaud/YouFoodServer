@@ -31,3 +31,6 @@ doc/
 
 # Ignore test uploads
 public/system/*
+
+# Ignore Private AWS config
+config/initializers/dev_env.rb
