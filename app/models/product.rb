@@ -37,7 +37,7 @@ class Product < ActiveRecord::Base
                       medium: '300x300>', 
                       thumb: '100x100>'
                     },
-                    default_url: "/images/empty-food-image.jpg",
+                    default_url: "https://s3.amazonaws.com/"+ENV['S3_BUCKET_NAME']+"/empty-food-image.jpg",
                     storage: :s3,
                     bucket: ENV['S3_BUCKET_NAME'],
                     s3_credentials: {
